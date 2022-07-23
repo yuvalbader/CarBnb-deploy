@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/hhasona/CarBnb/issues"
   },
-  "homepage": "https://github.com/hhasona/CarBnb#readme"
+  "homepage": "https://github.com/hhasona/CarBnb#readme",
+  "dependencies": {
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
 }
