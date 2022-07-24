@@ -1,20 +1,15 @@
-const getAllUsers = async () => {};
+class UserService {
+  getAllUsers = async () => {};
 
-const getUserById = async (id) => {};
+  getUserById = async (id) => {};
 
-const createUser = async (user) => {};
+  createUser = async (user) => {};
 
-const updateUser = async (updatedUser, id) => {};
+  updateUser = async (updatedUser, id) => {};
 
-const deleteUser = async (userId) => {};
+  deleteUser = async (userId) => {};
 
-const deleteAllUsers = async () => {};
+  deleteAllUsers = async () => {};
+}
 
-module.exports = {
-  getAllUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
-  deleteAllUsers,
-};
+module.exports = new UserService();

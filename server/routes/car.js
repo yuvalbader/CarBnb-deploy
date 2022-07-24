@@ -1,4 +1,5 @@
 const carRouter = require("express").Router();
+
 const {
   getAllCars,
   getCarById,
@@ -17,4 +18,4 @@ carRouter.put("/:id", updateCar);
 carRouter.delete("/:id", deleteCar);
 carRouter.delete("/deleteAll", deleteAllCars);
 
-
+module.exports = carRouter;

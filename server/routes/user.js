@@ -1,12 +1,12 @@
 const userRouter = require("express").Router();
-import {
+const {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
   deleteAllUsers,
-} from "../controllers/user";
+} = require("../controllers/user");
 
 userRouter.get("/", getAllUsers);
 userRouter.get("/:id", getUserById);

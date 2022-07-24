@@ -1,17 +1,19 @@
-const getAllCars = async () => {};
+class CarsService {
+  constructor() {}
 
-const getCarById = async (carId) => {};
+  getAllCars = async () => {};
 
-const addCar = async (car) => {};
+  getCarById = async (carId) => {};
 
-const updateCar = async (id, updateCar) => {};
+  getCarByUserId = async (userId) => {};
 
-const deleteCar = async (carId) => {};
+  addCar = async (car) => {};
 
-module.exports = {
-  getAllCars,
-  getCarById,
-  addCar,
-  updateCar,
-  deleteCar,
-};
+  updateCar = async (id, updateCar) => {};
+
+  deleteCar = async (carId) => {};
+
+  deleteAllCars = async () => {};
+}
+
+module.exports = new CarsService();

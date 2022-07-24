@@ -1,26 +1,19 @@
-const getAllReservations = async () => {};
+class ReservationService {
+  getAllReservations = async () => {};
 
-const getReservationsByOwnerId = async (ownerId) => {};
+  getReservationsByOwnerId = async (ownerId) => {};
 
-const getReservationsByCustomerId = async (customerId) => {};
+  getReservationsByCustomerId = async (customerId) => {};
 
-const getReservationById = async (reservationId) => {};
+  getReservationById = async (reservationId) => {};
 
-const createReservation = async (reservation) => {};
+  createReservation = async (reservation) => {};
 
-const updateReservation = async (id, updatedReservation) => {};
+  updateReservation = async (id, updatedReservation) => {};
 
-const deleteReservation = async (reservationId) => {};
+  deleteReservation = async (reservationId) => {};
 
-const deleteAllReservations = async () => {};
+  deleteAllReservations = async () => {};
+}
 
-module.exports = {
-  getAllReservations,
-  getReservationsByOwnerId,
-  getReservationsByCustomerId,
-  getReservationById,
-  createReservation,
-  updateReservation,
-  deleteReservation,
-  deleteAllReservations,
-};
+module.exports = new ReservationService();

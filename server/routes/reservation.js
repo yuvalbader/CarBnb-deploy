@@ -18,3 +18,5 @@ reservationRouter.post("/", createReservation);
 reservationRouter.put("/:id", updateReservation);
 reservationRouter.delete("/:id", deleteReservation);
 reservationRouter.delete("/deleteAll", deleteAllReservations);
+
+module.exports = reservationRouter;
