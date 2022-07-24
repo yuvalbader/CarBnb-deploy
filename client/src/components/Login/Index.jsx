@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import jwt_decode from "jwt-decode"
@@ -13,6 +13,7 @@ export default function HelperTextMisaligned() {
   }
   // hard coded state for now until initalized redux state is available
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
+
 
   function handleCallbackResponse(response) {
     let userObject = jwt_decode(response.credential)
@@ -72,7 +73,7 @@ export default function HelperTextMisaligned() {
           sx={style}
         />
       </Box>
-      <h3
+      <h1
         style={{
           display: "flex",
           justifyContent: "center",
@@ -80,7 +81,7 @@ export default function HelperTextMisaligned() {
         }}
       >
         or
-      </h3>
+      </h1>
       <div
         id="google-signin"
         style={{ display: "flex", justifyContent: "center" }}
