@@ -31,7 +31,6 @@ const autocompleteService = {
 }
 
 export default function GoogleMaps() {
-  const [valueOfDate, setValueOfDate] = React.useState([null, null])
 
   const [value, setValue] = React.useState(null)
   const [inputValue, setInputValue] = React.useState("")
