@@ -1,4 +1,11 @@
-import { combineReducers } from "redux"
+import vehiclesSlice from './vehicles-reducers';
+import searchSlice from './search-reducers';
+import viewSlice from './view-reducers';
+
+import { combineReducers } from 'redux';
 const allReducers = combineReducers({
-})
-export default allReducers
+  vehiclesSlice,
+  searchSlice,
+  viewSlice,
+});
+export default allReducers;
