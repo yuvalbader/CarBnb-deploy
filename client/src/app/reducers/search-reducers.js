@@ -1,19 +1,30 @@
-import actionTypes from '../actions/constants';
+import actionTypes from "../actions/constants"
 
 const initialState = {
-  searchTerm: null,
-};
+  where: null,
+  from: null,
+  until: null,
+  timeToPick: null,
+  timeToDrop: null,
+}
 
 const searchReducers = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SEARCH: {
-      const { term } = action;
-      return { ...state, searchTerm: term };
+      const { where, from, until, timeToPick, timeToDrop } = action
+      return {
+        ...state,
+        where: where,
+        from: from,
+        until: until,
+        timeToPick: timeToPick,
+        timeToDrop: timeToDrop,
+      }
     }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default searchReducers;
+export default searchReducers
