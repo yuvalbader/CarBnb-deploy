@@ -1,4 +1,5 @@
 import React from "react"
+import { useSelector, useDispatch } from "react-redux"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
@@ -10,7 +11,9 @@ import throttle from "lodash/throttle"
 import Date from "./Date/Index"
 import Time from "./Time/Index"
 import SearchIcon from "@mui/icons-material/Search"
+import IconButton from "@mui/material/IconButton"
 import "./style.css"
+import { search } from "../../app/actions/search-actions"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -18,7 +21,6 @@ function loadScript(src, id) {
     const script = document.createElement("script")
     script.setAttribute("async", "")
     script.setAttribute("id", id)
-
     script.src = src
     script.onload = resolve
     script.onerror = reject
@@ -31,15 +33,32 @@ const autocompleteService = {
 }
 
 export default function GoogleMaps() {
-  const [valueOfDate, setValueOfDate] = React.useState([null, null])
-
+  const dispatch = useDispatch()
   const [value, setValue] = React.useState(null)
   const [inputValue, setInputValue] = React.useState("")
   const [options, setOptions] = React.useState([])
   const loaded = React.useRef(false)
+  const whereRef = React.useRef()
+  const fromRef = React.useRef()
+  const untilRef = React.useRef()
+  const timeToPickRef = React.useRef()
+  const timeToDropRef = React.useRef()
 
-  console.log("value  ", value)
-  console.log(" inputValue ", inputValue)
+  const searchHandler = () => {
+    dispatch(
+      search(
+        whereRef.current.value,
+        fromRef.current.value,
+        untilRef.current.value,
+        timeToPickRef.current.value,
+        timeToDropRef.current.value
+      )
+    )
+
+    
+
+  }
+
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -124,7 +143,12 @@ export default function GoogleMaps() {
             setInputValue(newInputValue)
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Where" fullWidth />
+            <TextField
+              inputRef={whereRef}
+              {...params}
+              label="Where"
+              fullWidth
+            />
           )}
           renderOption={(props, option) => {
             const matches =
@@ -167,11 +191,18 @@ export default function GoogleMaps() {
             )
           }}
         />
-        <Date label="From" />
-        <Date label="Until" />
-        <Time />
-        <Time />
-      <SearchIcon className="search-icon" />
+        <Date ref={fromRef} label="From" />
+        <Date ref={untilRef} label="Until" />
+        <Time ref={timeToPickRef} />
+        <Time ref={timeToDropRef} />
+        <IconButton
+          color="primary"
+          aria-label="upload picture"
+          component="label"
+          onClick={searchHandler}
+        >
+          <SearchIcon className="search-icon" />
+        </IconButton>
       </div>
     </div>
   )
