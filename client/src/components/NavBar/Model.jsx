@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useCallback } from "react"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
@@ -21,7 +21,7 @@ const styleButton = {
   color: "white",
 }
 
-export default function Model(props) {
+export default function Model({ pageName }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -29,7 +29,7 @@ export default function Model(props) {
   return (
     <>
       <Button sx={styleButton} onClick={handleOpen}>
-        {props.pageName}
+        {pageName}
       </Button>
       <Modal
         open={open}
