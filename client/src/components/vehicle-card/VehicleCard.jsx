@@ -4,8 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Devider from '@mui/material/Divider';
 import StarRateIcon from '@mui/icons-material/StarRate';
-import Image from '../../images/bmw.jpg';
 import Box from '@mui/material/Box';
+
 
 const styleBox1 = {
   display: 'flex',
