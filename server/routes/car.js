@@ -8,11 +8,14 @@ const {
   deleteCar,
   deleteAllCars,
   getCarsByUserId,
+  getBrands,
 } = require("../controllers/car");
 
 carRouter.get("/", getAllCars);
-carRouter.get("/:id", getCarById);
 carRouter.get("/user/:id", getCarsByUserId);
+carRouter.get("/brands", getBrands);
+carRouter.get("/:id", getCarById);
+
 carRouter.post("/", addCar);
 carRouter.put("/:id", updateCar);
 carRouter.delete("/:id", deleteCar);
