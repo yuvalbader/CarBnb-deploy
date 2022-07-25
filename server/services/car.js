@@ -53,4 +53,4 @@ class CarsService {
   };
 }
 
-module.exports = new CarsService();
+module.exports = new CarsService()

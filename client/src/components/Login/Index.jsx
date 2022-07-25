@@ -50,7 +50,7 @@ export default function HelperTextMisaligned() {
   }, [])
   return (
     <>
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           alignItems: "center",
@@ -81,7 +81,7 @@ export default function HelperTextMisaligned() {
         }}
       >
         or
-      </h1>
+      </h1> */}
       <div
         id="google-signin"
         style={{ display: "flex", justifyContent: "center" }}
