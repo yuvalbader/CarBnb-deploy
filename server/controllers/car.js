@@ -52,6 +52,7 @@ const getCarsByUserId = async (req, res, next) => {
 
 const addCar = async (req, res, next) => {
   const newCar = req.body;
+  console.log("got to add car controller: ", req.body);
   try {
     const car = await CarsService.addCar(newCar);
     if (!car) {
