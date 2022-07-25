@@ -1,12 +1,15 @@
 import "./App.css"
 import NavBarComponent from "./components/NavBar/Index"
-import SearchComponent from "./components/Search/Index"
+import Home from "./pages/Home/Home"
+import { Routes, Route } from "react-router-dom"
 function App() {
   return (
-    <div className="App">
+    <>
       <NavBarComponent />
-      <SearchComponent />
-    </div>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+      </Routes>
+    </>
   )
 }
 
