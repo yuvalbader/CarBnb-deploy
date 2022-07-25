@@ -19,7 +19,7 @@ export const fetchVehicles = () => {
     dispatch(fetchVehiclesRequestAction())
     try {
       const vehicles = await ListApiService.getList()
-      const vehiclesById = vehicles.reduce((acc, vehicle) => {
+      const vehiclesById = vehicles.data.reduce((acc, vehicle) => {
         acc[vehicle.id] = vehicle
         return acc
       }, {})
