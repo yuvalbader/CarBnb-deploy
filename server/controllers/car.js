@@ -1,17 +1,5 @@
 const CarsService = require("../services/car");
 
-// const getAllCars = async (req, res, next) => {
-//   try {
-//     const cars = await CarsService.getAllCars();
-//     if (!cars) {
-//       return res.status(404).send("Cars not found");
-//     }
-//     return res.status(200).send(cars);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
-
 const getAllCars = async (req, res, next) => {
   try {
     const cars = await CarsService.getAllCars();
@@ -19,6 +7,19 @@ const getAllCars = async (req, res, next) => {
       throw new Error("Cars not found");
     }
     return res.status(200).send(cars);
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+};
+
+const getBrands = async (req, res, next) => {
+  try {
+    console.log("got to get brands controller");
+    const brands = await CarsService.getBrands();
+    if (!brands) {
+      throw new Error("Brands not found");
+    }
+    return res.status(200).send(brands);
   } catch (err) {
     return res.status(404).send(err.message);
   }
@@ -107,6 +108,7 @@ module.exports = {
   getAllCars,
   getCarById,
   getCarsByUserId,
+  getBrands,
   addCar,
   updateCar,
   deleteCar,

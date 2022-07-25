@@ -1,7 +1,14 @@
 class UserService {
   getAllUsers = async () => {};
 
-  getUserById = async (id) => {};
+  getUserByEmail = async (email) => {
+    console.log("got to get user by email: ", email);
+    return await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+  };
 
   createUser = async (user) => {};
 

@@ -1,20 +1,20 @@
-const express = require("express")
-const app = express()
-const router = require("../server/routes/api")
-const bodyParser = require("body-parser")
-const cors = require("cors")
-const api = require("./routes/api")
+const express = require("express");
+const cors = require("cors");
 
-require("dotenv").config()
+const app = express();
+const router = require("../server/routes/api");
+const bodyParser = require("body-parser");
+const api = require("./routes/api");
+const PORT = process.env.PORT || "8000";
 
-app.use(cors({ origin: "http://localhost:3000" }))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(router)
+require("dotenv").config();
 
-app.use("/", api)
+app.use(cors({ origin: "http://localhost:3000" }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(router);
 
-const PORT = process.env.PORT || "8000"
+app.use("/", api);
 
-app.listen(PORT, () => console.log(`App is Up on port ${PORT}`))
-module.exports = app
+app.listen(PORT, () => console.log(`App is Up on port ${PORT}`));
+module.exports = app;
