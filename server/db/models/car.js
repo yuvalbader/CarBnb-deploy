@@ -22,9 +22,9 @@ module.exports = (sequelize, DataTypes) => {
   Car.init(
     {
       profile_piture: DataTypes.STRING,
-      barnd: DataTypes.STRING,
+      brand: DataTypes.STRING,
       model: DataTypes.STRING,  
-      yaer: DataTypes.INTEGER,
+      year: DataTypes.INTEGER,
       number_of_seats: DataTypes.INTEGER,
       price_per_day: DataTypes.INTEGER,
       description: DataTypes.STRING,
