@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       profile_piture: DataTypes.STRING,
       barnd: DataTypes.STRING,
-      model: DataTypes.STRING,
-      yaer:DataTypes.INTEGER,
+      model: DataTypes.STRING,  
+      yaer: DataTypes.INTEGER,
       number_of_seats: DataTypes.INTEGER,
       price_per_day: DataTypes.INTEGER,
       description: DataTypes.STRING,
