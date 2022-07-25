@@ -14,6 +14,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
+import { fetchVehicles } from "../../app/actions/fetch-cars-actions"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -54,6 +55,9 @@ export default function GoogleMaps() {
         timeToDropRef.current.value
       )
     )
+  }
+  const fetchAllCars = async () => {
+    dispatch(fetchVehicles())
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -200,6 +204,9 @@ export default function GoogleMaps() {
         >
           <SearchIcon className="search-icon" />
         </IconButton>
+        <button onClick={fetchAllCars} className="fetchAll">
+          FetchAll
+        </button>
       </div>
     </div>
   )
