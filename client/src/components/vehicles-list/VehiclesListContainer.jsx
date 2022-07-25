@@ -1,28 +1,11 @@
-import VehicleCard from "../vehicle-card/VehicleCard"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import { vehiclesDemo } from "./data"
-import { getVehicles } from "../../app/selectors/vehicles-selectors"
-import {
-  getFrom,
-  getTimeToDrop,
-  getTimeToPick,
-  getUntill,
-  getWhere,
-} from "../../app/selectors/search-selectors"
-const styleList = { display: "grid", gridTemplateColumns: "repeat(3,1fr)" }
+import VehicleCard from '../vehicle-card/VehicleCard';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import { getFilteredVehicles } from '../../app/selectors/vehicles-selectors';
+const styleList = { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' };
 
 const VehicleListContainer = () => {
-  const vehiclesList = getVehicles()
-  const from = getFrom()
-  const timeToDrop = getTimeToDrop()
-  const timeToPick = getTimeToPick()
-  const until = getUntill()
-  const where = getWhere()
-
-  const filteredVehicles = vehiclesList.filter((vehicle) =>
-    vehicle.address.includes(where)
-  )
+  const filteredVehicles = getFilteredVehicles();
 
   return (
     <List sx={styleList}>
@@ -39,7 +22,7 @@ const VehicleListContainer = () => {
         </ListItem>
       ))}
     </List>
-  )
-}
+  );
+};
 
-export default VehicleListContainer
+export default VehicleListContainer;
