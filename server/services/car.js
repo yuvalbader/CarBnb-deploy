@@ -1,19 +1,22 @@
+const { Car } = require("../db/models")
 class CarsService {
   constructor() {}
 
-  getAllCars = async () => {};
+  getAllCars = async () => {
+    return await Car.findAll()
+  }
 
-  getCarById = async (carId) => {};
+  getCarById = async (carId) => {}
 
-  getCarByUserId = async (userId) => {};
+  getCarByUserId = async (userId) => {}
 
-  addCar = async (car) => {};
+  addCar = async (car) => {}
 
-  updateCar = async (id, updateCar) => {};
+  updateCar = async (id, updateCar) => {}
 
-  deleteCar = async (carId) => {};
+  deleteCar = async (carId) => {}
 
-  deleteAllCars = async () => {};
+  deleteAllCars = async () => {}
 }
 
-module.exports = new CarsService();
+module.exports = new CarsService()
