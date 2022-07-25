@@ -54,9 +54,6 @@ export default function GoogleMaps() {
         timeToDropRef.current.value
       )
     )
-
-    
-
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -122,7 +119,7 @@ export default function GoogleMaps() {
   }, [value, inputValue, fetch])
   return (
     <div className="container">
-      <div className="row">
+      <div className="searchContainer">
         <Autocomplete
           id="google-map-demo"
           sx={{ width: 300 }}

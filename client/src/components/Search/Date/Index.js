@@ -10,7 +10,7 @@ const Date = forwardRef((props, ref) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
-        label="From"
+        label={props.label}
         value={value}
         inputRef={ref}
         onChange={(newValue) => {
