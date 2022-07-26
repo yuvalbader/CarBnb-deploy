@@ -1,4 +1,4 @@
-const { Car } = require("../db/models");
+const { Car } = require('../db/models');
 
 class CarsService {
   constructor() {}
@@ -20,7 +20,7 @@ class CarsService {
   };
 
   addCar = async (car) => {
-    console.log("got to add car service:", car);
+    console.log('got to add car service:', car);
     return await Car.create({
       profile_piture: car.profile_piture,
       brand: car.brand,
@@ -53,4 +53,4 @@ class CarsService {
   };
 }
 
-module.exports = new CarsService()
+module.exports = new CarsService();
