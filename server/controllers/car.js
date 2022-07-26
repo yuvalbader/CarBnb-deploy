@@ -14,7 +14,6 @@ const getAllCars = async (req, res, next) => {
 
 const getBrands = async (req, res, next) => {
   try {
-    console.log("got to get brands controller");
     const brands = await CarsService.getBrands();
     if (!brands) {
       throw new Error("Brands not found");
@@ -30,11 +29,11 @@ const getCarById = async (req, res, next) => {
   try {
     const car = await CarsService.getCarById(id);
     if (!car) {
-      return res.status(404).send("Car not found");
+      throw new Error("Car not found");
     }
     return res.status(200).send(car);
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 
@@ -43,25 +42,24 @@ const getCarsByUserId = async (req, res, next) => {
   try {
     const cars = await CarsService.getCarByUserId(id);
     if (!cars) {
-      return res.status(404).send("Cars not found");
+      throw new Error("Cars not found");
     }
     return res.status(200).send(cars);
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 
 const addCar = async (req, res, next) => {
   const newCar = req.body;
-  console.log("got to add car controller: ", req.body);
   try {
     const car = await CarsService.addCar(newCar);
     if (!car) {
-      return res.status(404).send("Car not added");
+      throw new Error("Unable to add car");
     }
     return res.status(200).send("Car has been successfully added");
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 
@@ -71,11 +69,11 @@ const updateCar = async (req, res, next) => {
   try {
     const car = await CarsService.updateCar(id, updateCar);
     if (!car) {
-      return res.status(404).send("Car not updated");
+      throw new Error("Unable to update car");
     }
     return res.status(200).send("Car has been successfully updated");
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 
@@ -83,12 +81,13 @@ const deleteCar = async (req, res, next) => {
   const id = req.params.id;
   try {
     const car = await CarsService.deleteCar(id);
+
     if (!car) {
-      return res.status(404).send("Car not deleted");
+      throw new Error(`Unable to delete car with id: ${id}`);
     }
     return res.status(200).send("Car has been successfully deleted");
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 
@@ -96,11 +95,11 @@ const deleteAllCars = async (req, res, next) => {
   try {
     const cars = await CarsService.deleteAllCars();
     if (!cars) {
-      return res.status(404).send("Cars not deleted");
+      throw new Error("Unable to delete all cars");
     }
     return res.status(200).send("Cars has been successfully deleted");
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 

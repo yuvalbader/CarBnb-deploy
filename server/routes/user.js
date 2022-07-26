@@ -15,4 +15,8 @@ userRouter.put("/:id", updateUser);
 userRouter.delete("/:id", deleteUser);
 userRouter.delete("/deleteAll", deleteAllUsers);
 
+
+// my reservations
+//my orders 
+
 module.exports = userRouter;
