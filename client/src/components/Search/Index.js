@@ -14,7 +14,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
-import { fetchVehicles } from "../../app/actions/fetch-cars-actions"
+import ListApiService from "../../services/list-api-service"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -33,7 +33,7 @@ const autocompleteService = {
   current: null,
 }
 
-export default function GoogleMaps() {
+export default function Search() {
   const dispatch = useDispatch()
   const [value, setValue] = React.useState(null)
   const [inputValue, setInputValue] = React.useState("")
@@ -55,9 +55,6 @@ export default function GoogleMaps() {
         timeToDropRef.current.value
       )
     )
-  }
-  const fetchAllCars = async () => {
-    dispatch(fetchVehicles())
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -204,9 +201,6 @@ export default function GoogleMaps() {
         >
           <SearchIcon className="search-icon" />
         </IconButton>
-        <button onClick={fetchAllCars} className="fetchAll">
-          FetchAll
-        </button>
       </div>
     </div>
   )
