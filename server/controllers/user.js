@@ -9,9 +9,9 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-const getUserById = async (req, res, next) => {
+const getUserByEmail = async (req, res, next) => {
   try {
-    const user = await userService.getUserById(req.params.id);
+    const user = await userService.getUserByEmail(req.params.email);
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -69,7 +69,7 @@ const deleteAllUsers = async (req, res, next) => {
 
 module.exports = {
   getAllUsers,
-  getUserById,
+  getUserByEmail,
   createUser,
   updateUser,
   deleteUser,

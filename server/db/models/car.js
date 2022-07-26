@@ -1,5 +1,5 @@
-"use strict"
-const { Model } = require("sequelize")
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Car extends Model {
     /**
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       Car.belongsTo(models.User, {
         as: "user",
         foreignKey: "user_id",
-      })
+      });
       Car.hasMany(models.Reservation, {
         as: "reservations",
         foreignKey: "car_id",
-      })
+      });
     }
   }
   Car.init(
@@ -29,11 +29,13 @@ module.exports = (sequelize, DataTypes) => {
       price_per_day: DataTypes.INTEGER,
       description: DataTypes.STRING,
       user_id: DataTypes.INTEGER,
+      type: DataTypes.STRING,//[Hatchback, Sedan, SUV, MUV, Coupe, Convertible, Pickup Truck]
+      location: DataTypes.STRING,//city, country
     },
     {
       sequelize,
       modelName: "Car",
     }
-  )
-  return Car
-}
+  );
+  return Car;
+};

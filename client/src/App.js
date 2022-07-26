@@ -1,16 +1,16 @@
-import './App.css';
-import NavBarComponent from './components/NavBar/Index';
-import SearchComponent from './components/Search/Index';
-import AddNewVehicleForm from './components/list-new-vehicle-form/ListNewCarForm';
-
+import "./App.css"
+import NavBarComponent from "./components/NavBar/Index"
+import Home from "./pages/Home/Home"
+import { Routes, Route } from "react-router-dom"
 function App() {
   return (
-    <div className="App">
+    <>
       <NavBarComponent />
-      <SearchComponent />
-      <AddNewVehicleForm />
-    </div>
-  );
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+      </Routes>
+    </>
+  )
 }
 
 export default App;

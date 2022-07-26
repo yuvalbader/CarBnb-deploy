@@ -13,12 +13,14 @@ import MenuItem from "@mui/material/MenuItem"
 import AdbIcon from "@mui/icons-material/Adb"
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline"
 import Model from "./Model"
+import { useNavigate } from "react-router-dom"
 
 const pagesIfVisitor = ["Learn more", "Log in", "Sign up"]
 const pagesIfLog = ["Learn more", "My reservations"]
 const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"]
 
 const NavBarComponent = () => {
+  const navigate = useNavigate()
   const [isUser, setIsUser] = useState(false)
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -172,7 +174,9 @@ const NavBarComponent = () => {
                   return (
                     <Button
                       key={page}
-                      onClick={handleCloseNavMenu}
+                      onClick={() =>
+                        navigate(`/${page.toLowerCase().replace(" ", "-")}`)
+                      }
                       sx={{ ml: 4, color: "white", display: "block" }}
                     >
                       {page}
