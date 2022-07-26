@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       price_per_day: DataTypes.INTEGER,
       description: DataTypes.STRING,
       user_id: DataTypes.INTEGER,
-      
+      type: DataTypes.STRING,//[Hatchback, Sedan, SUV, MUV, Coupe, Convertible, Pickup Truck]
+      location: DataTypes.STRING,//city, country
     },
     {
       sequelize,
