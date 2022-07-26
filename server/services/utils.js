@@ -12,6 +12,12 @@ class UtilsService {
         [Op.or]: [
           { end_date: { [Op.between]: [start_order, end_order] } },
           { start_date: { [Op.between]: [start_order, end_order] } },
+          {
+            [Op.and]: [
+              { start_date: { [Op.lt]: start_order } },
+              { end_date: { [Op.gt]: end_order } },
+            ],
+          },
         ],
         // [Op.or]: [
         //   { end_date: { [Op.gt]: start_order } },
