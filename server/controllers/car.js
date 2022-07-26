@@ -14,6 +14,7 @@ const getAllCars = async (req, res, next) => {
 
 const getBrands = async (req, res, next) => {
   try {
+    console.log("got to get brands controller");
     const brands = await CarsService.getBrands();
     if (!brands) {
       throw new Error("Brands not found");
@@ -52,10 +53,11 @@ const getCarsByUserId = async (req, res, next) => {
 
 const addCar = async (req, res, next) => {
   const newCar = req.body;
+  console.log("got to add car controller: ", req.body);
   try {
     const car = await CarsService.addCar(newCar);
     if (!car) {
-      throw new Error("Unable to add car");
+      throw new Error("Car not added");
     }
     return res.status(200).send("Car has been successfully added");
   } catch (err) {
