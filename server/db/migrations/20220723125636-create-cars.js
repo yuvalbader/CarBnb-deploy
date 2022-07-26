@@ -11,9 +11,7 @@ module.exports = {
       profile_piture: {
         type: Sequelize.STRING,
       },
-      type: {
-        type: Sequelize.STRING,
-      },
+
       number_of_seats: {
         type: Sequelize.INTEGER,
       },
