@@ -1,24 +1,27 @@
 import React, { forwardRef } from "react"
-import TextField from "@mui/material/TextField"
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import { TimePicker } from "@mui/x-date-pickers/TimePicker"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import { possibleTimes } from "./data"
 import "./style.css"
-const Time = forwardRef((_props, ref) => {
-  const [value, setValue] = React.useState(null)
-  console.log("value", value);
+const Time = forwardRef((props, ref) => {
+  const [time, setTime] = React.useState("")
+
+  const handleChange = (event) => {
+    setTime(event.target.value)
+  }
+
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <TimePicker
-        label="10:00AM"
-        value={value}
-        inputRef={ref}
-        onChange={(newValue) => {
-          setValue(newValue)
-        }}
-        renderInput={(params) => <TextField {...params} />}
-      />
-    </LocalizationProvider>
+    <FormControl sx={{ minWidth: 120,m:3 }}>
+      <Select value={time} onChange={handleChange} displayEmpty inputRef={ref}>
+        <MenuItem value="">
+          <em>10:00AM</em>
+        </MenuItem>
+        {possibleTimes.map((time) => (
+          <MenuItem value={time}>{time}</MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   )
 })
 
