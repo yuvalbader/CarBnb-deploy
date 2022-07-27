@@ -1,6 +1,6 @@
 import * as React from "react";
 import ProfileNavBar from "./ProfileNavBar/ProfileNavBar";
-import DetailsContainer from "./DetailsContainer/DetailsContainer";
+import DetailsContainer from "./OrdersContainer/OrdersContainer";
 
 
 

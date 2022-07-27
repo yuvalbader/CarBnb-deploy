@@ -5,10 +5,11 @@ import Tab from "@mui/material/Tab";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import CardTravelIcon from "@mui/icons-material/CardTravel";
-import DetailsContainer from "../DetailsContainer/DetailsContainer";
+import OrdersContainer from "../OrdersContainer/OrdersContainer";
+import MyCars from "../MyCars/MyCars";
 
 const ProfileNavBar = () => {
-  const [value, setValue] = useState("0");
+  const [value, setValue] = useState("trips");
 
   const handleChange = (event, value) => {
     setValue(value);
@@ -25,30 +26,28 @@ const ProfileNavBar = () => {
           icon={<CardTravelIcon />}
           iconPosition="start"
           label="My trips"
-          value="0"
+          value="trips"
         />
         <Tab
           icon={<ListAltIcon />}
           iconPosition="start"
           label="My reservations"
-          value="1"
+          value="reservations"
         />
         <Tab
           icon={<TimeToLeaveIcon />}
           iconPosition="start"
           label="My cars"
-          value="2"
+          value="cars"
         />
       </Tabs>
-      {value === "0" && (
-        <DetailsContainer page="trips">My trips</DetailsContainer>
+      {value === "trips" && (
+        <OrdersContainer page="trips">My trips</OrdersContainer>
       )}
-      {value === "1" && (
-        <DetailsContainer page="reservations">My reservations</DetailsContainer>
+      {value === "reservations" && (
+        <OrdersContainer page="reservations">My reservations</OrdersContainer>
       )}
-      {/* {value === "2" && (
-        <DetailsContainer title="cars">My cars</DetailsContainer>
-      )} */}
+      {value === "cars" && <MyCars title="cars">My cars</MyCars>}
     </div>
   );
 };

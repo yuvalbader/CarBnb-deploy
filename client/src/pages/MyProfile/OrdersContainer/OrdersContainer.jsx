@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./DetailsContainer.css";
+import "./OrdersContainer.css";
 
 const DetailsContainer = (props) => {
   // const [page, setPage] = useState(props.page);
