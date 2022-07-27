@@ -15,7 +15,6 @@ carRouter.get("/", getAllCars);
 carRouter.get("/user/:id", getCarsByUserId);
 carRouter.get("/brands", getBrands);
 carRouter.get("/:id", getCarById);
-
 carRouter.post("/", addCar);
 carRouter.put("/:id", updateCar);
 carRouter.delete("/:id", deleteCar);

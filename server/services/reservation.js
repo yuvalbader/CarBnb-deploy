@@ -6,11 +6,10 @@ class ReservationService {
   };
 
   getReservationsByOwnerId = async (ownerId) => {
-    return Reservation.findAll({
-      where: {
-        car_id: ownerId,
-      },
-    });
+   // get all reservation of an owner by ownerId.
+   
+
+ 
   };
 
   getReservationsByCustomerId = async (customerId) => {
@@ -56,5 +55,4 @@ class ReservationService {
     });
   };
 }
-
 module.exports = new ReservationService();

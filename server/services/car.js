@@ -3,9 +3,24 @@ const { Car } = require('../db/models');
 class CarsService {
   constructor() {}
 
+  carsImgs = [
+    {
+      tesla:
+        "https://resources.turo.com/f/81934/386x308/7dcf9bff19/image_make_tesla-2x.jpg",
+    },
+    {
+      jeep: "https://resources.turo.com/f/81934/386x308/9bf274f19e/image_make_jeep-2x.jpg",
+    },
+  ];
+
   getAllCars = async () => {
     return await Car.findAll();
   };
+
+  // return all cars that are available in a city for a given date range
+  // it menas that the car is not reserved for the given
+  // date range in the reservation table
+  getAvailableCars = async (startDate, endDate, city) => {};
 
   getCarById = async (carId) => {
     return await Car.findByPk(carId);

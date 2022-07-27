@@ -1,37 +1,70 @@
 .containerr.testimonials__containerr {
-    width: 50%;
-    padding-bottom: 4rem;
+  width: 50%;
+  padding-bottom: 8rem;
+  height: 20vh;
+}
+img {
+  width: 100%;
+}
+#section {
+  text-align: center;
+}
+.swiper-pagination-clickable .swiper-pagination-bullet {
+  /* background: var(--color-primary); */
+}
+.testemonials {
+  text-align: center;
+  border-radius: 2rem;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.card-brand {
+  border-radius: 2rem;
+  box-shadow: 3px 2px 9px 2px rgba(0, 0, 0, 0.1);
+
+}
+h1 {
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h5 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  position: absolute;
+}
+h4 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 20%;
+}
+
+@media screen and (max-width: 1024px) {
+  .container.testimonials__container {
+    width: 60%;
   }
-  .avatar {
-    width: 4rem;
-    aspect-ratio: 1/1;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    border: 0.4rem solid var(--color-primary-variant);
+}
+@media screen and (max-width: 600px) {
+  .container.testimonials__container {
+    width: var(--container-width-sm);
   }
-  
-  .swiper-pagination-clickable .swiper-pagination-bullet {
-    background: var(--color-primary);
+
+  .review {
+    width: var(--container-width-sm);
   }
-  .testemonials {
-    background: var(--color-bg-variant);
-    text-align: center;
-    border-radius: 2rem;
-    user-select: none;
-  }
-  
-  @media screen and (max-width: 1024px) {
-    .container.testimonials__container {
-      width: 60%;
-    }
-  }
-  @media screen and (max-width: 600px) {
-    .container.testimonials__container {
-      width: var(--container-width-sm);
-    }
-  
-    .review {
-      width: var(--container-width-sm);
-    }
-  }
+}

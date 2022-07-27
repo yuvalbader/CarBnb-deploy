@@ -10,9 +10,9 @@ class ListApiService {
     return axios.post(url, { ...body, userEmail });
   }
   static async getList() {
-    // const response = await ListApiService.baseGet(`http://localhost:8000/api/car`)
-    // return response.data
-    return ListApiService.baseGet('http://localhost:8000/api/car');
+    const response = await axios.get(`http://localhost:8000/api/car`);
+    return response.data;
+    // return ListApiService.baseGet("http://localhost:8000/api/car")
   }
 
   static async getBrandList() {
