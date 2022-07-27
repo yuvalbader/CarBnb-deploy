@@ -1,5 +1,6 @@
 import React from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
+import Fab from "@mui/material/Fab"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
@@ -14,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
-import ListApiService from "../../services/list-api-service"
+
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -82,13 +83,6 @@ export default function Search() {
 
   React.useEffect(() => {
     let active = true
-
-    // ask about this
-    // if (!autocompleteService.current && window.google) {
-    //   // autocompleteService.current =
-    //   //   new window.google.maps.places.AutocompleteService()
-    // }
-
     if (!autocompleteService.current) {
       return undefined
     }
@@ -118,12 +112,13 @@ export default function Search() {
       active = false
     }
   }, [value, inputValue, fetch])
+
   return (
-    <div className="container">
+    <div className="container__searchBar">
       <div className="searchContainer">
         <Autocomplete
           id="google-map-demo"
-          sx={{ width: 300 }}
+          sx={{ width: 400 }}
           getOptionLabel={(option) =>
             typeof option === "string" ? option : option.description
           }
@@ -144,8 +139,8 @@ export default function Search() {
             <TextField
               inputRef={whereRef}
               {...params}
-              label="Where"
               fullWidth
+              placeholder="Where?"
             />
           )}
           renderOption={(props, option) => {
@@ -189,9 +184,11 @@ export default function Search() {
             )
           }}
         />
+        <div className="vertical_line"></div>
         <Date ref={fromRef} label="From" />
-        <Date ref={untilRef} label="Until" />
         <Time ref={timeToPickRef} />
+        <div className="vertical_line"></div>
+        <Date ref={untilRef} label="Until" />
         <Time ref={timeToDropRef} />
         <IconButton
           color="primary"
@@ -199,7 +196,11 @@ export default function Search() {
           component="label"
           onClick={searchHandler}
         >
-          <SearchIcon className="search-icon" />
+          <Box>
+            <Fab size='small' color="primary" aria-label="search">
+              <SearchIcon />
+            </Fab>
+          </Box>
         </IconButton>
       </div>
     </div>

@@ -4,8 +4,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("Reservations", [
       {
-        start_date: new Date(2022, 7, 30),
-        end_date: new Date(2022, 3, 8),
+        start_date: new Date("2022, 7, 30"),
+        end_date: new Date("2022, 8, 3"),
         total_price: 500,
         start_time: new Date(),
         end_time: new Date(),
@@ -15,8 +15,8 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        start_date: new Date(2022, 7, 30),
-        end_date: new Date(2022, 3, 8),
+        start_date: new Date("2022, 7, 30"),
+        end_date: new Date("2022, 8, 3"),
         total_price: 200,
         start_time: new Date(),
         end_time: new Date(),

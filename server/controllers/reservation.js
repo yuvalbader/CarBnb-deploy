@@ -93,7 +93,9 @@ const deleteReservation = async (req, res, next) => {
 const deleteAllReservations = async (req, res, next) => {
   try {
     await reservationService.deleteAllReservations();
-    return res.status(200).send("All reservations has been successfully deleted");
+    return res
+      .status(200)
+      .send("All reservations has been successfully deleted");
   } catch (err) {
     return res.status(404).send(err.message);
   }
