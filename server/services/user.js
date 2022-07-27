@@ -15,6 +15,11 @@ class UserService {
     });
   };
 
+  getUserById = async (id) => {
+    console.log("got to get user by id: ", id);
+    return await User.findByPk(id);
+  };
+
   createUser = async (user) => {};
 
   updateUser = async (updatedUser, id) => {};

@@ -6,7 +6,6 @@ class UtilsService {
 
   getAvailableCars = async (search) => {
     const { start_order, end_order, location } = search;
-    console.log(start_order, end_order);
     const booking = await Reservation.findAll({
       where: {
         [Op.or]: [
@@ -29,6 +28,22 @@ class UtilsService {
       },
     });
   };
+
+  // getCarsToPresent = async () => {
+  //   const today = new Date(); //Today's Date
+  //   const requiredDate = (n) => {
+  //     return new Date(
+  //       today.getFullYear(),
+  //       today.getMonth(),
+  //       today.getDate() + n
+  //     );
+  //   };
+  //   console.log(today,requiredDate(3));
+  //   let dates = { start_order:today, end_order:requiredDate, location:"" }
+  //   let cars = this.getAvailableCars (dates);
+    
+  // };
 }
+
 
 module.exports = new UtilsService();
