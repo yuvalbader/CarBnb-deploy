@@ -1,61 +1,64 @@
-import React, { useState, useEffect, useCallback } from "react"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import Toolbar from "@mui/material/Toolbar"
-import IconButton from "@mui/material/IconButton"
-import Typography from "@mui/material/Typography"
-import Menu from "@mui/material/Menu"
-import MenuIcon from "@mui/icons-material/Menu"
-import Container from "@mui/material/Container"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import MenuItem from "@mui/material/MenuItem"
-import AdbIcon from "@mui/icons-material/Adb"
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline"
-import Model from "./Model"
-import { useNavigate } from "react-router-dom"
+import React, { useState, useEffect, useCallback } from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import Model from "./Model";
+import { useNavigate } from "react-router-dom";
 
-const pagesIfVisitor = ["Learn more", "Log in", "Sign up"]
-const pagesIfLog = ["Learn more", "My reservations"]
-const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"]
+const pagesIfVisitor = ["Learn more", "Log in", "Sign up"];
+const pagesIfLog = ["Learn more", "My profile"];
+const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavBarComponent = () => {
-  const navigate = useNavigate()
-  const [isUser, setIsUser] = useState(false)
-  const [anchorElNav, setAnchorElNav] = useState(null)
-  const [anchorElUser, setAnchorElUser] = useState(null)
+  const navigate = useNavigate();
+  const [isUser, setIsUser] = useState(false);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const user = JSON.parse(localStorage.getItem("user"))
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    checkIfUserLogIn()
-  }, [])
+    checkIfUserLogIn();
+  }, []);
 
   const checkIfUserLogIn = () => {
     // checking local storage if user is logged in
     if (localStorage.getItem("user")) {
-      console.log("user is logged in", JSON.parse(localStorage.getItem("user")))
-      setIsUser(true)
+      console.log(
+        "user is logged in",
+        JSON.parse(localStorage.getItem("user"))
+      );
+      setIsUser(true);
     }
-  }
+  };
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   const handleLogOut = () => {
-    localStorage.removeItem("user")
-    setIsUser(false)
-  }
+    localStorage.removeItem("user");
+    setIsUser(false);
+  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -169,7 +172,7 @@ const NavBarComponent = () => {
                       >
                         <Model pageName={page} />
                       </Button>
-                    )
+                    );
                   }
                   return (
                     <Button
@@ -181,7 +184,7 @@ const NavBarComponent = () => {
                     >
                       {page}
                     </Button>
-                  )
+                  );
                 })}
           </Box>
           {/* ends of menu */}
@@ -220,13 +223,13 @@ const NavBarComponent = () => {
                             {setting}
                           </Typography>
                         </MenuItem>
-                      )
+                      );
                     }
                     return (
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
-                    )
+                    );
                   })}
               </Menu>
             ) : (
@@ -237,6 +240,6 @@ const NavBarComponent = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  )
-}
-export default NavBarComponent
+  );
+};
+export default NavBarComponent;
