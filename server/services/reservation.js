@@ -56,5 +56,4 @@ class ReservationService {
     });
   };
 }
-
 module.exports = new ReservationService();
