@@ -7,6 +7,7 @@ function Select({ name, options, ...moreProps }) {
   const [field, meta] = useField(name);
 
   const changeHandler = (event) => {
+    console.log(event.target);
     const { value } = event.target;
     setFieldValue(name, value);
   };
@@ -15,12 +16,12 @@ function Select({ name, options, ...moreProps }) {
     ...field,
     ...moreProps,
     select: true,
-    variant: 'outlined',
+    variant: 'standard',
     fullWidth: true,
     onChange: changeHandler,
   };
 
-  if(meta && meta.touched && meta.error){
+  if (meta && meta.touched && meta.error) {
     configSelect.error = true;
     configSelect.helperText = meta.error;
   }

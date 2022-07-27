@@ -6,22 +6,23 @@ import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
-import TextFieldWarrper from '../ui/form/TextFieldWarrper';
-import Select from '../ui/form/Select';
-import SubmitButton from '../ui/form/SubmitButton';
-import ListApiService from '../../services/list-api-service';
-import InputMap from './InputMap';
+import TextFieldWarrper from './form/TextFieldWarrper';
+import Select from './form/Select';
+import SubmitButton from './form/SubmitButton';
+import { addVehicle } from '../../app/actions/add-vehicle-actions';
+/* import InputMap from './InputMap'; */
 
 import { useDispatch } from 'react-redux';
-import InputButton from '../ui/form/InputButton';
+import InputButton from './form/InputButton';
+import SelectWarrper from './form/Select';
 
-function AddNewVehicleForm() {
+const ListNewVehicleForm = () => {
   const dispatch = useDispatch();
   //let lat = 0;
   // let lng = 0;
 
   const INITIAL_FORM_STATE = {
-    profile_piture: '',
+    profile_picture: '',
     brand: '',
     model: '',
     year: '',
@@ -31,32 +32,36 @@ function AddNewVehicleForm() {
   };
 
   const FORM_VALIDATION = Yup.object().shape({
-    profile_piture: Yup.string().required('חובה'),
-    brand: Yup.string().required('חובה'),
-    model: Yup.string().required('חובה'),
-    year: Yup.string().required('חובה'),
-    number_of_seats: Yup.number().required('חובה'),
-    price_per_day: Yup.number().required('חובה'),
-    description: Yup.string().required('חובה'),
+    profile_picture: Yup.string().required('required'),
+    brand: Yup.string().required('required'),
+    model: Yup.string().required('required'),
+    year: Yup.string().required('required'),
+    number_of_seats: Yup.string().required('required'),
+    price_per_day: Yup.string().required('required'),
+    description: Yup.string().required('required'),
+    type: Yup.string().required('required'),
+    city: Yup.string().required('required'),
   });
 
   function addNewVehicleHandler(values) {
+    console.log(values);
     const vehicleData = {
-      profile_piture: '',
-      brand: '',
-      model: '',
-      year: '',
-      number_of_seats: '',
-      price_per_day: '',
-      description: '',
-      user_id: '',
+      profile_picture: values.profile_picture,
+      brand: values.brand,
+      model: values.model,
+      year: values.year,
+      number_of_seats: values.number_of_seats,
+      price_per_day: values.price_per_day,
+      description: values.description,
+      type: values.type,
+      city: values.city,
     };
 
-    dispatch(ListApiService.addVehicle(vehicleData));
+    dispatch(addVehicle(vehicleData));
   }
 
   return (
-    <Card sx={{ maxwidth: '100%' }}>
+    <Card sx={{ maxWidth: '50%', m: '20px' }}>
       {/*       <InputMap
         onClick={(latitude, longtitude) => {
           lat = latitude;
@@ -71,38 +76,38 @@ function AddNewVehicleForm() {
         <Form>
           <Grid
             container
-            spacing={2}
+            spacing={1}
             justifyContent="space-evenly"
             alignItems="center"
             p={5}
           >
-            <Grid item xs={6}>
-              <Select
+            <Grid item xs={12}>
+              <SelectWarrper
                 name="type"
                 label="Type"
                 options={{
-                  1: 'Private',
-                  2: 'Motocycle',
-                  3: 'Jeep',
-                  4: 'Van',
-                  5: 'Bus',
-                  6: 'Sport',
-                  7: 'Luxuary',
-                  8: 'Mini',
+                  Private: 'Private',
+                  Motorcycle: 'Motorcycle',
+                  Jeep: 'Jeep',
+                  Van: 'Van',
+                  Bus: 'Bus',
+                  Sport: 'Sport',
+                  Luxuary: 'Luxuary',
+                  Mini: 'Mini',
                 }}
-              ></Select>
+              ></SelectWarrper>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextFieldWarrper name="brand" label="Brand" />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextFieldWarrper name="model" label="Model"></TextFieldWarrper>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextFieldWarrper name="year" label="Year"></TextFieldWarrper>
             </Grid>
-            <Grid item xs={6}>
-              <Select
+            <Grid item xs={12}>
+              <SelectWarrper
                 name="number_of_seats"
                 label="Number of seats"
                 options={{
@@ -114,41 +119,40 @@ function AddNewVehicleForm() {
                   6: '6',
                   7: '7',
                 }}
-              ></Select>
+              ></SelectWarrper>
             </Grid>
-            <Grid item xs={6}>
-              <TextFieldWarrper name="price" label="Price Per Day" />
+            <Grid item xs={12}>
+              <TextFieldWarrper name="city" label="City" />
             </Grid>
-            <Grid item xs={6}>
-              <TextFieldWarrper name="description" label="Description" />
+            <Grid item xs={12}>
+              <TextFieldWarrper name="price_per_day" label="Price/Day" />
             </Grid>
-            <Divider />
+            <Grid item xs={12}>
+              <TextFieldWarrper
+                name="description"
+                label="Description"
+                multiline
+                rows={4}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputButton name="profile_picture">
+                <PhotoCameraIcon />
+              </InputButton>
+            </Grid>
             <Grid
               container
-              spacing={2}
-              justifyContent="flex-start"
-              alignItems="center"
-              p={5}
-            >
-              <Grid item xs={6}>
-                <InputButton name="image">
-                  <PhotoCameraIcon />
-                </InputButton>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={2}
+              spacing={1}
               justifyContent="center"
               alignItems="center"
               p={5}
             >
-              <SubmitButton text="הוסף טיול"></SubmitButton>
+              <SubmitButton text="Add Vehicle"></SubmitButton>
             </Grid>
           </Grid>
         </Form>
       </Formik>
     </Card>
   );
-}
-export default AddNewVehicleForm;
+};
+export default ListNewVehicleForm;

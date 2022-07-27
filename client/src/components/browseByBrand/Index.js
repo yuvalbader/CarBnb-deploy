@@ -1,22 +1,22 @@
-import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import "./style.css"
-import { Pagination } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import "swiper/css/pagination"
-import ListApiService from "../../services/list-api-service"
-import { fetchVehicles } from "../../app/actions/fetch-cars-actions"
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import './style.css';
+import { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import ListApiService from '../../services/list-api-service';
+import { fetchVehicles } from '../../app/actions/fetch-vehicles-actions';
 const Testimonials = () => {
-  const dispatch = useDispatch()
-  const [vehicles, setVehicles] = React.useState([])
+  const dispatch = useDispatch();
+  const [vehicles, setVehicles] = React.useState([]);
 
   useEffect(() => {
-    dispatch(fetchVehicles())
+    dispatch(fetchVehicles());
     ListApiService.getBrandList().then((res) => {
-      setVehicles(res)
-    })
-  }, [dispatch])
+      setVehicles(res);
+    });
+  }, [dispatch]);
 
   return (
     <section id="testimonials">
@@ -37,10 +37,10 @@ const Testimonials = () => {
               <h5 className="name">{brand}</h5>
               <small className="review"></small>
             </SwiperSlide>
-          )
+          );
         })}
       </Swiper>
     </section>
-  )
-}
-export default Testimonials
+  );
+};
+export default Testimonials;
