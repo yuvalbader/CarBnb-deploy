@@ -10,14 +10,15 @@ const getAllUsers = async (req, res, next) => {
 };
 
 const getUserByEmail = async (req, res, next) => {
+  const { email } = req.params;
   try {
-    const user = await userService.getUserByEmail(req.params.email);
+    const user = await userService.getUserByEmail(email);
     if (!user) {
-      return res.status(404).send("User not found");
+      throw new Error("User not found");
     }
     return res.status(200).send(user);
   } catch (err) {
-    next(err);
+    return res.status(404).send(err.message);
   }
 };
 

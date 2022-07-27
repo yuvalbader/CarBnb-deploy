@@ -1,3 +1,6 @@
+const { Op } = require("sequelize");
+const { User } = require("../db/models");
+
 class UserService {
   getAllUsers = async () => {};
 
@@ -5,7 +8,9 @@ class UserService {
     console.log("got to get user by email: ", email);
     return await User.findOne({
       where: {
-        email: email,
+        email: {
+          [Op.like]: "%" + email + "%",
+        },
       },
     });
   };
