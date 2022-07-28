@@ -5,8 +5,9 @@ export const vehicleModelsWithPhotos = [
     model: "X5",
     year: "2020",
     price: "$100",
-    photo:
+    photos: [
       "https://media.ed.edmunds-media.com/bmw/x5-m/2021/oem/2021_bmw_x5-m_4dr-suv_base_fq_oem_1_815.jpg",
+    ],
     ratingOfCar: 3,
   },
   {
@@ -15,7 +16,7 @@ export const vehicleModelsWithPhotos = [
     model: "Model S",
     year: "2020",
     price: "$100",
-    photo: "https://i.ytimg.com/vi/8r3kWLgeLg8/maxresdefault.jpg",
+    photos: ["https://i.ytimg.com/vi/8r3kWLgeLg8/maxresdefault.jpg"],
     ratingOfCar: 4,
   },
   {
@@ -24,7 +25,7 @@ export const vehicleModelsWithPhotos = [
     model: "Huracan",
     year: "2020",
     price: "$100",
-    photo: "https://i.ytimg.com/vi/ipZS7F8KaTk/maxresdefault.jpg",
+    photos: ["https://i.ytimg.com/vi/ipZS7F8KaTk/maxresdefault.jpg"],
     ratingOfCar: 5,
   },
   {
@@ -33,8 +34,13 @@ export const vehicleModelsWithPhotos = [
     model: "911",
     year: "2020",
     price: "$100",
-    photo:
+    photos: [
       "https://media.ed.edmunds-media.com/bmw/x5-m/2021/oem/2021_bmw_x5-m_4dr-suv_base_fq_oem_1_815.jpg",
+      "https://cdn.motor1.com/images/mgl/VmVwy/s1/porsche-911-turbo-s.webp",
+      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Porsche/911/8718/Porsche-911-GT3-with-Touring-Package/1642402319549/front-left-side-47.jpg",
+      "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/teaser_720x406x2/dam/AU_local/2020/Products_AU/911-Turbo-S-Images/Static/Porsche-911-Turbo-S--001.jpg/jcr:content/Porsche%20911%20Turbo%20S%20-001.jpg",
+      "https://alpes-holidays.com/wp-content/uploads/2022/04/2023-Porsche-911-Sport-Classic-Debuts-With-543-HP-RWD.jpg",
+    ],
     ratingOfCar: 4,
   },
   {
@@ -43,8 +49,9 @@ export const vehicleModelsWithPhotos = [
     model: "A6",
     year: "2020",
     price: "$100",
-    photo:
+    photos: [
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Porsche_911_992_GT3.jpg/1200px-Porsche_911_992_GT3.jpg",
+    ],
     ratingOfCar: 5,
   },
   {
@@ -53,8 +60,9 @@ export const vehicleModelsWithPhotos = [
     model: "C class",
     year: "2020",
     price: "$100",
-    photo:
+    photos: [
       "https://www.cmotors.co.il/wp-content/uploads/2021/06/Mercedes-C-Class-2021-D79ED7A7D793D799D79ED794.jpg",
+    ],
     ratingOfCar: 2,
   },
   {
@@ -63,7 +71,9 @@ export const vehicleModelsWithPhotos = [
     model: "458",
     year: "2020",
     price: "$100",
-    photo: "https://www.alainclass.com/wp-content/uploads/2017/05/ban1170.jpg",
+    photos: [
+      "https://www.alainclass.com/wp-content/uploads/2017/05/ban1170.jpg",
+    ],
     ratingOfCar: 5,
   },
 ]

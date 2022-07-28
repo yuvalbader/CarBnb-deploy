@@ -1,0 +1,24 @@
+.image_of_brand {
+  max-height: 100%;
+  object-fit: cover;
+  object-position: 100% 35%;
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-button-prev {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.swiper-button-next {
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  border-radius: 50%;
+}

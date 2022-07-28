@@ -4,17 +4,26 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 
-const Date = forwardRef((props, ref) => {
+const Datee = forwardRef((props, ref) => {
   const [value, setValue] = React.useState(null)
-
+  console.log(props, "props")
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
         toolbarPlaceholder={props.label}
-        value={value}
+        value={
+          value === null
+            ? props.label === "From"
+              ? new Date()
+              : new Date().setDate(new Date().getDate() + 3)
+            : value
+        }
         inputRef={ref}
         onChange={(newValue) => {
           setValue(newValue)
+          props.label === "From"
+            ? props.setDataFrom(newValue)
+            : props.setDataUntil(newValue)
         }}
         renderInput={(params) => <TextField {...params} />}
       />
@@ -22,4 +31,4 @@ const Date = forwardRef((props, ref) => {
   )
 })
 
-export default Date
+export default Datee

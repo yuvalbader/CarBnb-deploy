@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-
 import { useDispatch } from "react-redux"
 import "./style.css"
 import { Pagination } from "swiper"
@@ -15,8 +14,10 @@ import CardMedia from "@mui/material/CardMedia"
 import Typography from "@mui/material/Typography"
 import { CardActionArea } from "@mui/material"
 import RatingOfCar from "../../components/Rating/Index"
+import { useNavigate } from "react-router-dom"
 const Testimonials = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [vehicles, setVehicles] = React.useState([])
 
   useEffect(() => {
@@ -26,6 +27,11 @@ const Testimonials = () => {
     })
   }, [dispatch])
 
+  const onClick = (id) => {
+    navigate(`/car/${id}`, {
+      state: { vehicle: vehicleModelsWithPhotos.find((v) => v.id === id) },
+    })
+  }
   return (
     <section id="section">
       <h1>Find your drive</h1>
@@ -38,15 +44,19 @@ const Testimonials = () => {
         slidesPerView={5}
         pagination={{ clickable: true }}
       >
-        {vehicleModelsWithPhotos.map(({ id, brand, photo, ratingOfCar }) => {
+        {vehicleModelsWithPhotos.map(({ id, brand, photos, ratingOfCar }) => {
           return (
             <SwiperSlide key={id} className="testemonials">
-              <Card className="card-brand" sx={{ maxWidth: 345 }}>
+              <Card
+                onClick={() => onClick(id)}
+                className="card-brand"
+                sx={{ maxWidth: 345 }}
+              >
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     height="140"
-                    image={photo}
+                    image={photos[0]}
                     alt={brand}
                   />
                   <RatingOfCar rating={ratingOfCar} />

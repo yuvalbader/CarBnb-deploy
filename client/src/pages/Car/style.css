@@ -1,0 +1,28 @@
+.photoSwiper_container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo_swiper {
+  height: 80vh;
+}
+.details_container {
+  margin-top: 5vh;
+  margin-left: 20vw;
+  display: flex;
+}
+.left_side_container {
+  width: 25vw;
+  overflow: hidden;
+  margin-right: 15vw;
+  display: flex;
+  justify-content: center;
+}
+
+.right_side_container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
