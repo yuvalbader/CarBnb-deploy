@@ -15,10 +15,6 @@ const ProfileNavBar = () => {
     setValue(value);
   };
 
-  useEffect(() => {
-    console.log("value", value);
-  }, [value]);
-
   return (
     <div>
       <Tabs value={value} onChange={handleChange}>

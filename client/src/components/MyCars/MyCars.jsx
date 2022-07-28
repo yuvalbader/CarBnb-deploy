@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import VehicleListContainer from "../../../components/vehicles-list/VehiclesListContainer";
-import { vehicleModelsWithPhotos } from "../../../components/browseByBrand/dummyData";
-import Button from "@mui/material/Button";
-import ListApiService from "../../../services/list-api-service";
+import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
+import { vehicleModelsWithPhotos } from "../browseByBrand/dummyData";
 
 const MyCars = (props) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  const navigateToContacts = () => {
-    navigate("/add-vehicle");
-  };
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
