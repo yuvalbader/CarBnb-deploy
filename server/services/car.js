@@ -17,11 +17,6 @@ class CarsService {
     return await Car.findAll();
   };
 
-  // return all cars that are available in a city for a given date range
-  // it menas that the car is not reserved for the given
-  // date range in the reservation table
-  getAvailableCars = async (startDate, endDate, city) => {};
-
   getCarById = async (carId) => {
     return await Car.findByPk(carId);
   };
@@ -35,7 +30,6 @@ class CarsService {
   };
 
   addCar = async (car) => {
-    console.log('got to add car service:', car);
     return await Car.create({
       profile_piture: car.profile_piture,
       brand: car.brand,
@@ -45,6 +39,8 @@ class CarsService {
       price_per_day: car.price_per_day,
       description: car.description,
       user_id: car.user_id,
+      type: car.type,
+      location: car.location,
     });
   };
 

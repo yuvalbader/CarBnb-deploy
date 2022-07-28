@@ -62,6 +62,7 @@ class ReservationService {
     const reserved = await Reservation.findAll({
       where: {
         car_id: car_id,
+
         [Op.or]: [
           { end_date: { [Op.between]: [start_order, end_order] } },
           { start_date: { [Op.between]: [start_order, end_order] } },
