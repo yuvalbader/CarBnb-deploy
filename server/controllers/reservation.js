@@ -101,6 +101,17 @@ const deleteAllReservations = async (req, res, next) => {
   }
 };
 
+const isCarAvailable = async (req, res, next) => {
+  const details = req.body;
+  const id = req.params.id;
+  try {
+    const result = await reservationService.isCarAvailable({ id, details });
+    return res.status(200).send(result);
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+};
+
 module.exports = {
   getAllReservations,
   getReservationsByOwnerId,
@@ -110,4 +121,5 @@ module.exports = {
   updateReservation,
   deleteReservation,
   deleteAllReservations,
+  isCarAvailable,
 };

@@ -104,6 +104,7 @@ const deleteAllCars = async (req, res, next) => {
   }
 }
 
+
 module.exports = {
   getAllCars,
   getCarById,
