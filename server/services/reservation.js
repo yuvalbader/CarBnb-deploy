@@ -6,11 +6,12 @@ class ReservationService {
     return await Reservation.findAll();
   };
 
-  getReservationsByOwnerId = async (ownerId) => {
-   // get all reservation of an owner by ownerId.
-   
-
- 
+  getReservationsByCarId = async (carId) => {
+    return Reservation.findAll({
+      where: {
+        car_id: carId,
+      },
+    });
   };
 
   getReservationsByCustomerId = async (customerId) => {
@@ -57,11 +58,11 @@ class ReservationService {
   };
 
   isCarAvailable = async (data) => {
-    const { id, details } = data;
-    const { start_order, end_order } = details;
+    const { car_id, start_order, end_order } = data;
     const reserved = await Reservation.findAll({
       where: {
-        car_id: id,
+        car_id: car_id,
+
         [Op.or]: [
           { end_date: { [Op.between]: [start_order, end_order] } },
           { start_date: { [Op.between]: [start_order, end_order] } },
