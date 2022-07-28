@@ -1,0 +1,24 @@
+.sideSearch_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sideSearch_start_trip {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .sideSearch_container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .date_time {
+    display: flex;
+  }
+}

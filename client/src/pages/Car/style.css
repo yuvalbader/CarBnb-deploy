@@ -1,0 +1,57 @@
+.photoSwiper_container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo_swiper {
+  height: 80vh;
+}
+.details_container {
+  margin-top: 5vh;
+  margin-left: 20vw;
+  display: flex;
+}
+.left_side_container {
+  width: 25vw;
+  overflow: hidden;
+  margin-right: 15vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.right_side_container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .photo_swiper {
+    max-height: 250px;
+  }
+  .details_container {
+    margin-top: 5vh;
+    margin-left: 10vw;
+    display: flex;
+    flex-direction: column;
+  }
+  .left_side_container {
+    width: 80vw;
+    overflow: hidden;
+    margin-right: 15vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .right_side_container {
+    width: 80vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top:2vh;
+  }
+}
