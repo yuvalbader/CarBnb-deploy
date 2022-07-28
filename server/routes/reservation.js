@@ -8,13 +8,14 @@ const {
   updateReservation,
   deleteReservation,
   deleteAllReservations,
+  isCarAvailable,
 } = require("../controllers/reservation");
 
 reservationRouter.get("/", getAllReservations);
 reservationRouter.get("/car/:id", getReservationsByCarId);
 reservationRouter.get("/customer/:id", getReservationsByCustomerId);
 reservationRouter.get("/:id", getReservationById);
-reservationRouter.get("/availability", isCarAvailabl);
+reservationRouter.post("/available", isCarAvailable);
 reservationRouter.post("/", createReservation);
 reservationRouter.put("/:id", updateReservation);
 reservationRouter.delete("/:id", deleteReservation);
