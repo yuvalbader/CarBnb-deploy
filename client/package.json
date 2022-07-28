@@ -6,7 +6,10 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@material-ui/pickers": "^3.3.10",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.92",
     "@mui/material": "^5.9.1",
     "@mui/styled-engine-sc": "^5.8.0",
     "@mui/styles": "^5.9.2",
@@ -22,6 +25,7 @@
     "date-fns": "^2.29.1",
     "daterangepicker": "^3.1.0",
     "dotenv": "^16.0.1",
+    "formik": "^2.2.9",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
@@ -35,8 +39,9 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
-    "swiper": "^8.3.1",
-    "web-vitals": "^2.1.4"
+    "swiper": "^8.3.2",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
