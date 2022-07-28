@@ -58,7 +58,6 @@ class ReservationService {
   };
 
   isCarAvailable = async (data) => {
-    //details{car_id:Int,start_order:Date,end_order:Date}
     const { id, details } = data;
     const { start_order, end_order } = details;
     const reserved = await Reservation.findAll({
