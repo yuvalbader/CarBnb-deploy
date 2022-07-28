@@ -5,11 +5,12 @@ class ReservationService {
     return await Reservation.findAll();
   };
 
-  getReservationsByOwnerId = async (ownerId) => {
-   // get all reservation of an owner by ownerId.
-   
-
- 
+  getReservationsByCarId = async (carId) => {
+    return Reservation.findAll({
+      where: {
+        car_id: carId,
+      },
+    });
   };
 
   getReservationsByCustomerId = async (customerId) => {

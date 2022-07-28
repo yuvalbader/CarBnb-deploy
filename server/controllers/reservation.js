@@ -12,10 +12,10 @@ const getAllReservations = async (req, res, next) => {
   }
 };
 
-const getReservationsByOwnerId = async (req, res, next) => {
+const getReservationsByCarId = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const reservations = await reservationService.getReservationsByOwnerId(id);
+    const reservations = await reservationService.getReservationsByCarId(id);
     if (!reservations) {
       throw new Error("Reservations not found");
     }
@@ -103,7 +103,7 @@ const deleteAllReservations = async (req, res, next) => {
 
 module.exports = {
   getAllReservations,
-  getReservationsByOwnerId,
+  getReservationsByOwnerId: getReservationsByCarId,
   getReservationsByCustomerId,
   getReservationById,
   createReservation,
