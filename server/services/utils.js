@@ -41,9 +41,8 @@ class UtilsService {
   //   console.log(today,requiredDate(3));
   //   let dates = { start_order:today, end_order:requiredDate, location:"" }
   //   let cars = this.getAvailableCars (dates);
-    
+
   // };
 }
-
 
 module.exports = new UtilsService();
