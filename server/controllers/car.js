@@ -3,7 +3,7 @@ const CarsService = require("../services/car");
 const getAllCars = async (req, res, next) => {
   try {
     const cars = await CarsService.getAllCars();
-    if (!cars) {
+    if (cars.length === 0) {
       throw new Error("Cars not found");
     }
     return res.status(200).send(cars);
@@ -14,11 +14,11 @@ const getAllCars = async (req, res, next) => {
 
 const getBrands = async (req, res, next) => {
   try {
-    console.log("got to get brands controller");
-    const brands = await CarsService.getBrands();
-    if (!brands) {
+    let brands = await CarsService.getBrands();
+    if (brands.length === 0) {
       throw new Error("Brands not found");
     }
+    brands = brands.map((a) => a.brand);
     return res.status(200).send(brands);
   } catch (err) {
     return res.status(404).send(err.message);
@@ -26,7 +26,7 @@ const getBrands = async (req, res, next) => {
 };
 
 const getCarById = async (req, res, next) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const car = await CarsService.getCarById(id);
     if (!car) {
@@ -39,10 +39,10 @@ const getCarById = async (req, res, next) => {
 };
 
 const getCarsByUserId = async (req, res, next) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const cars = await CarsService.getCarByUserId(id);
-    if (!cars) {
+    if (cars.length === 0) {
       throw new Error("Cars not found");
     }
     return res.status(200).send(cars);
@@ -53,7 +53,6 @@ const getCarsByUserId = async (req, res, next) => {
 
 const addCar = async (req, res, next) => {
   const newCar = req.body;
-  console.log("got to add car controller: ", req.body);
   try {
     const car = await CarsService.addCar(newCar);
     if (!car) {
@@ -66,11 +65,12 @@ const addCar = async (req, res, next) => {
 };
 
 const updateCar = async (req, res, next) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const updateCar = req.body;
   try {
     const car = await CarsService.updateCar(id, updateCar);
-    if (!car) {
+    console.log(car);
+    if (car[0] === 0) {
       throw new Error("Unable to update car");
     }
     return res.status(200).send("Car has been successfully updated");
@@ -80,13 +80,9 @@ const updateCar = async (req, res, next) => {
 };
 
 const deleteCar = async (req, res, next) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
-    const car = await CarsService.deleteCar(id);
-
-    if (!car) {
-      throw new Error(`Unable to delete car with id: ${id}`);
-    }
+    await CarsService.deleteCar(id);
     return res.status(200).send("Car has been successfully deleted");
   } catch (err) {
     return res.status(404).send(err.message);
@@ -95,16 +91,12 @@ const deleteCar = async (req, res, next) => {
 
 const deleteAllCars = async (req, res, next) => {
   try {
-    const cars = await CarsService.deleteAllCars();
-    if (!cars) {
-      throw new Error("Unable to delete all cars");
-    }
+    await CarsService.deleteAllCars();
     return res.status(200).send("Cars has been successfully deleted");
   } catch (err) {
     return res.status(404).send(err.message);
   }
 };
-
 
 module.exports = {
   getAllCars,

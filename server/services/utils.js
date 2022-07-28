@@ -1,6 +1,5 @@
 const { Op } = require("sequelize");
 const { Car, Reservation } = require("../db/models");
-const reservation = require("./reservation");
 
 class UtilsService {
   constructor() {}
