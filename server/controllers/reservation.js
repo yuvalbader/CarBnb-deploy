@@ -103,7 +103,7 @@ const deleteAllReservations = async (req, res, next) => {
 
 module.exports = {
   getAllReservations,
-  getReservationsByOwnerId: getReservationsByCarId,
+  getReservationsByCarId,
   getReservationsByCustomerId,
   getReservationById,
   createReservation,

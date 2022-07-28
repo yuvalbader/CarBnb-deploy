@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import VehicleListContainer from "../../../components/vehicles-list/VehiclesListContainer";
 import { vehicleModelsWithPhotos } from "../../../components/browseByBrand/dummyData";
 import Button from "@mui/material/Button";
+import ListApiService from "../../../services/list-api-service";
 
 const MyCars = (props) => {
   const [data, setData] = useState([0]);
@@ -12,8 +13,15 @@ const MyCars = (props) => {
     navigate("/add-vehicle");
   };
   useEffect(() => {
-    console.log("data", vehicleModelsWithPhotos);
-  });
+    // console.log("data", vehicleModelsWithPhotos);
+    fetchMyData();
+  }, []);
+
+  const fetchMyData = async () => {
+    const data = { start_order: new Date(), end_order: new Date(), car_id:1 };
+    const res = await ListApiService.isCarAvailable(data);
+    setData(res);
+  };
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
@@ -42,7 +50,8 @@ const MyCars = (props) => {
     <div className="details-view-container">
       <p className="title"> My cars </p>
       {/* {data.length === 0 && userHadNoCars()} */}
-      {data.length !== 0 && <VehicleListContainer/>}
+      {/* {data.length !== 0 && <VehicleListContainer/>} */}
+      {console.log(data)}
       <Button variant="contained" onClick={navigateToContacts}>
         Add car
       </Button>
