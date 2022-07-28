@@ -1,30 +1,30 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react';
 
-import { useDispatch } from "react-redux"
-import "./style.css"
-import { Pagination } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import "swiper/css/pagination"
-import ListApiService from "../../services/list-api-service"
-import { vehicleModelsWithPhotos } from "./dummyData"
-import { fetchVehicles } from "../../app/actions/fetch-cars-actions"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import { CardActionArea } from "@mui/material"
-import RatingOfCar from "../../components/Rating/Index"
+import { useDispatch } from 'react-redux';
+import './style.css';
+import { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import ListApiService from '../../services/list-api-service';
+import { vehicleModelsWithPhotos } from './dummyData';
+import { fetchVehicles } from '../../app/actions/fetch-cars-actions';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import RatingOfCar from '../../components/Rating/Index';
 const Testimonials = () => {
-  const dispatch = useDispatch()
-  const [vehicles, setVehicles] = React.useState([])
+  const dispatch = useDispatch();
+  const [vehicles, setVehicles] = React.useState([]);
 
   useEffect(() => {
-    dispatch(fetchVehicles())
+    dispatch(fetchVehicles());
     ListApiService.getBrandList().then((res) => {
-      setVehicles(res)
-    })
-  }, [dispatch])
+      setVehicles(res);
+    });
+  }, [dispatch]);
 
   return (
     <section id="section">
@@ -59,10 +59,10 @@ const Testimonials = () => {
                 </CardActionArea>
               </Card>
             </SwiperSlide>
-          )
+          );
         })}
       </Swiper>
     </section>
-  )
-}
-export default Testimonials
+  );
+};
+export default Testimonials;

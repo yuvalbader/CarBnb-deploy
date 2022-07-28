@@ -1,4 +1,4 @@
-const { Car } = require("../db/models");
+const { Car } = require('../db/models');
 
 class CarsService {
   constructor() {}
