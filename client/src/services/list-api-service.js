@@ -90,9 +90,7 @@ class ListApiService {
 
   static async isCarAvailable(data) {
     try {
-      const response = await axios.get(
-        BASE_URL + RES + `availability/`,data
-      );
+      const response = await axios.post(BASE_URL + RES + `available/`, data);
       return response.data; //boolean
     } catch (err) {
       console.log(err.message);
