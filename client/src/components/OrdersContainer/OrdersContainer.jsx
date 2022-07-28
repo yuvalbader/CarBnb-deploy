@@ -45,24 +45,27 @@ const DetailsContainer = (props) => {
   }
 
   return (
-    <div className="">
-      <Swiper
-        slidesPerView={3}
-        spaceBetween={10}
-        pagination={{
-          clickable: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {data.map((item) => {
-          return (
-            <SwiperSlide className="swiper-slide">
-              <ReservationCard item={item}></ReservationCard>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
+    <div>
+      <div>
+        <p className="title"> {title} </p>
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={10}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          {data.map((item) => {
+            return (
+              <SwiperSlide className="swiper-slide">
+                <ReservationCard item={item}></ReservationCard>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
     </div>
   );
 };
