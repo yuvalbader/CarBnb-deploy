@@ -12,7 +12,7 @@ const Time = forwardRef((props, ref) => {
   }
 
   return (
-    <FormControl sx={{ minWidth: 120 }}>
+    <FormControl sx={{ minWidth: 125 }}>
       <Select value={time} onChange={handleChange} inputRef={ref}>
         {possibleTimes.map((time) => (
           <MenuItem value={time}>{time}</MenuItem>

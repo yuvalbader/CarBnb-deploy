@@ -13,4 +13,12 @@
   align-items: center;
 }
 
-
+@media screen and (max-width: 768px) {
+  .sideSearch_container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .date_time {
+    display: flex;
+  }
+}

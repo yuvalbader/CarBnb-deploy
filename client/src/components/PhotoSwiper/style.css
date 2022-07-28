@@ -22,3 +22,19 @@
   background-color: #fff;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 768px) {
+  .swiper-button-prev {
+    width: 60px;
+    height: 60px;
+    top: 12vh;
+  }
+
+  .swiper-button-next {
+    width: 60px;
+    height: 60px;
+    top: 12vh;
+  }
+  .swiper-slide {
+  }
+}

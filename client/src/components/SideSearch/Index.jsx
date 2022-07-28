@@ -130,9 +130,9 @@ export default function SideSearch({ state }) {
         >
           Trip start
         </Typography>
-        <div>
+        <div className="date_time">
           <DateToPick setDataFrom={setDataFrom} ref={fromRef} label="From" />
-          <Time />
+          <Time time={135} />
         </div>
         <Typography
           sx={{ marginTop: "1vh", width: "100%", textAlign: "start" }}
@@ -140,13 +140,13 @@ export default function SideSearch({ state }) {
         >
           Trip end
         </Typography>
-        <div>
+        <div className="date_time">
           <DateToPick
             setDataUntil={setDataUntil}
             ref={untilRef}
             label="Until"
           />
-          <Time />
+          <Time time={135} />
         </div>
       </div>
       <div style={{ width: "100%" }}>
