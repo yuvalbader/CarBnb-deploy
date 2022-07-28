@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Car, Reservation } = require("../db/models");
+const reservation = require("./reservation");
 
 class UtilsService {
   constructor() {}
@@ -41,9 +42,8 @@ class UtilsService {
   //   console.log(today,requiredDate(3));
   //   let dates = { start_order:today, end_order:requiredDate, location:"" }
   //   let cars = this.getAvailableCars (dates);
-    
+
   // };
 }
-
 
 module.exports = new UtilsService();

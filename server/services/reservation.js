@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Reservation } = require("../db/models");
 
 class ReservationService {
@@ -5,11 +6,12 @@ class ReservationService {
     return await Reservation.findAll();
   };
 
-  getReservationsByOwnerId = async (ownerId) => {
-   // get all reservation of an owner by ownerId.
-   
-
- 
+  getReservationsByCarId = async (carId) => {
+    return Reservation.findAll({
+      where: {
+        car_id: carId,
+      },
+    });
   };
 
   getReservationsByCustomerId = async (customerId) => {
@@ -53,6 +55,27 @@ class ReservationService {
       where: {},
       truncate: true,
     });
+  };
+
+  isCarAvailable = async (data) => {
+    const { car_id, start_order, end_order } = data;
+    const reserved = await Reservation.findAll({
+      where: {
+        car_id: car_id,
+
+        [Op.or]: [
+          { end_date: { [Op.between]: [start_order, end_order] } },
+          { start_date: { [Op.between]: [start_order, end_order] } },
+          {
+            [Op.and]: [
+              { start_date: { [Op.lt]: start_order } },
+              { end_date: { [Op.gt]: end_order } },
+            ],
+          },
+        ],
+      },
+    });
+    return reserved.length == 0;
   };
 }
 module.exports = new ReservationService();

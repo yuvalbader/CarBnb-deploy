@@ -12,10 +12,10 @@ const getAllReservations = async (req, res, next) => {
   }
 };
 
-const getReservationsByOwnerId = async (req, res, next) => {
+const getReservationsByCarId = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const reservations = await reservationService.getReservationsByOwnerId(id);
+    const reservations = await reservationService.getReservationsByCarId(id);
     if (!reservations) {
       throw new Error("Reservations not found");
     }
@@ -101,13 +101,24 @@ const deleteAllReservations = async (req, res, next) => {
   }
 };
 
+const isCarAvailable = async (req, res, next) => {
+  const details = req.body;
+  try {
+    const result = await reservationService.isCarAvailable(details);
+    return res.status(200).send(result);
+  } catch (err) {
+    return res.status(404).send(err.message);
+  }
+};
+
 module.exports = {
   getAllReservations,
-  getReservationsByOwnerId,
+  getReservationsByCarId,
   getReservationsByCustomerId,
   getReservationById,
   createReservation,
   updateReservation,
   deleteReservation,
   deleteAllReservations,
+  isCarAvailable,
 };
