@@ -8,6 +8,7 @@ import DetailsContainer from "../../components/OrdersContainer/OrdersContainer";
 const MyProfile = () => {
   return (
     <div>
+      
       <ProfileNavBar />
     </div>
   );

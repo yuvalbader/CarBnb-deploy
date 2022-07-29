@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ReservationCard from "../ReservationCard/ReservationCard";
+import VehicleCard from "../vehicle-card/VehicleCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import dummyData from "../../pages/MyProfile/dummyData";
@@ -18,6 +19,7 @@ const DetailsContainer = (props) => {
   useEffect(() => {
     const page = props.page;
     const pageTitle = `My ${page}`;
+    console.log(pageTitle);
     const pageLabel = `No past ${page}`;
     const pageText = `This is where you can access information about your ${page}`;
     setTitle(pageTitle);
@@ -60,7 +62,8 @@ const DetailsContainer = (props) => {
           {data.map((item) => {
             return (
               <SwiperSlide className="swiper-slide">
-                <ReservationCard item={item}></ReservationCard>
+                <VehicleCard item={{ ...item, seats: 5, engine: "petrol", gear:"Auto" }}> </VehicleCard>
+                {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
             );
           })}
