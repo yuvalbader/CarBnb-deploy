@@ -1,13 +1,8 @@
 import actionTypes from "./constants"
 
-const searchAction = (where, from, until, timeToPick, timeToDrop) => {
+const searchAction = () => {
   return {
     type: actionTypes.SEARCH,
-    where,
-    from,
-    until,
-    timeToPick,
-    timeToDrop,
   }
 }
 
