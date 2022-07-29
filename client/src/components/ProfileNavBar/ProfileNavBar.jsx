@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
@@ -11,7 +12,11 @@ import MyCars from "../MyCars/MyCars";
 const ProfileNavBar = () => {
   const [value, setValue] = useState("trips");
 
+  const navigate = useNavigate();
+
   const handleChange = (event, value) => {
+    console.log("vhange");
+    // navigate(`/MyProfile/${value}`);
     setValue(value);
   };
 
