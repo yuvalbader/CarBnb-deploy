@@ -16,6 +16,9 @@ function App() {
         <Route path="/" exact element={<Home />} />
         <Route path="/add-vehicle" exact element={<AddVehicle />} />
         <Route path="/MyProfile" exact element={<MyProfile />} />
+        <Route path="/MyProfile/reservations" exact element={<MyProfile />} />
+        <Route path="/MyProfile/trips" exact element={<MyProfile />} />
+        <Route path="/MyProfile/cars" exact element={<MyProfile />} />
         <Route path="/car/:id" element={<Car />} />
       </Routes>
     </>
