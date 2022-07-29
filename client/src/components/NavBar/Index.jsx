@@ -22,8 +22,8 @@ const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"]
 const NavBarComponent = () => {
   const navigate = useNavigate()
   const [isUser, setIsUser] = useState(false)
-  const [anchorElNav, setAnchorElNav] = useState(null)
-  const [anchorElUser, setAnchorElUser] = useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(false)
+  const [anchorElUser, setAnchorElUser] = useState(false)
 
   const user = JSON.parse(localStorage.getItem("user"))
   useEffect(() => {
@@ -271,7 +271,7 @@ const NavBarComponent = () => {
                   })}
               </Menu>
             ) : (
-              <Menu sx={{ mt: "45px" }}></Menu>
+              <Menu open={anchorElUser} sx={{ mt: "45px" }}></Menu>
             )}
           </Box>
           {/* ends of login profile */}
