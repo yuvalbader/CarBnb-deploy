@@ -2,6 +2,6 @@ const carRouter = require("express").Router();
 
 const { availableCars } = require("../controllers/utils");
 
-carRouter.get("/", availableCars);
+carRouter.post("/", availableCars);
 
 module.exports = carRouter;

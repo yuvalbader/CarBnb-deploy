@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import Fab from '@mui/material/Fab';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import parse from 'autosuggest-highlight/parse';
-import throttle from 'lodash/throttle';
-import Date from './Date/Index';
-import Time from './Time/Index';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import './style.css';
-import { search } from '../../app/actions/search-actions';
-import { ConnectionClosedEvent } from 'mongodb';
-=======
 import React from "react"
 import { useDispatch } from "react-redux"
 import Fab from "@mui/material/Fab"
@@ -35,7 +15,6 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
->>>>>>> main
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA';
 
@@ -68,10 +47,6 @@ export default function Search() {
   const timeToDropRef = React.useRef();
 
   const searchHandler = () => {
-<<<<<<< HEAD
-    dispatch(search(searchData));
-  };
-=======
     console.log("fromRef", fromRef.current.value, typeof fromRef.current.value)
     console.log(
       "timeToPick",
@@ -109,7 +84,6 @@ export default function Search() {
     }
     dispatch(search(searchDataObject))
   }
->>>>>>> main
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
