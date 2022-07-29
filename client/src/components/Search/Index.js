@@ -9,7 +9,7 @@ import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import parse from "autosuggest-highlight/parse"
 import throttle from "lodash/throttle"
-import Date from "./Date/Index"
+import Datee from "./Date/Index"
 import Time from "./Time/Index"
 import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
@@ -47,15 +47,42 @@ export default function Search() {
   const timeToDropRef = React.useRef()
 
   const searchHandler = () => {
-    dispatch(
-      search(
-        whereRef.current.value,
-        fromRef.current.value,
-        untilRef.current.value,
-        timeToPickRef.current.value,
-        timeToDropRef.current.value
-      )
+    console.log("fromRef", fromRef.current.value, typeof fromRef.current.value)
+    console.log(
+      "timeToPick",
+      timeToPickRef.current.value,
+      typeof timeToPickRef.current.value
     )
+    const yearFrom = fromRef.current.value.split("/")[2]
+    const monthFrom = fromRef.current.value.split("/")[0]
+    const dayFrom = fromRef.current.value.split("/")[1]
+    const hoursFrom = timeToPickRef.current.value.split(":")[0]
+    const minutesFrom = timeToPickRef.current.value.split(":")[1]
+
+    const yearUntil = untilRef.current.value.split("/")[2]
+    const monthUntil = untilRef.current.value.split("/")[0]
+    const dayUntil = untilRef.current.value.split("/")[1]
+    const hoursUntil = timeToDropRef.current.value.split(":")[0]
+    const minutesUntil = timeToDropRef.current.value.split(":")[1]
+
+    const searchDataObject = {
+      location: whereRef.current.value,
+      start_order: new Date(
+        yearFrom,
+        monthFrom,
+        dayFrom,
+        hoursFrom,
+        minutesFrom
+      ),
+      end_order: new Date(
+        yearUntil,
+        monthUntil,
+        dayUntil,
+        hoursUntil,
+        minutesUntil
+      ),
+    }
+    dispatch(search(searchDataObject))
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -185,10 +212,10 @@ export default function Search() {
           }}
         />
         <div className="vertical_line"></div>
-        <Date ref={fromRef} label="From" />
+        <Datee ref={fromRef} label="From" />
         <Time ref={timeToPickRef} />
         <div className="vertical_line"></div>
-        <Date ref={untilRef} label="Until" />
+        <Datee ref={untilRef} label="Until" />
         <Time ref={timeToDropRef} />
         <IconButton
           color="primary"
