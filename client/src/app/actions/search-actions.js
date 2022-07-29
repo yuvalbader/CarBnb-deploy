@@ -1,9 +1,17 @@
 import actionTypes from './constants';
 import ListApiService from '../../services/list-api-service';
 
+<<<<<<< HEAD
 const searchRequestAction = () => ({
   type: actionTypes.SEARCH_VEHICLES_REQUEST,
 });
+=======
+const searchAction = () => {
+  return {
+    type: actionTypes.SEARCH,
+  }
+}
+>>>>>>> main
 
 const searchSuccessAction = (searchData) => ({
   type: actionTypes.SEARCH_VEHICLES_SUCCESS,

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import Fab from '@mui/material/Fab';
@@ -16,6 +17,25 @@ import IconButton from '@mui/material/IconButton';
 import './style.css';
 import { search } from '../../app/actions/search-actions';
 import { ConnectionClosedEvent } from 'mongodb';
+=======
+import React from "react"
+import { useDispatch } from "react-redux"
+import Fab from "@mui/material/Fab"
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
+import Autocomplete from "@mui/material/Autocomplete"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import parse from "autosuggest-highlight/parse"
+import throttle from "lodash/throttle"
+import Datee from "./Date/Index"
+import Time from "./Time/Index"
+import SearchIcon from "@mui/icons-material/Search"
+import IconButton from "@mui/material/IconButton"
+import "./style.css"
+import { search } from "../../app/actions/search-actions"
+>>>>>>> main
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA';
 
@@ -48,8 +68,48 @@ export default function Search() {
   const timeToDropRef = React.useRef();
 
   const searchHandler = () => {
+<<<<<<< HEAD
     dispatch(search(searchData));
   };
+=======
+    console.log("fromRef", fromRef.current.value, typeof fromRef.current.value)
+    console.log(
+      "timeToPick",
+      timeToPickRef.current.value,
+      typeof timeToPickRef.current.value
+    )
+    const yearFrom = fromRef.current.value.split("/")[2]
+    const monthFrom = fromRef.current.value.split("/")[0]
+    const dayFrom = fromRef.current.value.split("/")[1]
+    const hoursFrom = timeToPickRef.current.value.split(":")[0]
+    const minutesFrom = timeToPickRef.current.value.split(":")[1]
+
+    const yearUntil = untilRef.current.value.split("/")[2]
+    const monthUntil = untilRef.current.value.split("/")[0]
+    const dayUntil = untilRef.current.value.split("/")[1]
+    const hoursUntil = timeToDropRef.current.value.split(":")[0]
+    const minutesUntil = timeToDropRef.current.value.split(":")[1]
+
+    const searchDataObject = {
+      location: whereRef.current.value,
+      start_order: new Date(
+        yearFrom,
+        monthFrom,
+        dayFrom,
+        hoursFrom,
+        minutesFrom
+      ),
+      end_order: new Date(
+        yearUntil,
+        monthUntil,
+        dayUntil,
+        hoursUntil,
+        minutesUntil
+      ),
+    }
+    dispatch(search(searchDataObject))
+  }
+>>>>>>> main
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
@@ -178,10 +238,10 @@ export default function Search() {
           }}
         />
         <div className="vertical_line"></div>
-        <Date ref={fromRef} label="From" />
+        <Datee ref={fromRef} label="From" />
         <Time ref={timeToPickRef} />
         <div className="vertical_line"></div>
-        <Date ref={untilRef} label="Until" />
+        <Datee ref={untilRef} label="Until" />
         <Time ref={timeToDropRef} />
         <IconButton
           color="primary"
