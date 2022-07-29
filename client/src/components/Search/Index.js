@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import Fab from '@mui/material/Fab';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import parse from 'autosuggest-highlight/parse';
+import throttle from 'lodash/throttle';
+import Date from './Date/Index';
+import Time from './Time/Index';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import './style.css';
+import { search } from '../../app/actions/search-actions';
+import { ConnectionClosedEvent } from 'mongodb';
+=======
 import React from "react"
 import { useDispatch } from "react-redux"
 import Fab from "@mui/material/Fab"
@@ -9,109 +29,142 @@ import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import parse from "autosuggest-highlight/parse"
 import throttle from "lodash/throttle"
-import Date from "./Date/Index"
+import Datee from "./Date/Index"
 import Time from "./Time/Index"
 import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
+>>>>>>> main
 
-const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
+const GOOGLE_MAPS_API_KEY = 'AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA';
 
 function loadScript(src, id) {
   return new Promise((resolve, reject) => {
-    const script = document.createElement("script")
-    script.setAttribute("async", "")
-    script.setAttribute("id", id)
-    script.src = src
-    script.onload = resolve
-    script.onerror = reject
-    document.head.appendChild(script)
-  })
+    const script = document.createElement('script');
+    script.setAttribute('async', '');
+    script.setAttribute('id', id);
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
 }
 
 const autocompleteService = {
   current: null,
-}
+};
 
 export default function Search() {
-  const dispatch = useDispatch()
-  const [value, setValue] = React.useState(null)
-  const [inputValue, setInputValue] = React.useState("")
-  const [options, setOptions] = React.useState([])
-  const loaded = React.useRef(false)
-  const whereRef = React.useRef()
-  const fromRef = React.useRef()
-  const untilRef = React.useRef()
-  const timeToPickRef = React.useRef()
-  const timeToDropRef = React.useRef()
+  const dispatch = useDispatch();
+  const [value, setValue] = React.useState(null);
+  const [inputValue, setInputValue] = React.useState('');
+  const [options, setOptions] = React.useState([]);
+  const loaded = React.useRef(false);
+  const whereRef = React.useRef();
+  const fromRef = React.useRef();
+  const untilRef = React.useRef();
+  const timeToPickRef = React.useRef();
+  const timeToDropRef = React.useRef();
 
   const searchHandler = () => {
-    dispatch(
-      search(
-        whereRef.current.value,
-        fromRef.current.value,
-        untilRef.current.value,
-        timeToPickRef.current.value,
-        timeToDropRef.current.value
-      )
+<<<<<<< HEAD
+    dispatch(search(searchData));
+  };
+=======
+    console.log("fromRef", fromRef.current.value, typeof fromRef.current.value)
+    console.log(
+      "timeToPick",
+      timeToPickRef.current.value,
+      typeof timeToPickRef.current.value
     )
-  }
+    const yearFrom = fromRef.current.value.split("/")[2]
+    const monthFrom = fromRef.current.value.split("/")[0]
+    const dayFrom = fromRef.current.value.split("/")[1]
+    const hoursFrom = timeToPickRef.current.value.split(":")[0]
+    const minutesFrom = timeToPickRef.current.value.split(":")[1]
 
-  if (typeof window !== "undefined" && !loaded.current) {
-    if (!document.querySelector("#google-maps")) {
+    const yearUntil = untilRef.current.value.split("/")[2]
+    const monthUntil = untilRef.current.value.split("/")[0]
+    const dayUntil = untilRef.current.value.split("/")[1]
+    const hoursUntil = timeToDropRef.current.value.split(":")[0]
+    const minutesUntil = timeToDropRef.current.value.split(":")[1]
+
+    const searchDataObject = {
+      location: whereRef.current.value,
+      start_order: new Date(
+        yearFrom,
+        monthFrom,
+        dayFrom,
+        hoursFrom,
+        minutesFrom
+      ),
+      end_order: new Date(
+        yearUntil,
+        monthUntil,
+        dayUntil,
+        hoursUntil,
+        minutesUntil
+      ),
+    }
+    dispatch(search(searchDataObject))
+  }
+>>>>>>> main
+
+  if (typeof window !== 'undefined' && !loaded.current) {
+    if (!document.querySelector('#google-maps')) {
       loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`,
         document.body,
-        "google-maps"
+        'google-maps'
       ).then(() => {
         autocompleteService.current =
-          new window.google.maps.places.AutocompleteService()
+          new window.google.maps.places.AutocompleteService();
 
-        loaded.current = true
-      })
+        loaded.current = true;
+      });
     }
   }
 
   const fetch = React.useMemo(
     () =>
       throttle((request, callback) => {
-        autocompleteService.current.getPlacePredictions(request, callback)
+        autocompleteService.current.getPlacePredictions(request, callback);
       }, 200),
     []
-  )
+  );
 
   React.useEffect(() => {
-    let active = true
+    let active = true;
     if (!autocompleteService.current) {
-      return undefined
+      return undefined;
     }
 
-    if (inputValue === "") {
-      setOptions(value ? [value] : [])
-      return undefined
+    if (inputValue === '') {
+      setOptions(value ? [value] : []);
+      return undefined;
     }
 
     fetch({ input: inputValue }, (results) => {
       if (active) {
-        let newOptions = []
+        let newOptions = [];
 
         if (value) {
-          newOptions = [value]
+          newOptions = [value];
         }
 
         if (results) {
-          newOptions = [...newOptions, ...results]
+          newOptions = [...newOptions, ...results];
         }
 
-        setOptions(newOptions)
+        setOptions(newOptions);
       }
-    })
+    });
 
     return () => {
-      active = false
-    }
-  }, [value, inputValue, fetch])
+      active = false;
+    };
+  }, [value, inputValue, fetch]);
 
   return (
     <div className="container__searchBar">
@@ -120,7 +173,7 @@ export default function Search() {
           id="google-map-demo"
           sx={{ width: 400 }}
           getOptionLabel={(option) =>
-            typeof option === "string" ? option : option.description
+            typeof option === 'string' ? option : option.description
           }
           filterOptions={(x) => x}
           options={options}
@@ -129,11 +182,11 @@ export default function Search() {
           filterSelectedOptions
           value={value}
           onChange={(event, newValue) => {
-            setOptions(newValue ? [newValue, ...options] : options)
-            setValue(newValue)
+            setOptions(newValue ? [newValue, ...options] : options);
+            setValue(newValue);
           }}
           onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue)
+            setInputValue(newInputValue);
           }}
           renderInput={(params) => (
             <TextField
@@ -145,14 +198,14 @@ export default function Search() {
           )}
           renderOption={(props, option) => {
             const matches =
-              option.structured_formatting.main_text_matched_substrings
+              option.structured_formatting.main_text_matched_substrings;
             const parts = parse(
               option.structured_formatting.main_text,
               matches.map((match) => [
                 match.offset,
                 match.offset + match.length,
               ])
-            )
+            );
 
             return (
               <li {...props}>
@@ -160,7 +213,7 @@ export default function Search() {
                   <Grid item>
                     <Box
                       component={LocationOnIcon}
-                      sx={{ color: "text.secondary", mr: 2 }}
+                      sx={{ color: 'text.secondary', mr: 2 }}
                     />
                   </Grid>
                   <Grid item xs>
@@ -181,14 +234,14 @@ export default function Search() {
                   </Grid>
                 </Grid>
               </li>
-            )
+            );
           }}
         />
         <div className="vertical_line"></div>
-        <Date ref={fromRef} label="From" />
+        <Datee ref={fromRef} label="From" />
         <Time ref={timeToPickRef} />
         <div className="vertical_line"></div>
-        <Date ref={untilRef} label="Until" />
+        <Datee ref={untilRef} label="Until" />
         <Time ref={timeToDropRef} />
         <IconButton
           color="primary"
@@ -197,12 +250,12 @@ export default function Search() {
           onClick={searchHandler}
         >
           <Box>
-            <Fab size='small' color="primary" aria-label="search">
+            <Fab size="small" color="primary" aria-label="search">
               <SearchIcon />
             </Fab>
           </Box>
         </IconButton>
       </div>
     </div>
-  )
+  );
 }
