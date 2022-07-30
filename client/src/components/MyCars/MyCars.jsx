@@ -1,25 +1,5 @@
-<<<<<<< HEAD
-import { useState, useEffect } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
-import { vehicleModelsWithPhotos } from "../browseByBrand/dummyData";
-import Button from "@mui/material/Button";
-const MYCARS = "mycars";
-
-const MyCars = (props) => {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
-  const handleOutletChange = useOutletContext();
-
-  handleOutletChange(MYCARS);
-
-  const navigateToContacts = () => {
-    navigate("/add-vehicle");
-  };
-
-=======
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useOutletContext} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import VehicleListContainer from '../vehicles-list/VehiclesListContainer';
 import { vehicleModelsWithPhotos } from '../browseByBrand/dummyData';
@@ -33,8 +13,10 @@ const MyCars = () => {
   const [isAddCarPressed, setIsAddCarPressed] = useState(false);
   const openFormHandler = () => setIsAddCarPressed(true);
   const closeFormHandler = () => setIsAddCarPressed(false);
+  const handleOutletChange = useOutletContext();
 
->>>>>>> main
+  handleOutletChange("mycars");
+
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
   // you can try to set the data with some dummy data and see if it renders you the "test" div from line 38
@@ -63,11 +45,7 @@ const MyCars = () => {
       <p className="title"> My cars </p>
       {data.length === 0 && userHadNoCars()}
       {data.length !== 0 && <VehicleListContainer />}
-<<<<<<< HEAD
-      <Button variant="contained" onClick={navigateToContacts}>
-=======
       <Button variant="contained" onClick={openFormHandler}>
->>>>>>> main
         Add car
       </Button>
       <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />

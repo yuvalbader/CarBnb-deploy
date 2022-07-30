@@ -52,7 +52,7 @@ class ListApiService {
 
   static async getOwnerCars(userId) {
     try {
-      const response = await axios.get(BASE_URL + CAR + `user/``${userId}`)
+      const response = await axios.get(BASE_URL + CAR + `user/${userId}`)
       return response.data
     } catch (err) {
       console.log(err.message)
