@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
-import { vehicleModelsWithPhotos } from "../browseByBrand/dummyData";
-import Button from "@mui/material/Button";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import VehicleListContainer from '../vehicles-list/VehiclesListContainer';
+import { vehicleModelsWithPhotos } from '../browseByBrand/dummyData';
+import Button from '@mui/material/Button';
+import ListVahicleDialog from '../list-new-vehicle-form/ListVehicleDialog';
 
-const MyCars = (props) => {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
+const MyCars = () => {
+  //const data = useSelector((state) => state.userSlice.MyCars);
+  const data = [];
 
-    const navigateToContacts = () => {
-    navigate("/add-vehicle");
-  };
-
+  const [isAddCarPressed, setIsAddCarPressed] = useState(false);
+  const openFormHandler = () => setIsAddCarPressed(true);
+  const closeFormHandler = () => setIsAddCarPressed(false);
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
@@ -40,10 +41,11 @@ const MyCars = (props) => {
     <div className="details-view-container">
       <p className="title"> My cars </p>
       {data.length === 0 && userHadNoCars()}
-      {data.length !== 0 && <VehicleListContainer/>}
-      <Button variant="contained" onClick={navigateToContacts}>
+      {data.length !== 0 && <VehicleListContainer />}
+      <Button variant="contained" onClick={openFormHandler}>
         Add car
       </Button>
+      <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />
     </div>
   );
 };
