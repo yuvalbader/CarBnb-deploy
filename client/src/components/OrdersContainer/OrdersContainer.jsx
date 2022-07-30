@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import ReservationCard from "../ReservationCard/ReservationCard";
-import VehicleCard from "../vehicle-card/VehicleCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import dummyData from "../../pages/MyProfile/dummyData";
+import { useState, useEffect } from 'react';
+import ReservationCard from '../ReservationCard/ReservationCard';
+import VehicleCard from '../vehicle-card/VehicleCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import dummyData from '../../pages/MyProfile/dummyData';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "./OrdersContainer.css";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './OrdersContainer.css';
 
-const DetailsContainer = (props) => {
+const OrdersContainer = (props) => {
   // const [page, setPage] = useState(props.page);
-  const [title, setTitle] = useState("");
-  const [label, setLabel] = useState("Trips");
+  const [title, setTitle] = useState('');
+  const [label, setLabel] = useState('Trips');
   const [data, setData] = useState(dummyData);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   useEffect(() => {
     const page = props.page;
@@ -62,7 +62,11 @@ const DetailsContainer = (props) => {
           {data.map((item) => {
             return (
               <SwiperSlide className="swiper-slide">
-                <VehicleCard item={{ ...item, seats: 5, engine: "petrol", gear:"Auto" }}> </VehicleCard>
+                <VehicleCard
+                  item={{ ...item, seats: 5, engine: 'petrol', gear: 'Auto' }}
+                >
+                  {' '}
+                </VehicleCard>
                 {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
             );
@@ -73,4 +77,4 @@ const DetailsContainer = (props) => {
   );
 };
 
-export default DetailsContainer;
+export default OrdersContainer;

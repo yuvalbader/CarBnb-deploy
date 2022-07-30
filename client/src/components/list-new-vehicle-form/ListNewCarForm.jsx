@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
 import TextFieldWarrper from './form/TextFieldWarrper';
@@ -16,7 +18,7 @@ import { useDispatch } from 'react-redux';
 import InputButton from './form/InputButton';
 import SelectWarrper from './form/Select';
 
-const ListNewVehicleForm = () => {
+const ListNewVehicleForm = (onSubmit) => {
   const dispatch = useDispatch();
   //let lat = 0;
   // let lng = 0;
@@ -29,6 +31,9 @@ const ListNewVehicleForm = () => {
     number_of_seats: '',
     price_per_day: '',
     description: '',
+    location: '',
+    gear: '',
+    gas: '',
   };
 
   const FORM_VALIDATION = Yup.object().shape({
@@ -40,7 +45,9 @@ const ListNewVehicleForm = () => {
     price_per_day: Yup.string().required('required'),
     description: Yup.string().required('required'),
     type: Yup.string().required('required'),
-    city: Yup.string().required('required'),
+    location: Yup.string().required('required'),
+    gear: Yup.string().required('required'),
+    gas: Yup.string().required('required'),
   });
 
   function addNewVehicleHandler(values) {
@@ -54,20 +61,20 @@ const ListNewVehicleForm = () => {
       price_per_day: values.price_per_day,
       description: values.description,
       type: values.type,
-      city: values.city,
+      location: values.location,
+      gear: values.gear,
+      gas: values.gas,
     };
 
     dispatch(addVehicle(vehicleData));
+    onSubmit();
   }
 
   return (
-    <Card sx={{ maxWidth: '50%', m: '20px' }}>
-      {/*       <InputMap
-        onClick={(latitude, longtitude) => {
-          lat = latitude;
-          lng = longtitude;
-        }}
-      ></InputMap> */}
+    <Box sx={{ maxWidth: '50%', m: '20px' }}>
+      <Typography variant="h6" component="div" sx={{ textAlign: 'center' }}>
+        Fill in your vahicle detailes
+      </Typography>
       <Formik
         initialValues={{ ...INITIAL_FORM_STATE }}
         validationSchema={FORM_VALIDATION}
@@ -122,7 +129,24 @@ const ListNewVehicleForm = () => {
               ></SelectWarrper>
             </Grid>
             <Grid item xs={12}>
-              <TextFieldWarrper name="city" label="City" />
+              <TextFieldWarrper name="gear" label="Gear" />
+            </Grid>
+            <Grid item xs={12}>
+              <SelectWarrper
+                name="gas"
+                label="Gas"
+                options={{
+                  Electric: 'Electric',
+                  Hybrid: 'Hybrid',
+                  Gas: 'Gas',
+                }}
+              ></SelectWarrper>
+            </Grid>
+            <Grid item xs={12}>
+              <TextFieldWarrper name="price_per_day" label="Price/Day" />
+            </Grid>
+            <Grid item xs={12}>
+              <TextFieldWarrper name="location" label="Location" />
             </Grid>
             <Grid item xs={12}>
               <TextFieldWarrper name="price_per_day" label="Price/Day" />
@@ -152,7 +176,7 @@ const ListNewVehicleForm = () => {
           </Grid>
         </Form>
       </Formik>
-    </Card>
+    </Box>
   );
 };
 export default ListNewVehicleForm;

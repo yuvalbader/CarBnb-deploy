@@ -4,7 +4,7 @@ const initialState = {};
 
 const vehiclesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_VEHICLE_SUCCESS: {
+    case actionTypes.FETCH_VEHICLES_SUCCESS: {
       const { vehicles } = action;
       return { ...vehicles };
     }
