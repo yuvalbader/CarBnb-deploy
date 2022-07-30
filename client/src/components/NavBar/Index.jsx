@@ -116,7 +116,6 @@ const NavBarComponent = () => {
                           onClick={() => {
                             navigate("/MyProfile")
                             handleCloseNavMenu()
-                            console.log("clicked")
                           }}
                         >
                           <Typography textAlign="center">{page}</Typography>

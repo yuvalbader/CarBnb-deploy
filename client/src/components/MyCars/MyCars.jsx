@@ -8,10 +8,9 @@ const MyCars = (props) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-    const navigateToContacts = () => {
+  const navigateToContacts = () => {
     navigate("/add-vehicle");
   };
-
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
@@ -40,7 +39,7 @@ const MyCars = (props) => {
     <div className="details-view-container">
       <p className="title"> My cars </p>
       {data.length === 0 && userHadNoCars()}
-      {data.length !== 0 && <VehicleListContainer/>}
+      {data.length !== 0 && <VehicleListContainer />}
       <Button variant="contained" onClick={navigateToContacts}>
         Add car
       </Button>
