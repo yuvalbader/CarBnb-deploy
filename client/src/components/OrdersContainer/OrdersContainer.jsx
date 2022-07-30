@@ -1,55 +1,47 @@
-import { useState, useEffect } from 'react';
-import ReservationCard from '../ReservationCard/ReservationCard';
-import VehicleCard from '../vehicle-card/VehicleCard';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper';
-import dummyData from '../../pages/MyProfile/dummyData';
+import { useState, useEffect } from "react";
+import ReservationCard from "../ReservationCard/ReservationCard";
+import VehicleCard from "../vehicle-card/VehicleCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import dummyData from "../../pages/MyProfile/dummyData";
+import { useOutletContext } from "react-router-dom";
+
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './OrdersContainer.css';
 
-const OrdersContainer = (props) => {
-  // const [page, setPage] = useState(props.page);
-  const [title, setTitle] = useState('');
-  const [label, setLabel] = useState('Trips');
+const OrdersContainer = ( props, navBar ) => {
   const [data, setData] = useState(dummyData);
-  const [text, setText] = useState('');
+  const handleOutletChange = useOutletContext();
 
-  useEffect(() => {
-    const page = props.page;
-    const pageTitle = `My ${page}`;
-    console.log(pageTitle);
-    const pageLabel = `No past ${page}`;
-    const pageText = `This is where you can access information about your ${page}`;
-    setTitle(pageTitle);
-    setLabel(pageLabel);
-    setText(pageText);
-  }, [props.title, props.label]);
+  const { page } = props;
+  const pageLabel = `No past ${page}`;
+  const pageTitle = `My ${page}`;
+  handleOutletChange(page);
 
-  if (data.length === 0) {
+  useEffect(() => {}, [props.title, props.label]);
+  
+  const defaultOuput = () => {
     return (
-      <div className="details-view-container">
-        <p className="title"> {title} </p>
-        <div className="trips-view-container-img">
-          <img
-            src="https://resources.turo.com/client/v2/builds/assets/il_car_on_the_desert_@2xc6729191106bba04b948.png"
-            alt=""
-          />
-          <div className="no-past-container">
-            <p className="no-past title">{label}</p>
-            <label className="no-past-label"></label>
-          </div>
-          <div> {text}</div>
-        </div>
+      <div className="trips-view-container-img">
+        <img
+          src="https://resources.turo.com/client/v2/builds/assets/il_car_on_the_desert_@2xc6729191106bba04b948.png"
+          alt=""
+        />
+        <p className="no-past title">{pageLabel}</p>
+        <div>This is where you can access information about your {page}</div>
       </div>
     );
-  }
+  };
 
   return (
-    <div>
-      <div>
-        <p className="title"> {title} </p>
+    <>
+      <div className="details-view-container">
+        <p className="title"> {pageTitle} </p>
+        {data.length === 0 && defaultOuput()}
+      </div>
+      {data.length !== 0 && (
         <Swiper
           slidesPerView={3}
           spaceBetween={10}
@@ -63,17 +55,15 @@ const OrdersContainer = (props) => {
             return (
               <SwiperSlide className="swiper-slide">
                 <VehicleCard
-                  item={{ ...item, seats: 5, engine: 'petrol', gear: 'Auto' }}
-                >
-                  {' '}
-                </VehicleCard>
+                  item={{ ...item, seats: 5, engine: "petrol", gear: "Auto" }}
+                ></VehicleCard>
                 {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
             );
           })}
         </Swiper>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useOutletContext} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import VehicleListContainer from '../vehicles-list/VehiclesListContainer';
 import { vehicleModelsWithPhotos } from '../browseByBrand/dummyData';
@@ -13,6 +13,9 @@ const MyCars = () => {
   const [isAddCarPressed, setIsAddCarPressed] = useState(false);
   const openFormHandler = () => setIsAddCarPressed(true);
   const closeFormHandler = () => setIsAddCarPressed(false);
+  const handleOutletChange = useOutletContext();
+
+  handleOutletChange("mycars");
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.

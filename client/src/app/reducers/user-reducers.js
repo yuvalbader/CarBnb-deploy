@@ -1,8 +1,17 @@
-/* import actionTypes from '../actions/constants';
+import actionTypes from '../actions/constants';
 
-const initialState = {};
+const initialState = {
+  reservstions:[],
+  orders:[]
+};
 
-const userReducer = (state = initialState, action) => {};
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+
+
+    default:
+      return state;
+  }
+};
 
 export default userReducer;
- */

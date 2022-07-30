@@ -4,7 +4,7 @@ import DetailsContainer from '../../components/OrdersContainer/OrdersContainer';
 
 const MyProfile = () => {
   return (
-    <div>
+    <div>      
       <ProfileNavBar />
     </div>
   );
