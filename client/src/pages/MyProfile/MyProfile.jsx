@@ -1,9 +1,6 @@
-import * as React from "react";
-import ProfileNavBar from "../../components/ProfileNavBar/ProfileNavBar";
-import DetailsContainer from "../../components/OrdersContainer/OrdersContainer";
-
-
-
+import * as React from 'react';
+import ProfileNavBar from '../../components/ProfileNavBar/ProfileNavBar';
+import DetailsContainer from '../../components/OrdersContainer/OrdersContainer';
 
 const MyProfile = () => {
   return (

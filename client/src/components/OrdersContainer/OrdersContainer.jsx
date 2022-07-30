@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import ReservationCard from "../ReservationCard/ReservationCard";
 import VehicleCard from "../vehicle-card/VehicleCard";
@@ -6,14 +7,31 @@ import { Pagination } from "swiper";
 import dummyData from "../../pages/MyProfile/dummyData";
 import { useOutletContext } from "react-router-dom";
 
+=======
+import { useState, useEffect } from 'react';
+import ReservationCard from '../ReservationCard/ReservationCard';
+import VehicleCard from '../vehicle-card/VehicleCard';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import dummyData from '../../pages/MyProfile/dummyData';
+>>>>>>> main
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "./OrdersContainer.css";
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './OrdersContainer.css';
 
+<<<<<<< HEAD
 const DetailsContainer = ( props, navBar ) => {
   const [data, setData] = useState(dummyData);
   const handleOutletChange = useOutletContext();
+=======
+const OrdersContainer = (props) => {
+  // const [page, setPage] = useState(props.page);
+  const [title, setTitle] = useState('');
+  const [label, setLabel] = useState('Trips');
+  const [data, setData] = useState(dummyData);
+  const [text, setText] = useState('');
+>>>>>>> main
 
   const { page } = props;
   const pageLabel = `No past ${page}`;
@@ -54,8 +72,15 @@ const DetailsContainer = ( props, navBar ) => {
             return (
               <SwiperSlide className="swiper-slide">
                 <VehicleCard
+<<<<<<< HEAD
                   item={{ ...item, seats: 5, engine: "petrol", gear: "Auto" }}
                 ></VehicleCard>
+=======
+                  item={{ ...item, seats: 5, engine: 'petrol', gear: 'Auto' }}
+                >
+                  {' '}
+                </VehicleCard>
+>>>>>>> main
                 {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
             );
@@ -66,4 +91,4 @@ const DetailsContainer = ( props, navBar ) => {
   );
 };
 
-export default DetailsContainer;
+export default OrdersContainer;

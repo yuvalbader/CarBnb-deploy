@@ -8,6 +8,7 @@ import { Car } from "./pages/Car/Car";
 import OrdersContainer from "./components/OrdersContainer/OrdersContainer";
 import "./App.css";
 import MyCars from "./components/MyCars/MyCars";
+import SearchResultsPage from './pages/SearchResults/SearchResults';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="reservations" element={<OrdersContainer page="reservations" />} />
           <Route path="mycars" element={<MyCars />} />
         </Route>
+        <Route path="/searchResult" exact element={<SearchResultsPage />} />
         <Route path="/car/:id" element={<Car />} />
       </Routes>
     </>

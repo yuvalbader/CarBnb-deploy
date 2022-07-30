@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import actionTypes from '../actions/constants';
 
 const initialState = {};
@@ -27,3 +28,13 @@ const userReducer = (state = initialState, action) => {
 };
 
 export default userReducer;
+=======
+/* import actionTypes from '../actions/constants';
+
+const initialState = {};
+
+const userReducer = (state = initialState, action) => {};
+
+export default userReducer;
+ */
+>>>>>>> main
