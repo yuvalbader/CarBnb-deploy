@@ -11,15 +11,20 @@ const ProfileNavBar = () => {
   const [value, setValue] = useState("trips");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    return () => {
-      window.onpopstate = () => {
-        setValue(value);
-      };
-    };
-  }, [value]);
+  // useEffect(() => {
+  //   return () => {
+  //     window.onpopstate = () => {
+  //       setValue(value);
+  //     };
+  //   };
+  // }, [value]);
+  
   const handleChange = (event, value) => {
     navigate(value);
+    setValue(value);
+  };
+
+  const handleOutletChange = (value) => {
     setValue(value);
   };
 
@@ -52,7 +57,7 @@ const ProfileNavBar = () => {
         <OrdersContainer page="reservations">My reservations</OrdersContainer>
       )}
       {value === "cars" && <MyCars title="cars">My cars</MyCars>} */}
-      <Outlet />
+      <Outlet context={handleOutletChange}/>
     </div>
   );
 };

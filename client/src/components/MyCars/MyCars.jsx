@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
 import { vehicleModelsWithPhotos } from "../browseByBrand/dummyData";
 import Button from "@mui/material/Button";
+const MYCARS = "mycars";
 
 const MyCars = (props) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  const handleOutletChange = useOutletContext();
+
+  handleOutletChange(MYCARS);
 
   const navigateToContacts = () => {
     navigate("/add-vehicle");
