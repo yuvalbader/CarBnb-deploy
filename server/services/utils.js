@@ -1,12 +1,12 @@
-const { Op } = require("sequelize")
-const { Car, Reservation } = require("../db/models")
-const reservation = require("./reservation")
+const { Op } = require('sequelize');
+const { Car, Reservation } = require('../db/models');
+const reservation = require('./reservation');
 
 class UtilsService {
   constructor() {}
 
   getAvailableCars = async (search) => {
-    const { start_order, end_order, location } = search
+    const { start_order, end_order, location } = search;
     const booking = await Reservation.findAll({
       where: {
         [Op.or]: [
@@ -20,16 +20,19 @@ class UtilsService {
           },
         ],
       },
-    })
-    const unAvailableCars = booking.map((x) => x.car_id)
-    console.log(booking, "booking")
+    });
+    const unAvailableCars = booking.map((x) => x.car_id);
+    console.log(booking, 'booking');
+    console.log(unAvailableCars, 'unAvailableCars');
     const findall = await Car.findAll({
       where: {
         id: { [Op.notIn]: unAvailableCars },
-        location: { [Op.like]: "%" + location + "%" },
+        location: { [Op.like]: '%' + location + '%' },
       },
-    })
-  }
+    });
+    console.log(findall, 'available cars');
+    return findall;
+  };
 
   // getCarsToPresent = async () => {
   //   const today = new Date(); //Today's Date
@@ -47,4 +50,4 @@ class UtilsService {
   // };
 }
 
-module.exports = new UtilsService()
+module.exports = new UtilsService();

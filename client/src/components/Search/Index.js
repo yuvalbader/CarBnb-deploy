@@ -83,8 +83,9 @@ export default function Search() {
         minutesUntil
       ),
     };
+
     dispatch(search(searchDataObject));
-    navigate('/searchResults');
+    navigate('/searchResult');
   };
 
   if (typeof window !== 'undefined' && !loaded.current) {

@@ -1,10 +1,10 @@
 import VehicleCard from '../vehicle-card/VehicleCard';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { getFilteredVehicles } from '../../app/selectors/vehicles-selectors';
+
 const styleList = { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' };
 
-const VehicleListContainer = (vehicles) => {
+const VehicleListContainer = ({ vehicles }) => {
   return (
     <List sx={styleList}>
       {vehicles.map((vehicle) => (
@@ -12,10 +12,12 @@ const VehicleListContainer = (vehicles) => {
           <VehicleCard
             brand={vehicle.brand}
             model={vehicle.model}
-            year={vehicle.year}
-            rating={vehicle.rating}
-            price={vehicle.price}
-            image={vehicle.image}
+            price={vehicle.price_per_day}
+            image={vehicle.profile_picture}
+            gear={'manual'}
+            location={vehicle.location}
+            seats={'4'}
+            engine={'hybrid'}
           />
         </ListItem>
       ))}

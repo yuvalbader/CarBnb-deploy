@@ -11,7 +11,6 @@ import Chip from '@mui/material/Chip';
 
 import Box from '@mui/material/Box';
 import { Divider } from '@mui/material';
-import { margin } from '@mui/system';
 
 const styleBox1 = {
   display: 'flex',
@@ -33,33 +32,42 @@ const chipStyle = {
   border: 'none',
 };
 
-const VehicleCard = (props) => {
+const VehicleCard = ({
+  image,
+  brand,
+  model,
+  price,
+  gear,
+  location,
+  engine,
+  seats,
+}) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="200"
-        image={props.item.img}
-        alt={props.item.brand + ' ' + props.item.model}
+        image={image}
+        alt={brand + ' ' + model}
       />
       <CardContent>
         <Box sx={styleBox1}>
           <Box sx={styleBox2}>
             <Typography variant="h6" fontWeight={'bold'} sx={typographyStyle}>
-              {props.item.brand}
+              {brand}
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               sx={typographyStyle}
             >
-              {props.item.model}
+              {model}
             </Typography>
           </Box>
           <Box sx={styleBox2}>
             <LocationOnIcon color="primary" fontSize={'10px'} />
             <Typography sx={typographyStyle} variant="body2">
-              {props.item.location}
+              {location}
             </Typography>
           </Box>
           {/*           <Typography variant="h7" color="text.secondary" sx={typographyStyle}>
@@ -68,72 +76,28 @@ const VehicleCard = (props) => {
           <Box sx={styleBox2} justifyContent="space-between">
             <Chip
               icon={<AirlineSeatReclineExtraIcon />}
-              label={` ${props.item.seats} seats `}
+              label={` ${seats} seats `}
               variant="outlined"
               sx={chipStyle}
             />
             <Chip
               icon={<LocalGasStationIcon />}
-              label={`${props.item.engine}`}
+              label={`${engine}`}
               variant="outlined"
               sx={chipStyle}
             />
             <Chip
               icon={<ManageHistoryIcon />}
-              label={`${props.item.gear}`}
+              label={`${gear}`}
               variant="outlined"
               sx={chipStyle}
             />
-            {/* <Typography
-              display="flex"
-              flexDirection="column"
-              variant="h6"
-              gap="5px"
-              fontWeight={'bold'}
-              component="box"
-            >
-              <Typography
-                display="flex"
-                flexDirection="column"
-                variant="h6"
-                gap="5px"
-                fontWeight={'bold'}
-                component="box"
-              >
-                <Typography sx={styleBox3}>
-                  <LocalGasStationIcon color="primary" />
-                  {`${props.item.engine}`}
-                </Typography>
-              </Typography> */}
-            {/*  </Typography> */}
-            {/*             <Typography
-              display="flex"
-              flexDirection="column"
-              variant="h6"
-              gap="5px"
-              fontWeight={'bold'}
-              component="box"
-            >
-              <Typography
-                display="flex"
-                flexDirection="column"
-                variant="h6"
-                gap="5px"
-                fontWeight={'bold'}
-                component="box"
-              >
-                <Typography sx={styleBox3}>
-                  <ManageHistoryIcon color="primary" />
-                  {`${props.item.gear}`}
-                </Typography>
-              </Typography> */}
-            {/*        </Typography> */}
           </Box>
-          <Divider sx={{ my: '10px' }}></Divider>
+          {/* <Divider sx={{ my: '10px' }}></Divider> */}
           <Box sx={styleBox2} justifyContent="flex-end">
             <PaidIcon color="primary" fontSize={'10px'} />
             <Typography sx={typographyStyle} variant="h7" fontWeight={'bold'}>
-              {`${props.item.totalPrice} /day`}
+              {`${price} /day`}
             </Typography>
           </Box>
         </Box>

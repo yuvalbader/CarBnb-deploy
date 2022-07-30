@@ -1,12 +1,15 @@
 import actionTypes from '../actions/constants';
 
-const initialState = {};
+const initialState = {
+  searchedVehicles: [],
+};
 
 const searchReducers = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SEARCH_VEHICLES_SUCCESS: {
-      const { searchResult } = action;
-      return { ...searchResult };
+      const { searchData } = action;
+      const values = Object.values(searchData);
+      return { ...state, searchedVehicles: values };
     }
 
     default:
