@@ -90,10 +90,10 @@ const ListNewVehicleForm = () => {
                   Motorcycle: 'Motorcycle',
                   Jeep: 'Jeep',
                   Van: 'Van',
-                  Bus: 'Bus',
+                  Minivan: 'Minivan',
                   Sport: 'Sport',
                   Luxuary: 'Luxuary',
-                  Mini: 'Mini',
+                  SUV: 'SUV',
                 }}
               ></SelectWarrper>
             </Grid>
