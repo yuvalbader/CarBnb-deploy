@@ -1,20 +1,21 @@
-import React from "react"
-import { useDispatch } from "react-redux"
-import Fab from "@mui/material/Fab"
-import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
-import Autocomplete from "@mui/material/Autocomplete"
-import LocationOnIcon from "@mui/icons-material/LocationOn"
-import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
-import parse from "autosuggest-highlight/parse"
-import throttle from "lodash/throttle"
-import Datee from "./Date/Index"
-import Time from "./Time/Index"
-import SearchIcon from "@mui/icons-material/Search"
-import IconButton from "@mui/material/IconButton"
-import "./style.css"
-import { search } from "../../app/actions/search-actions"
+import { useState, useRef, useMemo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Fab from '@mui/material/Fab';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import parse from 'autosuggest-highlight/parse';
+import throttle from 'lodash/throttle';
+import Datee from './Date/Index';
+import Time from './Time/Index';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import './style.css';
+import { search } from '../../app/actions/search-actions';
 
 const GOOGLE_MAPS_API_KEY = 'AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA';
 
@@ -36,34 +37,34 @@ const autocompleteService = {
 
 export default function Search() {
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState('');
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
-  const whereRef = React.useRef();
-  const fromRef = React.useRef();
-  const untilRef = React.useRef();
-  const timeToPickRef = React.useRef();
-  const timeToDropRef = React.useRef();
+  const navigate = useNavigate();
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [options, setOptions] = useState([]);
+  const loaded = useRef(false);
+  const whereRef = useRef();
+  const fromRef = useRef();
+  const untilRef = useRef();
+  const timeToPickRef = useRef();
+  const timeToDropRef = useRef();
 
   const searchHandler = () => {
-    console.log("fromRef", fromRef.current.value, typeof fromRef.current.value)
-    console.log(
-      "timeToPick",
-      timeToPickRef.current.value,
-      typeof timeToPickRef.current.value
-    )
-    const yearFrom = fromRef.current.value.split("/")[2]
-    const monthFrom = fromRef.current.value.split("/")[0]
-    const dayFrom = fromRef.current.value.split("/")[1]
-    const hoursFrom = timeToPickRef.current.value.split(":")[0]
-    const minutesFrom = timeToPickRef.current.value.split(":")[1]
+    const dateFrom = fromRef.current.value.split('/');
+    const dateUntil = untilRef.current.value.split('/');
+    const timeFrom = timeToPickRef.current.value.split(':');
+    const timeUntil = timeToDropRef.current.value.split(':');
 
-    const yearUntil = untilRef.current.value.split("/")[2]
-    const monthUntil = untilRef.current.value.split("/")[0]
-    const dayUntil = untilRef.current.value.split("/")[1]
-    const hoursUntil = timeToDropRef.current.value.split(":")[0]
-    const minutesUntil = timeToDropRef.current.value.split(":")[1]
+    const yearFrom = dateFrom[2];
+    const monthFrom = dateFrom[0];
+    const dayFrom = dateFrom[1];
+    const hoursFrom = timeFrom[0];
+    const minutesFrom = timeFrom[1];
+
+    const yearUntil = dateUntil[2];
+    const monthUntil = dateUntil[0];
+    const dayUntil = dateUntil[1];
+    const hoursUntil = timeUntil[0];
+    const minutesUntil = timeUntil[1];
 
     const searchDataObject = {
       location: whereRef.current.value,
@@ -81,9 +82,10 @@ export default function Search() {
         hoursUntil,
         minutesUntil
       ),
-    }
-    dispatch(search(searchDataObject))
-  }
+    };
+    dispatch(search(searchDataObject));
+    navigate('/searchResults');
+  };
 
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
@@ -100,7 +102,7 @@ export default function Search() {
     }
   }
 
-  const fetch = React.useMemo(
+  const fetch = useMemo(
     () =>
       throttle((request, callback) => {
         autocompleteService.current.getPlacePredictions(request, callback);
@@ -108,7 +110,7 @@ export default function Search() {
     []
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     let active = true;
     if (!autocompleteService.current) {
       return undefined;

@@ -5,8 +5,8 @@ const loginUserSuccessAction = (userObject) => ({
   userObject,
 });
 
-export const loginUser = (userEmail) => {
+export const loginUser = (userData) => {
   return (dispatch) => {
-    dispatch(loginUserSuccessAction(userEmail));
+    dispatch(loginUserSuccessAction(userData));
   };
 };
