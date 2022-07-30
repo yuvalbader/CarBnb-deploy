@@ -1,14 +1,14 @@
-import React from "react"
-import PhotoSwiper from "../../components/PhotoSwiper/Index"
-import "./style.css"
-import { useLocation } from "react-router-dom"
-import SideSearch from "../../components/SideSearch/Index"
-import { Overview } from "../../components/Overview/Index"
-import Features from "../../components/Features/Index"
+import React from 'react';
+import PhotoSwiper from '../../components/PhotoSwiper/Index';
+import './style.css';
+import { useLocation } from 'react-router-dom';
+import SideSearch from '../../components/SideSearch/Index';
+import { Overview } from '../../components/Overview/Index';
+import Features from '../../components/Features/Index';
 export const Car = () => {
-  const location = useLocation()
-  const { state } = location
-  console.log(state, "state")
+  const location = useLocation();
+  const { state } = location;
+  console.log(state, 'state');
   return (
     <div className="photoSwiper_container">
       <div className="photo_swiper">
@@ -23,8 +23,8 @@ export const Car = () => {
           <div className="side_search">
             <SideSearch state={state} />
           </div>
-        </div>{" "}
+        </div>{' '}
       </div>
     </div>
-  )
-}
+  );
+};

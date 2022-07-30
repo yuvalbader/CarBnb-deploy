@@ -4,6 +4,9 @@ import Menu from '@mui/material/Menu';
 import { Box } from '@mui/material';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 
+const styleBox = {
+  my: '20px',
+};
 const FilterResultsBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -15,10 +18,10 @@ const FilterResultsBar = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ styleBox }}>
       <Button onClick={openSortMenuHandler}>Sort by</Button>
       <Button>Price</Button>
-      <Button startIcon={ManageSearchIcon}>Filters</Button>
+      <Button startIcon={<ManageSearchIcon />}>Filters</Button>
       <Menu
         anchorEl={anchorEl}
         open={open}
