@@ -2,7 +2,7 @@ import actionTypes from '../actions/constants';
 
 const initialState = {
   isLoading: false,
-  isErorr: false,
+  isError: false,
 };
 
 const viewReducers = (state = initialState, action) => {
