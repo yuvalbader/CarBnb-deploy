@@ -5,6 +5,7 @@ import Fab from "@mui/material/Fab"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
+import { InputAdornment } from "@material-ui/core"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
@@ -17,9 +18,13 @@ import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
 import { getIsLoading } from "../../app/selectors/view-selectors"
-
+import { makeStyles } from "@material-ui/core/styles"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
-
+const useStyles = makeStyles(() => ({
+  noBorder: {
+    border: "none",
+  },
+}))
 function loadScript(src, id) {
   return new Promise((resolve, reject) => {
     const script = document.createElement("script")
@@ -37,6 +42,7 @@ const autocompleteService = {
 }
 
 export default function Search() {
+  const classes = useStyles()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loading = useSelector(getIsLoading)
@@ -50,7 +56,6 @@ export default function Search() {
   const timeToPickRef = useRef()
   const timeToDropRef = useRef()
 
-  console.log("loading before search", loading)
   const searchHandler = () => {
     const dateFrom = fromRef.current.value.split("/")
     const dateUntil = untilRef.current.value.split("/")
@@ -88,7 +93,6 @@ export default function Search() {
     }
 
     dispatch(search(searchDataObject))
-    console.log("loading after search", loading)
     navigate("/searchResult")
   }
 
@@ -163,7 +167,7 @@ export default function Search() {
       <div className="searchContainer">
         <Autocomplete
           id="google-map-demo"
-          sx={{ width: 400 }}
+          sx={{ width: 400, border: "transparent", borderStyle: "hidden" }}
           getOptionLabel={(option) =>
             typeof option === "string" ? option : option.description
           }
@@ -182,10 +186,14 @@ export default function Search() {
           }}
           renderInput={(params) => (
             <TextField
+              variant="outlined"
               inputRef={whereRef}
               {...params}
               fullWidth
               placeholder="Where?"
+              InputProps={{
+                classes: { notchedOutline: classes.noBorder },
+              }}
             />
           )}
           renderOption={(props, option) => {
@@ -205,7 +213,10 @@ export default function Search() {
                   <Grid item>
                     <Box
                       component={LocationOnIcon}
-                      sx={{ color: "text.secondary", mr: 2 }}
+                      sx={{
+                        color: "text.secondary",
+                        mr: 2,
+                      }}
                     />
                   </Grid>
                   <Grid item xs>
