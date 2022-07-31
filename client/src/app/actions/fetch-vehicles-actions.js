@@ -2,16 +2,16 @@ import ListApiService from "../../services/list-api-service"
 import actionTypes from "./constants"
 
 const fetchVehiclesRequestAction = () => ({
-  type: actionTypes.FETCH_VEHICLE_REQUEST,
+  type: actionTypes.FETCH_VEHICLES_REQUEST,
 })
 
 const fetchVehiclesSuccessAction = (vehicles) => ({
-  type: actionTypes.FETCH_VEHICLE_SUCCESS,
+  type: actionTypes.FETCH_VEHICLES_SUCCESS,
   vehicles,
 })
 
 const fetchVehiclesFailureAction = () => ({
-  type: actionTypes.FETCH_VEHICLE_FAILURE,
+  type: actionTypes.FETCH_VEHICLES_FAILURE,
 })
 
 export const fetchVehicles = () => {
