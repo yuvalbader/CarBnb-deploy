@@ -2,7 +2,6 @@ import React, { forwardRef } from "react"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
-import { OutlinedInput } from "@mui/material"
 import { makeStyles } from "@material-ui/core/styles"
 import { possibleTimes } from "./data"
 import "./style.css"
@@ -37,6 +36,7 @@ const Time = forwardRef((props, ref) => {
         onChange={handleChange}
         inputRef={ref}
         inputProps={{ border: "sildpink" }}
+        required
       >
         {possibleTimes.map((time, index) => (
           <MenuItem key={index} value={time}>

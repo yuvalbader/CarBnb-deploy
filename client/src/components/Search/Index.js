@@ -5,7 +5,6 @@ import Fab from "@mui/material/Fab"
 import Box from "@mui/material/Box"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
-import { InputAdornment } from "@material-ui/core"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
@@ -18,13 +17,8 @@ import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
 import { getIsLoading } from "../../app/selectors/view-selectors"
-import { makeStyles } from "@material-ui/core/styles"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
-const useStyles = makeStyles(() => ({
-  noBorder: {
-    border: "none",
-  },
-}))
+
 function loadScript(src, id) {
   return new Promise((resolve, reject) => {
     const script = document.createElement("script")
@@ -42,7 +36,6 @@ const autocompleteService = {
 }
 
 export default function Search() {
-  const classes = useStyles()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loading = useSelector(getIsLoading)
@@ -74,6 +67,7 @@ export default function Search() {
     const hoursUntil = timeUntil[0]
     const minutesUntil = timeUntil[1]
 
+    console.log("where", whereRef.current.value)
     const searchDataObject = {
       location: whereRef.current.value,
       start_order: new Date(
@@ -91,9 +85,21 @@ export default function Search() {
         minutesUntil
       ),
     }
-
-    dispatch(search(searchDataObject))
-    navigate("/searchResult")
+    // validate data
+    if (searchDataObject.location === "") {
+      whereRef.current.focus()
+      whereRef.current.placeholder = "Please enter a location"
+      return
+    } else if (timeToPickRef.current.value === "") {
+      timeToPickRef.current.focus()
+      alert("Please enter a time")
+    } else if (timeToDropRef.current.value === "") {
+      timeToDropRef.current.focus()
+      alert("Please enter a time")
+    } else {
+      dispatch(search(searchDataObject))
+      navigate("/searchResult")
+    }
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -121,6 +127,7 @@ export default function Search() {
 
   useEffect(() => {
     let active = true
+
     if (!autocompleteService.current) {
       return undefined
     }
@@ -167,7 +174,7 @@ export default function Search() {
       <div className="searchContainer">
         <Autocomplete
           id="google-map-demo"
-          sx={{ width: 400, border: "transparent", borderStyle: "hidden" }}
+          sx={{ width: 400 }}
           getOptionLabel={(option) =>
             typeof option === "string" ? option : option.description
           }
@@ -191,8 +198,10 @@ export default function Search() {
               {...params}
               fullWidth
               placeholder="Where?"
-              InputProps={{
-                classes: { notchedOutline: classes.noBorder },
+              sx={{
+                "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                  borderStyle: "none",
+                },
               }}
             />
           )}

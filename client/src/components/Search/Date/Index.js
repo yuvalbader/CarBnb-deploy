@@ -26,13 +26,19 @@ const Datee = forwardRef((props, ref) => {
         }
         inputRef={ref}
         InputProps={{
-          classes: { notchedOutline: classes.noBorder },
+          classes: {
+            notchedOutline: props.classes ? props.classes : classes.noBorder,
+          },
         }}
         onChange={(newValue) => {
-          setValue(newValue)
-          props.label === "From"
-            ? props.setDataFrom(newValue)
-            : props.setDataUntil(newValue)
+          if (window.location.href !== "http://localhost:3000/") {
+            setValue(newValue)
+            props.label === "From"
+              ? props.setDataFrom(newValue)
+              : props.setDataUntil(newValue)
+          } else {
+            setValue(newValue)
+          }
         }}
         renderInput={(params) => <TextField {...params} />}
       />
