@@ -3,9 +3,16 @@ import TextField from "@mui/material/TextField"
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
+import { makeStyles } from "@material-ui/core/styles"
 
 const Datee = forwardRef((props, ref) => {
+  const useStyles = makeStyles(() => ({
+    noBorder: {
+      border: "none",
+    },
+  }))
   const [value, setValue] = React.useState(null)
+  const classes = useStyles()
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
@@ -18,6 +25,9 @@ const Datee = forwardRef((props, ref) => {
             : value
         }
         inputRef={ref}
+        InputProps={{
+          classes: { notchedOutline: classes.noBorder },
+        }}
         onChange={(newValue) => {
           setValue(newValue)
           props.label === "From"
