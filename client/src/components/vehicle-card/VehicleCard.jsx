@@ -37,8 +37,8 @@ const VehicleCard = (props) => {
       <CardMedia
         component="img"
         height="200"
-        image={props.item.img}
-        alt={props.item.brand + " " + props.item.model}
+        image={props.image}
+        alt={props.brand + " " + props.model}
       />
       <CardContent>
         <Box sx={styleBox1}>
@@ -50,19 +50,19 @@ const VehicleCard = (props) => {
               fontWeight={"bold"}
               component="div"
             >
-              {props.item.brand}
+              {props.brand}
               <Typography
                 component="div"
                 marginLeft="10px"
                 variant="h8"
                 color="text.secondary"
               >
-                {props.item.type}
+                {props.type}
               </Typography>
             </Typography>
           </Box>
           <Typography variant="h7" color="text.secondary">
-            {props.item.model}
+            {props.model}
           </Typography>
           <Typography
             variant="h8"
@@ -74,7 +74,7 @@ const VehicleCard = (props) => {
             gap="8px"
           >
             <LocationOnIcon color="primary" fontSize={"10px"} />
-            {props.item.location}
+            {props.location}
           </Typography>
           <Box display="flex" gap="40px" marginTop="20px">
             <Typography
@@ -87,7 +87,7 @@ const VehicleCard = (props) => {
             >
               <Typography sx={styleBox3}>
                 <AirlineSeatReclineExtraIcon color="primary" />
-                {` ${props.item.seats} seats `}
+                {` ${props.seats} seats `}
               </Typography>
             </Typography>
             <Typography
@@ -108,7 +108,7 @@ const VehicleCard = (props) => {
               >
                 <Typography sx={styleBox3}>
                   <LocalGasStationIcon color="primary" />
-                  {`${props.item.engine}`}
+                  {`${props.engine}`}
                 </Typography>
               </Typography>
             </Typography>
@@ -130,7 +130,7 @@ const VehicleCard = (props) => {
               >
                 <Typography sx={styleBox3}>
                   <ManageHistoryIcon color="primary" />
-                  {`${props.item.gear}`}
+                  {`${props.gear}`}
                 </Typography>
               </Typography>
             </Typography>
@@ -155,7 +155,7 @@ const VehicleCard = (props) => {
               <PaidIcon color="primary" fontSize={"10px"} />
               {"price"}
             </Typography>
-            <Typography> {`${props.item.totalPrice} /day`}</Typography>
+            <Typography> {`${props.totalPrice} /day`}</Typography>
           </Typography>
         </Box>
       </CardContent>

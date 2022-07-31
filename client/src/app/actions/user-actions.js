@@ -1,32 +1,63 @@
+import axios from "axios";
 import ListApiService from "../../services/list-api-service";
 import actionTypes from "./constants";
+import { useSelector } from "react-redux";
+import { store } from "../store";
 
-const fetchVehiclesRequestAction = () => ({
-  type: actionTypes.FETCH_VEHICLE_REQUEST,
+const fetchMyReservationsRequestAction = () => ({
+  type: actionTypes.FETCH_MY_RESERVATIONS_REQUEST,
 });
 
-const fetchVehiclesSuccessAction = (vehicles) => ({
-  type: actionTypes.FETCH_VEHICLE_SUCCESS,
-  vehicles,
+const fetchMyReservationsSuccessAction = (reservations) => ({
+  type: actionTypes.FETCH_MY_RESERVATIONS_SUCCESS,
+  reservations,
 });
 
-const fetchVehiclesFailureAction = () => ({
-  type: actionTypes.FETCH_VEHICLE_FAILURE,
+const fetchMyReservationsFailureAction = () => ({
+  type: actionTypes.FETCH_MY_RESERVATIONS_FAILURE,
 });
 
-export const fetchVehicles = () => {
+export const fetchMyReservations = () => {
   return async (dispatch) => {
-    dispatch(fetchVehiclesRequestAction());
+    dispatch(fetchMyReservationsRequestAction());
     try {
-      const userId = getUserId(state);
-      const vehicles = await ListApiService.getOwnerCars(userId);
-      const vehiclesById = vehicles.reduce((acc, vehicle) => {
-        acc[vehicle.id] = vehicle;
+      // const myVehicles = useSelector((state) => state.vehiclesSlice);
+      const myVehicles = store.getState().vehiclesSlice;
+      const myVehiclesId = Object.keys(myVehicles);
+      if (myVehiclesId.length === 0)
+        return dispatch(fetchMyReservationsSuccessAction({}));
+      const myReservationsPromises = myVehiclesId.map((id) => {
+        return ListApiService.getReservationByCarId(id);
+      });
+      let myReservations = await axios.all(myReservationsPromises);
+      myReservations = myReservations.flat();
+      const myReservationsById = myReservations.reduce((acc, reservation) => {
+        acc[reservation.id] = reservation;
         return acc;
       }, {});
-      dispatch(fetchVehiclesSuccessAction(vehiclesById));
+      dispatch(fetchMyReservationsSuccessAction(myReservationsById));
     } catch (error) {
-      dispatch(fetchVehiclesFailureAction());
+      console.error(error);
+      dispatch(fetchMyReservationsFailureAction());
     }
+  };
+};
+
+export const fetchMyOrders = () => {
+  return async (dispatch) => {
+    // dispatch(fetchMyOrdersRequestAction());
+    // try {
+    // const myVehicles = useSelector((state) => state.vehiclesSlice);
+    // // console.log("myVehicles:", myVehicles);
+    // const myVehiclesId = Object.keys(myVehicles);
+    // const myReservationsById = myReservations.reduce((acc, reservation) => {
+    //   acc[reservation.id] = reservation;
+    //   return acc;
+    // }, {});
+    //   dispatch(fetchMyOrdersSuccessAction(myReservationsById));
+    // } catch (error) {
+    //   console.error(error);
+    //   dispatch(fetchMyOrdersFailureAction());
+    // }
   };
 };
