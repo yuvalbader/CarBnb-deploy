@@ -17,16 +17,7 @@ import { CardActionArea } from "@mui/material"
 import RatingOfCar from "../../components/Rating/Index"
 import { useNavigate } from "react-router-dom"
 const Testimonials = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [vehicles, setVehicles] = React.useState([])
-
-  useEffect(() => {
-    dispatch(fetchVehicles())
-    ListApiService.getBrandList().then((res) => {
-      setVehicles(res)
-    })
-  }, [dispatch])
 
   const onClick = (id) => {
     navigate(`/car/${id}`, {

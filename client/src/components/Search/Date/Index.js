@@ -6,7 +6,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 
 const Datee = forwardRef((props, ref) => {
   const [value, setValue] = React.useState(null)
-  console.log(props, "props")
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker

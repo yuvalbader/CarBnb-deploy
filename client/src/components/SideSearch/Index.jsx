@@ -40,7 +40,6 @@ export default function SideSearch({ state }) {
   const [dataFrom, setDataFrom] = React.useState(today)
   const [dataUntil, setDataUntil] = React.useState(threeDays)
   // const selector = useSelector((state) => state)
-  console.log(threeDays)
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -110,7 +109,6 @@ export default function SideSearch({ state }) {
     }
   }, [value, inputValue, fetch])
 
-  console.log("Calcdays", calcDays)
 
   return (
     <div className="sideSearch_container">
