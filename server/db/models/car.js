@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Car.init(
     {
-      profile_piture: DataTypes.STRING,
+      profile_picture: DataTypes.STRING,
       brand: DataTypes.STRING,
       model: DataTypes.STRING,
       year: DataTypes.INTEGER,
@@ -31,6 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       user_id: DataTypes.INTEGER,
       type: DataTypes.STRING,//[Hatchback, Sedan, SUV, MUV, Coupe, Convertible, Pickup Truck]
       location: DataTypes.STRING,//city, country
+      engine: DataTypes.STRING,
+      gear: DataTypes.STRING,//[auto/manual]
     },
     {
       sequelize,

@@ -11,7 +11,30 @@ module.exports = {
       profile_piture: {
         type: Sequelize.STRING,
       },
-
+      brand: {
+        type: Sequelize.STRING,
+      },
+      model: {
+        type: Sequelize.STRING,
+      },
+      year: {
+        type: Sequelize.INTEGER,
+      },
+      location: {
+        type: Sequelize.STRING,
+      },
+      type: {
+        type: Sequelize.STRING,
+      },
+      engine: {
+        type: Sequelize.STRING,
+      },
+      gear: {
+        type: Sequelize.STRING,
+      },
+      gas: {
+        type: Sequelize.STRING,
+      },
       number_of_seats: {
         type: Sequelize.INTEGER,
       },
