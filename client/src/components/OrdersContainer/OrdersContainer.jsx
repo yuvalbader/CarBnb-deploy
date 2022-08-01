@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
-import ReservationCard from "../ReservationCard/ReservationCard";
-import VehicleCard from "../vehicle-card/VehicleCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import dummyData from "../../pages/MyProfile/dummyData";
-import { useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react"
+import ReservationCard from "../ReservationCard/ReservationCard"
+import VehicleCard from "../vehicle-card/VehicleCard"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Pagination } from "swiper"
+import dummyData from "../../pages/MyProfile/dummyData"
+import { useOutletContext } from "react-router-dom"
+import { useSelector } from "react-redux"
+import "swiper/css"
+import "swiper/css/pagination"
+import "./OrdersContainer.css"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 
+const OrdersContainer = (props, navBar) => {
+  const loading = useSelector((state) => state.userSlice.loading)
+  const [data, setData] = useState(dummyData)
+  const handleOutletChange = useOutletContext()
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import './OrdersContainer.css';
+  const { page } = props
+  const pageLabel = `No past ${page}`
+  const pageTitle = `My ${page}`
+  handleOutletChange(page)
 
-const OrdersContainer = ( props, navBar ) => {
-  const [data, setData] = useState(dummyData);
-  const handleOutletChange = useOutletContext();
+  useEffect(() => {}, [props.title, props.label])
 
-  const { page } = props;
-  const pageLabel = `No past ${page}`;
-  const pageTitle = `My ${page}`;
-  handleOutletChange(page);
-
-  useEffect(() => {}, [props.title, props.label]);
-  
   const defaultOuput = () => {
     return (
       <div className="trips-view-container-img">
@@ -32,9 +33,10 @@ const OrdersContainer = ( props, navBar ) => {
         <p className="no-past title">{pageLabel}</p>
         <div>This is where you can access information about your {page}</div>
       </div>
-    );
-  };
+    )
+  }
 
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div className="details-view-container">
@@ -59,12 +61,12 @@ const OrdersContainer = ( props, navBar ) => {
                 ></VehicleCard>
                 {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
-            );
+            )
           })}
         </Swiper>
       )}
     </>
-  );
-};
+  )
+}
 
-export default OrdersContainer;
+export default OrdersContainer
