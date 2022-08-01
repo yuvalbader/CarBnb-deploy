@@ -1,24 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react"
-import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
+import React, { useState, useEffect } from "react"
 import jwt_decode from "jwt-decode"
-import { useSelector } from "react-redux"
-
+import { useSelector, useDispatch } from "react-redux"
+import { loginUser } from "../../app/actions/login-user-actions"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 export default function HelperTextMisaligned() {
+  const loading = useSelector((state) => state.viewSlice.isLoading)
+  const dispatch = useDispatch()
   const clientId =
     "95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com"
-  const style = {
-    display: "flex",
-    alignText: "center",
-    justifyContent: "center",
-    width: "100%",
-  }
-  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn)
   // hard coded state for now until initalized redux state is available
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
 
   function handleCallbackResponse(response) {
     let userObject = jwt_decode(response.credential)
+    dispatch(loginUser(userObject.email))
+    // const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
+
     window.localStorage.setItem("user", JSON.stringify(userObject))
     if (userObject) {
       window.location.href = "/"
@@ -50,6 +47,8 @@ export default function HelperTextMisaligned() {
       size: "large",
     })
   }, [])
+
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div

@@ -23,21 +23,3 @@
   background-color: white;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
 }
-
-/* @media screen and (max-width: 768px) {
-  .searchContainer {
-    margin-top: 30vh;
-    border-radius: 35px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    background: none;
-  }
-  .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-    border-style: solid !important;
-    border-radius: 35px !important;
-    background-color: white !important;
-  }
-} */

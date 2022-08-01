@@ -16,9 +16,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
-import { getIsLoading } from "../../app/selectors/view-selectors"
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
-
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -38,9 +36,9 @@ const autocompleteService = {
 }
 
 export default function Search() {
+  const loading = useSelector((state) => state.viewSlice.isLoading)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const loading = useSelector(getIsLoading)
   const [value, setValue] = useState(null)
   const [inputValue, setInputValue] = useState("")
   const [options, setOptions] = useState([])
@@ -51,7 +49,6 @@ export default function Search() {
   const timeToPickRef = useRef()
   const timeToDropRef = useRef()
 
-  console.log("loading before search", loading)
   const searchHandler = () => {
     const dateFrom = fromRef.current.value.split("/")
     const dateUntil = untilRef.current.value.split("/")
@@ -70,6 +67,7 @@ export default function Search() {
     const hoursUntil = timeUntil[0]
     const minutesUntil = timeUntil[1]
 
+    console.log("where", whereRef.current.value)
     const searchDataObject = {
       location: whereRef.current.value,
       start_order: new Date(
@@ -87,10 +85,21 @@ export default function Search() {
         minutesUntil
       ),
     }
-
-    dispatch(search(searchDataObject))
-    console.log("loading after search", loading)
-    navigate("/searchResult")
+    // validate data
+    if (searchDataObject.location === "") {
+      whereRef.current.focus()
+      whereRef.current.placeholder = "Please enter a location"
+      return
+    } else if (timeToPickRef.current.value === "") {
+      timeToPickRef.current.focus()
+      alert("Please enter a time")
+    } else if (timeToDropRef.current.value === "") {
+      timeToDropRef.current.focus()
+      alert("Please enter a time")
+    } else {
+      dispatch(search(searchDataObject))
+      navigate("/searchResult")
+    }
   }
 
   if (typeof window !== "undefined" && !loaded.current) {
@@ -118,6 +127,7 @@ export default function Search() {
 
   useEffect(() => {
     let active = true
+
     if (!autocompleteService.current) {
       return undefined
     }
@@ -175,10 +185,16 @@ export default function Search() {
           }}
           renderInput={(params) => (
             <TextField
+              variant="outlined"
               inputRef={whereRef}
               {...params}
               fullWidth
               placeholder="Where?"
+              sx={{
+                "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                  borderStyle: "none",
+                },
+              }}
             />
           )}
           renderOption={(props, option) => {
@@ -198,7 +214,10 @@ export default function Search() {
                   <Grid item>
                     <Box
                       component={LocationOnIcon}
-                      sx={{ color: "text.secondary", mr: 2 }}
+                      sx={{
+                        color: "text.secondary",
+                        mr: 2,
+                      }}
                     />
                   </Grid>
                   <Grid item xs>

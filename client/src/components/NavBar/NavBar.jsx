@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import AppBar from "@mui/material/AppBar"
 import Box from "@mui/material/Box"
 import Toolbar from "@mui/material/Toolbar"
@@ -14,6 +14,8 @@ import AdbIcon from "@mui/icons-material/Adb"
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline"
 import Model from "./Model"
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { loginUser } from "../../app/actions/login-user-actions"
 
 const pagesIfVisitor = ["Learn more", "Log in", "Sign up"]
 const pagesIfLog = ["Learn more", "My profile"]
@@ -24,17 +26,27 @@ const NavBarComponent = () => {
   const [isUser, setIsUser] = useState(false)
   const [anchorElNav, setAnchorElNav] = useState(false)
   const [anchorElUser, setAnchorElUser] = useState(false)
+  const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem("user"))
-  useEffect(() => {
-    checkIfUserLogIn()
-  }, [])
 
-  const checkIfUserLogIn = () => {
-    // checking local storage if user is logged in
+  useEffect(() => {
+    const userObject = JSON.parse(localStorage.getItem("user"))
     if (localStorage.getItem("user")) {
+      console.log("user is logged in", userObject)
+      dispatch(loginUser(userObject.email))
       setIsUser(true)
     }
-  }
+  }, [])
+
+  // const checkIfUserLogIn = () => {
+  //   // checking local storage if user is logged in
+  //   const userObject = JSON.parse(localStorage.getItem("user"))
+  //   if (localStorage.getItem("user")) {
+  //     console.log("user is logged in", userObject)
+  //     dispatch(loginUser(userObject.email))
+  //     setIsUser(true)
+  //   }
+  // }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }
