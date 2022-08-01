@@ -1,59 +1,59 @@
-import { useState } from 'react';
-import { AppBar, Button, MenuItem, Toolbar } from '@mui/material';
-import Menu from '@mui/material/Menu';
-import { Box } from '@mui/material';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import RangeSlider from '../rangeSlider/RangeSlider';
+import { useState } from "react"
+import { AppBar, Button, MenuItem, Toolbar } from "@mui/material"
+import Menu from "@mui/material/Menu"
+import { Box } from "@mui/material"
+import ManageSearchIcon from "@mui/icons-material/ManageSearch"
+import RangeSlider from "../rangeSlider/RangeSlider"
 import {
   setPriceRange,
-  setSortHTL,
-  setSortLTH,
-} from '../../app/actions/search-actions';
-import { useDispatch } from 'react-redux';
+  setPriceHTL,
+  setPriceLTH,
+} from "../../app/actions/search-actions"
+import { useDispatch } from "react-redux"
 
 const styleBox = {
-  my: '20px',
-};
+  my: "20px",
+}
 
 const styleButton = {
-  mx: '10px',
-};
+  mx: "10px",
+}
 
 const FilterResultsBar = ({ minPrice, maxPrice }) => {
-  const dispatch = useDispatch();
-  const [sortMenuEnchor, setSortMenuEnchor] = useState(null);
-  const [priceMenuEnchor, setPriceMenuEnchor] = useState(null);
+  const dispatch = useDispatch()
+  const [sortMenuEnchor, setSortMenuEnchor] = useState(null)
+  const [priceMenuEnchor, setPriceMenuEnchor] = useState(null)
 
-  const sortOpen = Boolean(sortMenuEnchor);
-  const priceOpen = Boolean(priceMenuEnchor);
+  const sortOpen = Boolean(sortMenuEnchor)
+  const priceOpen = Boolean(priceMenuEnchor)
 
   const openSortMenuHandler = (event) => {
-    setSortMenuEnchor(event.currentTarget);
-  };
+    setSortMenuEnchor(event.currentTarget)
+  }
   const closeSortMenu = () => {
-    setSortMenuEnchor(null);
-  };
+    setSortMenuEnchor(null)
+  }
 
   const openPriceMenuHandler = (event) => {
-    setPriceMenuEnchor(event.currentTarget);
-  };
+    setPriceMenuEnchor(event.currentTarget)
+  }
   const closePriceMenu = () => {
-    setPriceMenuEnchor(null);
-  };
+    setPriceMenuEnchor(null)
+  }
 
   const sortLTHHandler = () => {
-    dispatch(setSortLTH());
-    setSortMenuEnchor(null);
-  };
+    dispatch(setPriceLTH())
+    setSortMenuEnchor(null)
+  }
 
   const sortHTLHandler = () => {
-    dispatch(setSortHTL());
-    setSortMenuEnchor(null);
-  };
+    dispatch(setPriceHTL())
+    setSortMenuEnchor(null)
+  }
 
   const changeRangeHandler = (range) => {
-    dispatch(setPriceRange(range));
-  };
+    dispatch(setPriceRange(range))
+  }
 
   return (
     <Box sx={{ styleBox }}>
@@ -85,7 +85,7 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
             open={sortOpen}
             onClose={closeSortMenu}
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              "aria-labelledby": "basic-button",
             }}
           >
             <MenuItem onClick={sortLTHHandler}>Price: low to high</MenuItem>
@@ -98,10 +98,10 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
           >
             <MenuItem
               sx={{
-                height: '100px',
-                width: '400px',
-                display: 'flex',
-                justifyContent: 'center',
+                height: "100px",
+                width: "400px",
+                display: "flex",
+                justifyContent: "center",
               }}
             >
               <RangeSlider
@@ -114,7 +114,7 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
         </Toolbar>
       </AppBar>
     </Box>
-  );
-};
+  )
+}
 
-export default FilterResultsBar;
+export default FilterResultsBar
