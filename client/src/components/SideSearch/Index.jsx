@@ -11,9 +11,16 @@ import DateToPick from "../Search/Date/Index"
 import Time from "../Search/Time/Index"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
+import { makeStyles } from "@material-ui/core/styles"
+
 import "./style.css"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
+const useStyles = makeStyles(() => ({
+  noBorder: {
+    border: "solid 1px #e0e0e0",
+  },
+}))
 function loadScript(src, position, id) {
   if (!position) {
     return
@@ -29,6 +36,7 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null }
 
 export default function SideSearch({ state }) {
+  const classes = useStyles()
   const today = new Date()
   const threeDays = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)
   const [value, setValue] = React.useState(null)
@@ -40,7 +48,6 @@ export default function SideSearch({ state }) {
   const [dataFrom, setDataFrom] = React.useState(today)
   const [dataUntil, setDataUntil] = React.useState(threeDays)
   // const selector = useSelector((state) => state)
-  console.log(threeDays)
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -110,8 +117,6 @@ export default function SideSearch({ state }) {
     }
   }, [value, inputValue, fetch])
 
-  console.log("Calcdays", calcDays)
-
   return (
     <div className="sideSearch_container">
       <div>
@@ -131,7 +136,12 @@ export default function SideSearch({ state }) {
           Trip start
         </Typography>
         <div className="date_time">
-          <DateToPick setDataFrom={setDataFrom} ref={fromRef} label="From" />
+          <DateToPick
+            classes={classes}
+            setDataFrom={setDataFrom}
+            ref={fromRef}
+            label="From"
+          />
           <Time time={135} />
         </div>
         <Typography
@@ -142,6 +152,7 @@ export default function SideSearch({ state }) {
         </Typography>
         <div className="date_time">
           <DateToPick
+            classes={classes}
             setDataUntil={setDataUntil}
             ref={untilRef}
             label="Until"

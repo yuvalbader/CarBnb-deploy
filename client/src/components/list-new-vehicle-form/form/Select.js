@@ -7,7 +7,6 @@ function Select({ name, options, ...moreProps }) {
   const [field, meta] = useField(name);
 
   const changeHandler = (event) => {
-    console.log(event.target);
     const { value } = event.target;
     setFieldValue(name, value);
   };

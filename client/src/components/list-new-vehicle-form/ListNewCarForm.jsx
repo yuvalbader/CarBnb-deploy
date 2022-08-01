@@ -51,7 +51,6 @@ const ListNewVehicleForm = (onSubmit) => {
   });
 
   function addNewVehicleHandler(values) {
-    console.log(values);
     const vehicleData = {
       profile_picture: values.profile_picture,
       brand: values.brand,
