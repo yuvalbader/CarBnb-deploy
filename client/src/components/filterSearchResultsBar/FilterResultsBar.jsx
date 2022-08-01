@@ -4,6 +4,12 @@ import Menu from '@mui/material/Menu';
 import { Box } from '@mui/material';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import RangeSlider from '../rangeSlider/RangeSlider';
+import {
+  setPriceRange,
+  setSortHTL,
+  setSortLTH,
+} from '../../app/actions/search-actions';
+import { useDispatch } from 'react-redux';
 
 const styleBox = {
   my: '20px',
@@ -14,6 +20,7 @@ const styleButton = {
 };
 
 const FilterResultsBar = ({ minPrice, maxPrice }) => {
+  const dispatch = useDispatch();
   const [sortMenuEnchor, setSortMenuEnchor] = useState(null);
   const [priceMenuEnchor, setPriceMenuEnchor] = useState(null);
 
@@ -33,6 +40,21 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
   const closePriceMenu = () => {
     setPriceMenuEnchor(null);
   };
+
+  const sortLTHHandler = () => {
+    dispatch(setSortLTH());
+    setSortMenuEnchor(null);
+  };
+
+  const sortHTLHandler = () => {
+    dispatch(setSortHTL());
+    setSortMenuEnchor(null);
+  };
+
+  const changeRangeHandler = (range) => {
+    dispatch(setPriceRange(range));
+  };
+
   return (
     <Box sx={{ styleBox }}>
       <AppBar position="static" color="transparent">
@@ -66,8 +88,8 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem onClick={closeSortMenu}>Price: low to high</MenuItem>
-            <MenuItem onClick={closeSortMenu}>Price: high to low</MenuItem>
+            <MenuItem onClick={sortLTHHandler}>Price: low to high</MenuItem>
+            <MenuItem onClick={sortHTLHandler}>Price: high to low</MenuItem>
           </Menu>
           <Menu
             anchorEl={priceMenuEnchor}
@@ -85,6 +107,7 @@ const FilterResultsBar = ({ minPrice, maxPrice }) => {
               <RangeSlider
                 minValue={minPrice}
                 maxValue={maxPrice}
+                onChangeRange={changeRangeHandler}
               ></RangeSlider>
             </MenuItem>
           </Menu>
