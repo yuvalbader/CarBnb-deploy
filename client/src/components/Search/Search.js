@@ -16,7 +16,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
-import { getIsLoading } from "../../app/selectors/view-selectors"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -36,9 +36,9 @@ const autocompleteService = {
 }
 
 export default function Search() {
+  const loading = useSelector((state) => state.viewSlice.isLoading)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const loading = useSelector(getIsLoading)
   const [value, setValue] = useState(null)
   const [inputValue, setInputValue] = useState("")
   const [options, setOptions] = useState([])
@@ -159,15 +159,7 @@ export default function Search() {
   }, [value, inputValue, fetch])
 
   if (loading) {
-    return (
-      <div className="loading_container">
-        <img
-          className="loading_page"
-          src="https://cdn.dribbble.com/users/778626/screenshots/4339853/media/35ef4328e6a9fa16ef277436cab1dc09.gif"
-          alt="loading"
-        />
-      </div>
-    )
+    return <LoadingSpinner />
   }
   return (
     <div className="container__searchBar">

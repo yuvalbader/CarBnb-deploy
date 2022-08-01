@@ -1,43 +1,45 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import ReservationCard from "../ReservationCard/ReservationCard";
-import VehicleCard from "../vehicle-card/VehicleCard";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-import dummyData from "../../pages/MyProfile/dummyData";
-import { useOutletContext } from "react-router-dom";
-import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions";
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import ReservationCard from "../ReservationCard/ReservationCard"
+import VehicleCard from "../vehicle-card/VehicleCard"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Pagination } from "swiper"
+import dummyData from "../../pages/MyProfile/dummyData"
+import { useOutletContext } from "react-router-dom"
+import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions"
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "./OrdersContainer.css";
+import "swiper/css"
+import "swiper/css/pagination"
+import "./OrdersContainer.css"
 import {
   fetchMyReservations,
   fetchMyOrders,
-} from "../../app/actions/user-actions";
+} from "../../app/actions/user-actions"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 
 const OrdersContainer = (props, navBar) => {
-  const handleOutletChange = useOutletContext();
-  const dispatch = useDispatch();
-  const myOrders = useSelector((state) => state.userSlice.orders);
-  const myReservations = useSelector((state) => state.userSlice.reservations);
-  const ordersList = Object.values(myOrders);
-  const reservationsList = Object.values(myReservations);
-  const { page } = props;
-  const data = page === "trips" ? ordersList : reservationsList;
-  const pageLabel = `No past ${page}`;
-  const pageTitle = `My ${page}`;
-  handleOutletChange(page);
-
+  const handleOutletChange = useOutletContext()
+  const loading = useSelector((state) => state.viewSlice.isLoading)
+  const dispatch = useDispatch()
+  const myOrders = useSelector((state) => state.userSlice.orders)
+  const myReservations = useSelector((state) => state.userSlice.reservations)
+  const ordersList = Object.values(myOrders)
+  const reservationsList = Object.values(myReservations)
+  const { page } = props
+  const data = page === "trips" ? ordersList : reservationsList
+  const pageLabel = `No past ${page}`
+  const pageTitle = `My ${page}`
+  handleOutletChange(page)
+  console.log("loading", loading)
   useEffect(() => {
-    fetchMyData();
-  }, []);
+    fetchMyData()
+  }, [])
 
   const fetchMyData = async () => {
-    await dispatch(fetchVehicles());
-    dispatch(fetchMyReservations());
+    await dispatch(fetchVehicles())
+    dispatch(fetchMyReservations())
     // dispatch(fetchMyOrders());
-  };
+  }
 
   const defaultOuput = () => {
     return (
@@ -49,9 +51,10 @@ const OrdersContainer = (props, navBar) => {
         <p className="no-past title">{pageLabel}</p>
         <div>This is where you can access information about your {page}</div>
       </div>
-    );
-  };
+    )
+  }
 
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div className="details-view-container">
@@ -76,12 +79,12 @@ const OrdersContainer = (props, navBar) => {
                 ></VehicleCard>
                 {/* <ReservationCard item={item}></ReservationCard> */}
               </SwiperSlide>
-            );
+            )
           })}
         </Swiper>
       )}
     </>
-  );
-};
+  )
+}
 
-export default OrdersContainer;
+export default OrdersContainer
