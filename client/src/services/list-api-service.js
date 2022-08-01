@@ -52,13 +52,8 @@ class ListApiService {
 
   static async getOwnerCars(userId) {
     try {
-<<<<<<< HEAD
-      const response = await axios.get(BASE_URL + CAR + `user/``${userId}`);
-      return response.data;
-=======
       const response = await axios.get(BASE_URL + CAR + `user/${userId}`)
       return response.data
->>>>>>> main
     } catch (err) {
       console.log(err.message);
     }
@@ -75,13 +70,8 @@ class ListApiService {
 
   static async getReservationByCarId(carId) {
     try {
-<<<<<<< HEAD
-      const response = await axios.get(BASE_URL + RES + `car/``${carId}`);
-      return response.data;
-=======
       const response = await axios.get(BASE_URL + RES + `car/${carId}`)
       return response.data
->>>>>>> main
     } catch (err) {
       console.log(err.message);
     }

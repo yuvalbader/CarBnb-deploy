@@ -64,7 +64,7 @@ const OrdersContainer = (props, navBar) => {
           slidesPerView={3}
           spaceBetween={10}
           pagination={{
-            clickable: true,
+          clickable: true,
           }}
           modules={[Pagination]}
           className="mySwiper"
