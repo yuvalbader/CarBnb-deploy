@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import SearchPlaceHolder from './SearchPlaceHolder';
 import ErrorPlaceHolder from './ErrorPlaceHolder';
+import { useState } from 'react';
 
 const SearchResultsPage = () => {
   const filteredVehicles = useSelector(
@@ -11,6 +12,7 @@ const SearchResultsPage = () => {
   );
   const isLoading = useSelector((state) => state.viewSlice.isLoading);
   const isError = useSelector((state) => state.viewSlice.isError);
+
   const prices = filteredVehicles.map((vehicle) =>
     parseInt(vehicle.price_per_day)
   );
