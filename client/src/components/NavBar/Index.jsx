@@ -1,67 +1,71 @@
-import React, { useState, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import Model from "./Model";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../app/actions/login-user-actions";
+import React, { useState, useEffect, useMemo } from "react"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import Container from "@mui/material/Container"
+import Avatar from "@mui/material/Avatar"
+import Button from "@mui/material/Button"
+import MenuItem from "@mui/material/MenuItem"
+import AdbIcon from "@mui/icons-material/Adb"
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline"
+import Model from "./Model"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { loginUser } from "../../app/actions/login-user-actions"
 
-const pagesIfVisitor = ["Learn more", "Log in", "Sign up"];
-const pagesIfLog = ["Learn more", "My profile"];
-const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"];
+const pagesIfVisitor = ["Learn more", "Log in", "Sign up"]
+const pagesIfLog = ["Learn more", "My profile"]
+const settingsIfLog = ["Profile", "Account", "Dashboard", "Logout"]
 
 const NavBarComponent = () => {
-  const navigate = useNavigate();
-  const [isUser, setIsUser] = useState(false);
-  const [anchorElNav, setAnchorElNav] = useState(false);
-  const [anchorElUser, setAnchorElUser] = useState(false);
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const [isUser, setIsUser] = useState(false)
+  const [anchorElNav, setAnchorElNav] = useState(false)
+  const [anchorElUser, setAnchorElUser] = useState(false)
+  const dispatch = useDispatch()
+  const user = JSON.parse(localStorage.getItem("user"))
 
-  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    checkIfUserLogIn();
-  }, []);
-
-  const checkIfUserLogIn = () => {
-    // checking local storage if user is logged in
+    const userObject = JSON.parse(localStorage.getItem("user"))
     if (localStorage.getItem("user")) {
-      const userObject = JSON.parse(localStorage.getItem("user"));
-      console.log("user is logged in", userObject);
-      dispatch(loginUser(userObject.email));
-
-      setIsUser(true);
+      console.log("user is logged in", userObject)
+      dispatch(loginUser(userObject.email))
+      setIsUser(true)
     }
-  };
+  }, [])
+
+  // const checkIfUserLogIn = () => {
+  //   // checking local storage if user is logged in
+  //   const userObject = JSON.parse(localStorage.getItem("user"))
+  //   if (localStorage.getItem("user")) {
+  //     console.log("user is logged in", userObject)
+  //     dispatch(loginUser(userObject.email))
+  //     setIsUser(true)
+  //   }
+  // }
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    setAnchorElNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    setAnchorElUser(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    setAnchorElNav(null)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    setAnchorElUser(null)
+  }
 
   const handleLogOut = () => {
-    localStorage.removeItem("user");
-    setIsUser(false);
-  };
+    localStorage.removeItem("user")
+    setIsUser(false)
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -120,13 +124,13 @@ const NavBarComponent = () => {
                         <MenuItem
                           key={page}
                           onClick={() => {
-                            navigate("/MyProfile");
-                            handleCloseNavMenu();
+                            navigate("/MyProfile")
+                            handleCloseNavMenu()
                           }}
                         >
                           <Typography textAlign="center">{page}</Typography>
                         </MenuItem>
-                      );
+                      )
                     }
                     return (
                       <MenuItem
@@ -137,7 +141,7 @@ const NavBarComponent = () => {
                       >
                         <Typography textAlign="center">{page}</Typography>
                       </MenuItem>
-                    );
+                    )
                   })
                 : pagesIfVisitor.map((page) => (
                     <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -182,26 +186,26 @@ const NavBarComponent = () => {
                       <MenuItem
                         key={page}
                         onClick={() => {
-                          navigate(`/${page.toLowerCase().replace(" ", "")}`);
+                          navigate(`/${page.toLowerCase().replace(" ", "")}`)
 
                           handleCloseNavMenu()
                         }}
                       >
                         <Typography textAlign="center">{page}</Typography>
                       </MenuItem>
-                    );
+                    )
                   }
                   return (
                     <MenuItem
                       key={page}
                       onClick={() => {
-                        handleCloseNavMenu();
-                        navigate(`/${page.toLowerCase().replace(" ", "")}`);
+                        handleCloseNavMenu()
+                        navigate(`/${page.toLowerCase().replace(" ", "")}`)
                       }}
                     >
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
-                  );
+                  )
                 })
               : pagesIfVisitor.map((page, index) => {
                   if (page === "Log in") {
@@ -217,7 +221,7 @@ const NavBarComponent = () => {
                     >
                       {page}
                     </Button>
-                  );
+                  )
                 })}
           </Box>
           {/* ends of menu */}
@@ -256,13 +260,13 @@ const NavBarComponent = () => {
                             {setting}
                           </Typography>
                         </MenuItem>
-                      );
+                      )
                     }
                     return (
                       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                         <Typography textAlign="center">{setting}</Typography>
                       </MenuItem>
-                    );
+                    )
                   })}
               </Menu>
             ) : (
@@ -273,6 +277,6 @@ const NavBarComponent = () => {
         </Toolbar>
       </Container>
     </AppBar>
-  );
-};
-export default NavBarComponent;
+  )
+}
+export default NavBarComponent

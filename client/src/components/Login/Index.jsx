@@ -1,97 +1,64 @@
-import React, { useState, useEffect, useCallback } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import jwt_decode from "jwt-decode";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../app/actions/login-user-actions";
-
+import React, { useState, useEffect } from "react"
+import jwt_decode from "jwt-decode"
+import { useDispatch, useSelector } from "react-redux"
+import { loginUser } from "../../app/actions/login-user-actions"
+import { getIsLoading } from "../../app/selectors/view-selectors"
 export default function HelperTextMisaligned() {
-  const dispatch = useDispatch();
+  const loading = useSelector(getIsLoading)
+  const dispatch = useDispatch()
   const clientId =
-    "95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com";
-  const style = {
-    display: "flex",
-    alignText: "center",
-    justifyContent: "center",
-    width: "100%",
-  };
+    "95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com"
+
   // hard coded state for now until initalized redux state is available
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
 
   function handleCallbackResponse(response) {
-    let userObject = jwt_decode(response.credential);
-    dispatch(loginUser(userObject.email));
+    let userObject = jwt_decode(response.credential)
+    dispatch(loginUser(userObject.email))
     // const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
 
-    window.localStorage.setItem("user", JSON.stringify(userObject));
+    window.localStorage.setItem("user", JSON.stringify(userObject))
     if (userObject) {
-      // window.location.href = "/";
+      window.location.href = "/"
     } else {
-      console.log("error");
+      console.log("error")
     }
   }
   useEffect(() => {
-    const token = user?.token;
+    const token = user?.token
     if (token) {
-      const decoded = jwt_decode(token);
+      const decoded = jwt_decode(token)
 
       if (decoded.exp * 1000 < new Date().getTime()) {
-        console.log("token expired");
+        console.log("token expired")
       }
     }
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, [user?.token]);
+    setUser(JSON.parse(localStorage.getItem("user")))
+  }, [user?.token])
 
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
       client_id: clientId,
       callback: handleCallbackResponse,
-    });
+    })
 
     google.accounts.id.renderButton(document.getElementById("google-signin"), {
       theme: "outline",
       size: "large",
-    });
-  }, []);
+    })
+  })
+
+  // if (loading) {
+  //   console.log("in loading")
+  //   return <div>Loading...</div>
+  // }
   return (
     <>
-      {/* <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          "& > :not(style)": { m: 1 },
-        }}
-      >
-        <TextField
-          helperText="Please enter your email"
-          id="demo-helper-text-misaligned"
-          label="Email"
-          sx={style}
-        />
-        <TextField
-          helperText="Please enter your password"
-          id="demo-helper-text-misaligned"
-          label="Password"
-          type={"password"}
-          sx={style}
-        />
-      </Box>
-      <h1
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "10vh",
-        }}
-      >
-        or
-      </h1> */}
       <div
         id="google-signin"
         style={{ display: "flex", justifyContent: "center" }}
       ></div>
     </>
-  );
+  )
 }
