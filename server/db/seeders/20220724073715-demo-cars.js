@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("Cars", [
-      // profile_piture: DataTypes.STRING,
+      // profile_picture: DataTypes.STRING,
       // brand: DataTypes.STRING,
       // model: DataTypes.STRING,
       // year: DataTypes.INTEGER,
@@ -24,15 +24,10 @@ module.exports = {
         price_per_day: 150,
         description: 'Electric',
         user_id: 1,
-<<<<<<< HEAD
         location:"Tel aviv, Israel",
         type: "Sedan",
         engine: "Electric",
         gear: "AUTO",
-=======
-        location: 'Tel aviv, Israel',
-        type: 'Sedan',
->>>>>>> 5091f8ab0d75beee7acbc25293e4c7517c14debb
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -45,15 +40,10 @@ module.exports = {
         price_per_day: 250,
         description: 'off-road',
         user_id: 1,
-<<<<<<< HEAD
         location:"Tel aviv, Israel",
         type: "SUV",
         engine: "Diesel",
         gear: "AUTO",
-=======
-        location: 'Tel aviv, Israel',
-        type: 'SUV',
->>>>>>> 5091f8ab0d75beee7acbc25293e4c7517c14debb
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -74,7 +64,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        profile_piture: "",
+        profile_picture: "",
         brand: "Seat",
         model: "M",
         year: 2022,
@@ -90,7 +80,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        profile_piture: "",
+        profile_picture: "",
         brand: "Tesla",
         model: "Y",
         year: 2022,
@@ -105,7 +95,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },      {
-        profile_piture: "",
+        profile_picture: "",
         brand: "Toyota",
         model: "Aygo",
         year: 2002,

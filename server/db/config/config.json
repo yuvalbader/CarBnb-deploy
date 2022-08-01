@@ -1,16 +1,9 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "root",
     "password": "password",
     "database": "todo_db",
     "host": "127.0.0.1",
-=======
-    "username": "W8VrtueBe7",
-    "password": "tlzQlrQWXU",
-    "database": "W8VrtueBe7",
-    "host": "remotemysql.com",
->>>>>>> main
     "dialect": "mysql"
   },
   "test": {
