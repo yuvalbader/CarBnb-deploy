@@ -9,6 +9,12 @@
   background-color: #ffffff;
 }
 
+.trips-view-container-img {
+  display: flex;
+  flex-direction: column;
+  ;
+}
+
 .no-past-container {
   display: flex;
   flex-direction: column;
@@ -27,6 +33,7 @@ p {
   line-height: 44px;
   text-transform: none;
 }
+
 .title {
   font-size: 38px;
   margin-top: 20px;

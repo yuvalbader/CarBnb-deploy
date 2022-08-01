@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import VehicleListContainer from '../vehicles-list/VehiclesListContainer';
-import { vehicleModelsWithPhotos } from '../browseByBrand/dummyData';
-import Button from '@mui/material/Button';
-import ListVahicleDialog from '../list-new-vehicle-form/ListVehicleDialog';
+import { useState, useEffect } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import { useSelector } from "react-redux";
+import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
+import { vehicleModelsWithPhotos } from "../browseByBrand/dummyData";
+import Button from "@mui/material/Button";
+import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog";
 
 const MyCars = () => {
-  //const data = useSelector((state) => state.userSlice.MyCars);
-  const data = [];
-
+  let data = useSelector((state) => state.vehiclesSlice);
+  data = Object.values(data);
+  console.log(data);
   const [isAddCarPressed, setIsAddCarPressed] = useState(false);
   const openFormHandler = () => setIsAddCarPressed(true);
   const closeFormHandler = () => setIsAddCarPressed(false);
+  const handleOutletChange = useOutletContext();
+
+  handleOutletChange("mycars");
 
   //this is what we render if there is no data  (the user has no cars).
   // we should render a "add car" button here that will open the add car dialog.
@@ -41,7 +44,7 @@ const MyCars = () => {
     <div className="details-view-container">
       <p className="title"> My cars </p>
       {data.length === 0 && userHadNoCars()}
-      {data.length !== 0 && <VehicleListContainer />}
+      {data.length !== 0 && <VehicleListContainer vehicles={data} />}
       <Button variant="contained" onClick={openFormHandler}>
         Add car
       </Button>

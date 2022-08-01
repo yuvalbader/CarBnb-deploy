@@ -4,7 +4,6 @@ import StarIcon from "@mui/icons-material/Star"
 import Avatar from "./Avatar/Index"
 import Typography from "@mui/material/Typography"
 export const Overview = ({ state }) => {
-  console.log(state, "stateeee in overview")
   return (
     <div className="brand_container">
       <div className="brand_name">

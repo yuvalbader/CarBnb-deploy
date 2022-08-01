@@ -8,7 +8,6 @@ import Features from '../../components/Features/Index';
 export const Car = () => {
   const location = useLocation();
   const { state } = location;
-  console.log(state, 'state');
   return (
     <div className="photoSwiper_container">
       <div className="photo_swiper">

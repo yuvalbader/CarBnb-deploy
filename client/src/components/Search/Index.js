@@ -1,71 +1,73 @@
-import { useState, useRef, useMemo, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
-import Fab from '@mui/material/Fab';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import parse from 'autosuggest-highlight/parse';
-import throttle from 'lodash/throttle';
-import Datee from './Date/Index';
-import Time from './Time/Index';
-import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '@mui/material/IconButton';
-import './style.css';
-import { search } from '../../app/actions/search-actions';
-
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA';
+import { useState, useRef, useMemo, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import Fab from "@mui/material/Fab"
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
+import Autocomplete from "@mui/material/Autocomplete"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import parse from "autosuggest-highlight/parse"
+import throttle from "lodash/throttle"
+import Datee from "./Date/Index"
+import Time from "./Time/Index"
+import SearchIcon from "@mui/icons-material/Search"
+import IconButton from "@mui/material/IconButton"
+import "./style.css"
+import { search } from "../../app/actions/search-actions"
+import { getIsLoading } from "../../app/selectors/view-selectors"
+const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.setAttribute('async', '');
-    script.setAttribute('id', id);
-    script.src = src;
-    script.onload = resolve;
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
+    const script = document.createElement("script")
+    script.setAttribute("async", "")
+    script.setAttribute("id", id)
+    script.src = src
+    script.onload = resolve
+    script.onerror = reject
+    document.head.appendChild(script)
+  })
 }
 
 const autocompleteService = {
   current: null,
-};
+}
 
 export default function Search() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [value, setValue] = useState(null);
-  const [inputValue, setInputValue] = useState('');
-  const [options, setOptions] = useState([]);
-  const loaded = useRef(false);
-  const whereRef = useRef();
-  const fromRef = useRef();
-  const untilRef = useRef();
-  const timeToPickRef = useRef();
-  const timeToDropRef = useRef();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const loading = useSelector(getIsLoading)
+  const [value, setValue] = useState(null)
+  const [inputValue, setInputValue] = useState("")
+  const [options, setOptions] = useState([])
+  const loaded = useRef(false)
+  const whereRef = useRef()
+  const fromRef = useRef()
+  const untilRef = useRef()
+  const timeToPickRef = useRef()
+  const timeToDropRef = useRef()
 
   const searchHandler = () => {
-    const dateFrom = fromRef.current.value.split('/');
-    const dateUntil = untilRef.current.value.split('/');
-    const timeFrom = timeToPickRef.current.value.split(':');
-    const timeUntil = timeToDropRef.current.value.split(':');
+    const dateFrom = fromRef.current.value.split("/")
+    const dateUntil = untilRef.current.value.split("/")
+    const timeFrom = timeToPickRef.current.value.split(":")
+    const timeUntil = timeToDropRef.current.value.split(":")
 
-    const yearFrom = dateFrom[2];
-    const monthFrom = dateFrom[0];
-    const dayFrom = dateFrom[1];
-    const hoursFrom = timeFrom[0];
-    const minutesFrom = timeFrom[1];
+    const yearFrom = dateFrom[2]
+    const monthFrom = dateFrom[0]
+    const dayFrom = dateFrom[1]
+    const hoursFrom = timeFrom[0]
+    const minutesFrom = timeFrom[1]
 
-    const yearUntil = dateUntil[2];
-    const monthUntil = dateUntil[0];
-    const dayUntil = dateUntil[1];
-    const hoursUntil = timeUntil[0];
-    const minutesUntil = timeUntil[1];
+    const yearUntil = dateUntil[2]
+    const monthUntil = dateUntil[0]
+    const dayUntil = dateUntil[1]
+    const hoursUntil = timeUntil[0]
+    const minutesUntil = timeUntil[1]
 
+    console.log("where", whereRef.current.value)
     const searchDataObject = {
       location: whereRef.current.value,
       start_order: new Date(
@@ -82,67 +84,91 @@ export default function Search() {
         hoursUntil,
         minutesUntil
       ),
-    };
+    }
+    // validate data
+    if (searchDataObject.location === "") {
+      whereRef.current.focus()
+      whereRef.current.placeholder = "Please enter a location"
+      return
+    } else if (timeToPickRef.current.value === "") {
+      timeToPickRef.current.focus()
+      alert("Please enter a time")
+    } else if (timeToDropRef.current.value === "") {
+      timeToDropRef.current.focus()
+      alert("Please enter a time")
+    } else {
+      dispatch(search(searchDataObject))
+      navigate("/searchResult")
+    }
+  }
 
-    dispatch(search(searchDataObject));
-    navigate('/searchResult');
-  };
-
-  if (typeof window !== 'undefined' && !loaded.current) {
-    if (!document.querySelector('#google-maps')) {
+  if (typeof window !== "undefined" && !loaded.current) {
+    if (!document.querySelector("#google-maps")) {
       loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places`,
         document.body,
-        'google-maps'
+        "google-maps"
       ).then(() => {
         autocompleteService.current =
-          new window.google.maps.places.AutocompleteService();
+          new window.google.maps.places.AutocompleteService()
 
-        loaded.current = true;
-      });
+        loaded.current = true
+      })
     }
   }
 
   const fetch = useMemo(
     () =>
       throttle((request, callback) => {
-        autocompleteService.current.getPlacePredictions(request, callback);
+        autocompleteService.current.getPlacePredictions(request, callback)
       }, 200),
     []
-  );
+  )
 
   useEffect(() => {
-    let active = true;
+    let active = true
+
     if (!autocompleteService.current) {
-      return undefined;
+      return undefined
     }
 
-    if (inputValue === '') {
-      setOptions(value ? [value] : []);
-      return undefined;
+    if (inputValue === "") {
+      setOptions(value ? [value] : [])
+      return undefined
     }
 
     fetch({ input: inputValue }, (results) => {
       if (active) {
-        let newOptions = [];
+        let newOptions = []
 
         if (value) {
-          newOptions = [value];
+          newOptions = [value]
         }
 
         if (results) {
-          newOptions = [...newOptions, ...results];
+          newOptions = [...newOptions, ...results]
         }
 
-        setOptions(newOptions);
+        setOptions(newOptions)
       }
-    });
+    })
 
     return () => {
-      active = false;
-    };
-  }, [value, inputValue, fetch]);
+      active = false
+    }
+  }, [value, inputValue, fetch])
 
+  if (loading) {
+    return (
+      <div className="loading_container">
+        <img
+          className="loading_page"
+          src="https://cdn.dribbble.com/users/778626/screenshots/4339853/media/35ef4328e6a9fa16ef277436cab1dc09.gif"
+          alt="loading"
+        />
+      </div>
+    )
+  }
   return (
     <div className="container__searchBar">
       <div className="searchContainer">
@@ -150,7 +176,7 @@ export default function Search() {
           id="google-map-demo"
           sx={{ width: 400 }}
           getOptionLabel={(option) =>
-            typeof option === 'string' ? option : option.description
+            typeof option === "string" ? option : option.description
           }
           filterOptions={(x) => x}
           options={options}
@@ -159,30 +185,36 @@ export default function Search() {
           filterSelectedOptions
           value={value}
           onChange={(event, newValue) => {
-            setOptions(newValue ? [newValue, ...options] : options);
-            setValue(newValue);
+            setOptions(newValue ? [newValue, ...options] : options)
+            setValue(newValue)
           }}
           onInputChange={(event, newInputValue) => {
-            setInputValue(newInputValue);
+            setInputValue(newInputValue)
           }}
           renderInput={(params) => (
             <TextField
+              variant="outlined"
               inputRef={whereRef}
               {...params}
               fullWidth
               placeholder="Where?"
+              sx={{
+                "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+                  borderStyle: "none",
+                },
+              }}
             />
           )}
           renderOption={(props, option) => {
             const matches =
-              option.structured_formatting.main_text_matched_substrings;
+              option.structured_formatting.main_text_matched_substrings
             const parts = parse(
               option.structured_formatting.main_text,
               matches.map((match) => [
                 match.offset,
                 match.offset + match.length,
               ])
-            );
+            )
 
             return (
               <li {...props}>
@@ -190,7 +222,10 @@ export default function Search() {
                   <Grid item>
                     <Box
                       component={LocationOnIcon}
-                      sx={{ color: 'text.secondary', mr: 2 }}
+                      sx={{
+                        color: "text.secondary",
+                        mr: 2,
+                      }}
                     />
                   </Grid>
                   <Grid item xs>
@@ -211,7 +246,7 @@ export default function Search() {
                   </Grid>
                 </Grid>
               </li>
-            );
+            )
           }}
         />
         <div className="vertical_line"></div>
@@ -234,5 +269,5 @@ export default function Search() {
         </IconButton>
       </div>
     </div>
-  );
+  )
 }
