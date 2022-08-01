@@ -70,7 +70,7 @@ class ListApiService {
 
   static async getReservationByCarId(carId) {
     try {
-      const response = await axios.get(BASE_URL + RES + `car/``${carId}`)
+      const response = await axios.get(BASE_URL + RES + `car/${carId}`)
       return response.data
     } catch (err) {
       console.log(err.message)
@@ -106,7 +106,7 @@ class ListApiService {
 
   static async getUserByEmail(email) {
     try {
-      const response = await axios.get(BASE_URL + USER + `email/``${email}`)
+      const response = await axios.get(BASE_URL + USER + `email/${email}`)
       return response.data
     } catch (err) {
       console.log(err.message)

@@ -1,36 +1,36 @@
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
-import PaidIcon from '@mui/icons-material/Paid';
-import AirlineSeatReclineExtraIcon from '@mui/icons-material/AirlineSeatReclineExtra';
-import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
-import Chip from '@mui/material/Chip';
+import Card from "@mui/material/Card"
+import CardMedia from "@mui/material/CardMedia"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation"
+import PaidIcon from "@mui/icons-material/Paid"
+import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra"
+import ManageHistoryIcon from "@mui/icons-material/ManageHistory"
+import Chip from "@mui/material/Chip"
 
-import Box from '@mui/material/Box';
-import { Divider } from '@mui/material';
+import Box from "@mui/material/Box"
+// import { Divider } from "@mui/material"
 
 const styleBox1 = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  my: '10px',
-};
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  my: "10px",
+}
 
 const styleBox2 = {
-  display: 'flex',
-  alignItems: 'center',
-  width: '100%',
-};
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+}
 
 const typographyStyle = {
-  padding: '5px',
-};
+  padding: "5px",
+}
 const chipStyle = {
-  border: 'none',
-};
+  border: "none",
+}
 
 const VehicleCard = ({
   image,
@@ -48,26 +48,98 @@ const VehicleCard = ({
         component="img"
         height="200"
         image={image}
-        alt={brand + ' ' + model}
+        alt={brand + " " + model}
       />
       <CardContent>
         <Box sx={styleBox1}>
-          <Box sx={styleBox2}>
-            <Typography variant="h6" fontWeight={'bold'} sx={typographyStyle}>
+          <Box>
+            <Typography
+              display="flex"
+              flexDirection="row"
+              variant="h6"
+              fontWeight={"bold"}
+              component="div"
+            >
               {brand}
+              {/* <Typography
+                component="div"
+                marginLeft="10px"
+                variant="h8"
+                color="text.secondary"
+              >
+                {type}
+              </Typography> */}
+            </Typography>
+          </Box>
+          <Typography variant="h7" color="text.secondary">
+            {model}
+          </Typography>
+          <Typography
+            variant="h8"
+            fontWeight={"bold"}
+            component="div"
+            marginTop="10px"
+            display="flex"
+            flexDirection="row"
+            gap="8px"
+          >
+            <LocationOnIcon color="primary" fontSize={"10px"} />
+            {location}
+          </Typography>
+          <Box display="flex" gap="40px" marginTop="20px">
+            <Typography
+              display="flex"
+              flexDirection="column"
+              variant="h6"
+              gap="5px"
+              fontWeight={"bold"}
+              component="box"
+            >
+              <Typography sx={styleBox2}>
+                <AirlineSeatReclineExtraIcon color="primary" />
+                {` ${seats} seats `}
+              </Typography>
             </Typography>
             <Typography
               variant="subtitle1"
               color="text.secondary"
               sx={typographyStyle}
             >
-              {model}
+              <Typography
+                display="flex"
+                flexDirection="column"
+                variant="h6"
+                gap="5px"
+                fontWeight={"bold"}
+                component="box"
+              >
+                <Typography sx={styleBox2}>
+                  <LocalGasStationIcon color="primary" />
+                  {`${engine}`}
+                </Typography>
+              </Typography>
             </Typography>
-          </Box>
-          <Box sx={styleBox2}>
-            <LocationOnIcon color="primary" fontSize={'10px'} />
-            <Typography sx={typographyStyle} variant="body2">
-              {location}
+            <Typography
+              display="flex"
+              flexDirection="column"
+              variant="h6"
+              gap="5px"
+              fontWeight={"bold"}
+              component="box"
+            >
+              <Typography
+                display="flex"
+                flexDirection="column"
+                variant="h6"
+                gap="5px"
+                fontWeight={"bold"}
+                component="box"
+              >
+                <Typography sx={styleBox2}>
+                  <ManageHistoryIcon color="primary" />
+                  {`${gear}`}
+                </Typography>
+              </Typography>
             </Typography>
           </Box>
           {/*           <Typography variant="h7" color="text.secondary" sx={typographyStyle}>
@@ -95,15 +167,16 @@ const VehicleCard = ({
           </Box>
           {/* <Divider sx={{ my: '10px' }}></Divider> */}
           <Box sx={styleBox2} justifyContent="flex-end">
-            <PaidIcon color="primary" fontSize={'10px'} />
-            <Typography sx={typographyStyle} variant="h7" fontWeight={'bold'}>
+            <PaidIcon color="primary" fontSize={"10px"} />
+            <Typography sx={typographyStyle} variant="h7" fontWeight={"bold"}>
               {`${price} /day`}
             </Typography>
+            {/* <Typography> {`${totalPrice} /day`}</Typography> */}
           </Box>
         </Box>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default VehicleCard;
+export default VehicleCard

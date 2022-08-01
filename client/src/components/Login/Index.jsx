@@ -1,29 +1,33 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import jwt_decode from 'jwt-decode';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import jwt_decode from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../app/actions/login-user-actions";
 
 export default function HelperTextMisaligned() {
+  const dispatch = useDispatch();
   const clientId =
-    '95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com';
+    "95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com";
   const style = {
-    display: 'flex',
-    alignText: 'center',
-    justifyContent: 'center',
-    width: '100%',
+    display: "flex",
+    alignText: "center",
+    justifyContent: "center",
+    width: "100%",
   };
-  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
   // hard coded state for now until initalized redux state is available
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
 
   function handleCallbackResponse(response) {
     let userObject = jwt_decode(response.credential);
-    window.localStorage.setItem('user', JSON.stringify(userObject));
+    dispatch(loginUser(userObject.email));
+    // const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
+
+    window.localStorage.setItem("user", JSON.stringify(userObject));
     if (userObject) {
-      window.location.href = '/';
+      // window.location.href = "/";
     } else {
-      console.log('error');
+      console.log("error");
     }
   }
   useEffect(() => {
@@ -32,10 +36,10 @@ export default function HelperTextMisaligned() {
       const decoded = jwt_decode(token);
 
       if (decoded.exp * 1000 < new Date().getTime()) {
-        console.log('token expired');
+        console.log("token expired");
       }
     }
-    setUser(JSON.parse(localStorage.getItem('user')));
+    setUser(JSON.parse(localStorage.getItem("user")));
   }, [user?.token]);
 
   useEffect(() => {
@@ -45,9 +49,9 @@ export default function HelperTextMisaligned() {
       callback: handleCallbackResponse,
     });
 
-    google.accounts.id.renderButton(document.getElementById('google-signin'), {
-      theme: 'outline',
-      size: 'large',
+    google.accounts.id.renderButton(document.getElementById("google-signin"), {
+      theme: "outline",
+      size: "large",
     });
   }, []);
   return (
@@ -86,7 +90,7 @@ export default function HelperTextMisaligned() {
       </h1> */}
       <div
         id="google-signin"
-        style={{ display: 'flex', justifyContent: 'center' }}
+        style={{ display: "flex", justifyContent: "center" }}
       ></div>
     </>
   );
