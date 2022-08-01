@@ -16,11 +16,6 @@ const style = {
   p: 4,
 }
 
-const styleButton = {
-  position: "relative",
-  color: "white",
-}
-
 export default function Model({ pageName }) {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
@@ -28,7 +23,10 @@ export default function Model({ pageName }) {
 
   return (
     <>
-      <Button sx={styleButton} onClick={handleOpen}>
+      <Button
+        sx={{ ml: 4, color: "white", display: "block" }}
+        onClick={handleOpen}
+      >
         {pageName}
       </Button>
       <Modal

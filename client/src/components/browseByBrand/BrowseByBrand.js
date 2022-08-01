@@ -8,7 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import ListApiService from "../../services/list-api-service";
 import { vehicleModelsWithPhotos } from "./dummyData";
-import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions";
+// import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";

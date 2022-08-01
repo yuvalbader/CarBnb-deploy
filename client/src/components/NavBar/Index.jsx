@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -132,8 +132,7 @@ const NavBarComponent = () => {
                       <MenuItem
                         key={page}
                         onClick={() => {
-                          handleCloseNavMenu();
-                          console.log("clicked");
+                          handleCloseNavMenu()
                         }}
                       >
                         <Typography textAlign="center">{page}</Typography>
@@ -185,8 +184,7 @@ const NavBarComponent = () => {
                         onClick={() => {
                           navigate(`/${page.toLowerCase().replace(" ", "")}`);
 
-                          handleCloseNavMenu();
-                          console.log("clicked");
+                          handleCloseNavMenu()
                         }}
                       >
                         <Typography textAlign="center">{page}</Typography>
@@ -205,17 +203,9 @@ const NavBarComponent = () => {
                     </MenuItem>
                   );
                 })
-              : pagesIfVisitor.map((page) => {
+              : pagesIfVisitor.map((page, index) => {
                   if (page === "Log in") {
-                    return (
-                      // return a button to log in with model
-                      <Button
-                        key={page}
-                        sx={{ ml: 4, color: "white", display: "block" }}
-                      >
-                        <Model pageName={page} />
-                      </Button>
-                    );
+                    return <Model key={index} pageName={page} />
                   }
                   return (
                     <Button
