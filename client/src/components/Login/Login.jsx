@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react"
 import jwt_decode from "jwt-decode"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { loginUser } from "../../app/actions/login-user-actions"
-import { getIsLoading } from "../../app/selectors/view-selectors"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 export default function HelperTextMisaligned() {
-  const loading = useSelector(getIsLoading)
+  const loading = useSelector((state) => state.viewSlice.isLoading)
   const dispatch = useDispatch()
   const clientId =
     "95479789917-f8hm3rhot8q2075e3qp31ulu1k3uqju8.apps.googleusercontent.com"
-
   // hard coded state for now until initalized redux state is available
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
 
@@ -47,12 +46,9 @@ export default function HelperTextMisaligned() {
       theme: "outline",
       size: "large",
     })
-  })
+  }, [])
 
-  // if (loading) {
-  //   console.log("in loading")
-  //   return <div>Loading...</div>
-  // }
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div

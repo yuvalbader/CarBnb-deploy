@@ -8,7 +8,7 @@ const VehicleListContainer = ({ vehicles }) => {
   console.log(vehicles)
   return (
     <List sx={styleList}>
-      {vehicles.map(({ brand, model, year, price_per_day, profile_piture }) => (
+      {vehicles.map(({ brand, model, year, price_per_day, profile_picture }) => (
         <ListItem>
           <VehicleCard
             brand={brand}
@@ -16,7 +16,7 @@ const VehicleListContainer = ({ vehicles }) => {
             year={year}
             // rating={vehicle.rating}
             price={price_per_day}
-            image={profile_piture}
+            image={profile_picture}
           />
         </ListItem>
       ))}

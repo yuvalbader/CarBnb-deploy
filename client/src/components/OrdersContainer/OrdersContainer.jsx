@@ -15,10 +15,11 @@ import {
   fetchMyReservations,
   fetchMyOrders,
 } from "../../app/actions/user-actions"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 
 const OrdersContainer = (props, navBar) => {
   const handleOutletChange = useOutletContext()
-  const userId = useSelector((state) => state.userSlice.userObject.id)
+  const loading = useSelector((state) => state.viewSlice.isLoading)
   const dispatch = useDispatch()
   const myOrders = useSelector((state) => state.userSlice.orders)
   const myReservations = useSelector((state) => state.userSlice.reservations)
@@ -29,13 +30,13 @@ const OrdersContainer = (props, navBar) => {
   const pageLabel = `No past ${page}`
   const pageTitle = `My ${page}`
   handleOutletChange(page)
-
+  console.log("loading", loading)
   useEffect(() => {
     fetchMyData()
   }, [])
 
-  const fetchMyData = () => {
-    dispatch(fetchVehicles())
+  const fetchMyData = async () => {
+    await dispatch(fetchVehicles())
     dispatch(fetchMyReservations())
     // dispatch(fetchMyOrders());
   }
@@ -53,6 +54,7 @@ const OrdersContainer = (props, navBar) => {
     )
   }
 
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div className="details-view-container">

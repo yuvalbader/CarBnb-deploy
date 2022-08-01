@@ -1,6 +1,6 @@
 import "./App.css"
 import React, { useEffect } from "react"
-import NavBarComponent from "./components/NavBar/Index"
+import NavBarComponent from "./components/NavBar/NavBar"
 import AddVehicle from "./components/list-new-vehicle-form/ListNewCarForm"
 import MyProfile from "./pages/MyProfile/MyProfile"
 import Home from "./pages/Home/Home"
