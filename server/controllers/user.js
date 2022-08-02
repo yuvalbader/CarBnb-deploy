@@ -14,7 +14,8 @@ const getUserByEmail = async (req, res, next) => {
   try {
     const user = await userService.getUserByEmail(email)
     if (!user) {
-      throw new Error("User not found")
+      // throw new Error("User not found")
+      return {}
     }
     return res.status(200).send(user)
   } catch (err) {
@@ -23,14 +24,12 @@ const getUserByEmail = async (req, res, next) => {
 }
 
 const getUserById = async (req, res, next) => {
-  console.log("getUserById")
   const { id } = req.params
-  console.log("id", id)
   try {
-    console.log("here")
     const user = await userService.getUserById(id)
     if (!user) {
-      throw new Error("User not found")
+      // throw new Error("User not found")
+      return {}
     }
     return res.status(200).send(user)
   } catch (err) {
