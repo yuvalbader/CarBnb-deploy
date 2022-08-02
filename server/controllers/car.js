@@ -3,10 +3,12 @@ const CarsService = require("../services/car")
 const getAllCars = async (req, res, next) => {
   try {
     const cars = await CarsService.getAllCars()
+    const firstFiveCars = cars.slice(0, 5)
     if (cars.length === 0) {
-      throw new Error("Cars not found")
+      // throw new Error("Cars not found")
+      return {}
     }
-    return res.status(200).send(cars)
+    return res.status(200).send(firstFiveCars)
   } catch (err) {
     return res.status(404).send(err.message)
   }
@@ -16,7 +18,8 @@ const getBrands = async (req, res, next) => {
   try {
     let brands = await CarsService.getBrands()
     if (brands.length === 0) {
-      throw new Error("Brands not found")
+      // throw new Error("Brands not found")
+      return {}
     }
     brands = brands.map((a) => a.brand)
     return res.status(200).send(brands)
@@ -30,7 +33,8 @@ const getCarById = async (req, res, next) => {
   try {
     const car = await CarsService.getCarById(id)
     if (!car) {
-      throw new Error("Car not found")
+      // throw new Error("Car not found")
+      return {}
     }
     return res.status(200).send(car)
   } catch (err) {
@@ -42,8 +46,10 @@ const getCarsByUserId = async (req, res, next) => {
   const { id } = req.params
   try {
     const cars = await CarsService.getCarByUserId(id)
+    console.log("typeof cars", typeof cars)
     if (cars.length === 0) {
-      throw new Error("Cars not found")
+      // throw new Error("Cars not found")
+      return []
     }
     return res.status(200).send(cars)
   } catch (err) {
@@ -56,7 +62,8 @@ const addCar = async (req, res, next) => {
   try {
     const car = await CarsService.addCar(newCar)
     if (!car) {
-      throw new Error("Car not added")
+      // throw new Error("Car not added")
+      return {}
     }
     return res.status(200).send("Car has been successfully added")
   } catch (err) {
@@ -71,7 +78,8 @@ const updateCar = async (req, res, next) => {
     const car = await CarsService.updateCar(id, updateCar)
     console.log(car)
     if (car[0] === 0) {
-      throw new Error("Unable to update car")
+      // throw new Error("Unable to update car")
+      return {}
     }
     return res.status(200).send("Car has been successfully updated")
   } catch (err) {

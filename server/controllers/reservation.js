@@ -2,115 +2,119 @@ const reservationService = require("../services/reservation");
 const UtilsService = require("../services/utils")
 const getAllReservations = async (req, res, next) => {
   try {
-    const reservations = await reservationService.getAllReservations();
+    const reservations = await reservationService.getAllReservations()
     if (!reservations) {
-      throw new Error("Reservations not found");
+      // throw new Error("Reservations not found")
+      return []
     }
-    return res.status(200).send(reservations);
+    return res.status(200).send(reservations)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const getReservationsByCarId = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
+
   try {
-    const reservations = await reservationService.getReservationsByCarId(id);
+    const reservations = await reservationService.getReservationsByCarId(id)
     if (!reservations) {
-      throw new Error("Reservations not found");
+      // throw new Error("Reservations not found")
+      return []
     }
-    return res.status(200).send(reservations);
+    return res.status(200).send(reservations)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const getReservationsByCustomerId = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
   try {
     const reservations = await reservationService.getReservationsByCustomerId(
       id
-    );
-    await UtilsService.getMyReservations(1);
+    )
     if (!reservations) {
-      throw new Error("Reservations not found");
+      // throw new Error("Reservations not found")
+      return []
     }
-    return res.status(200).send(reservations);
+    return res.status(200).send(reservations)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const getReservationById = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
   try {
-    const reservation = await reservationService.getReservationById(id);
+    const reservation = await reservationService.getReservationById(id)
     if (!reservation) {
-      throw new Error("Reservation not found");
+      throw new Error("Reservation not found")
     }
-    return res.status(200).send(reservation);
+    return res.status(200).send(reservation)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const createReservation = async (req, res, next) => {
-  const newReservation = req.body;
+  const newReservation = req.body
   try {
-    await reservationService.createReservation(newReservation);
-    return res.status(200).send("Reservation has been successfully added");
+    await reservationService.createReservation(newReservation)
+    return res.status(200).send("Reservation has been successfully added")
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const updateReservation = async (req, res, next) => {
-  const id = req.params.id;
-  const updatedReservation = req.body;
+  const id = req.params.id
+  const updatedReservation = req.body
   try {
     const reservation = await reservationService.updateReservation(
       id,
       updatedReservation
-    );
+    )
     if (!reservation) {
-      throw new Error("Reservation not found");
+      // throw new Error("Reservation not found")
+      return {}
     }
-    return res.status(200).send("Reservation has been successfully updated");
+    return res.status(200).send("Reservation has been successfully updated")
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const deleteReservation = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
   try {
-    await reservationService.deleteReservation(id);
-    return res.status(200).send("Reservation has been successfully deleted");
+    await reservationService.deleteReservation(id)
+    return res.status(200).send("Reservation has been successfully deleted")
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const deleteAllReservations = async (req, res, next) => {
   try {
-    await reservationService.deleteAllReservations();
+    await reservationService.deleteAllReservations()
     return res
       .status(200)
-      .send("All reservations has been successfully deleted");
+      .send("All reservations has been successfully deleted")
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const isCarAvailable = async (req, res, next) => {
-  const details = req.body;
+  const details = req.body
   try {
-    const result = await reservationService.isCarAvailable(details);
-    return res.status(200).send(result);
+    const result = await reservationService.isCarAvailable(details)
+    return res.status(200).send(result)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 module.exports = {
   getAllReservations,
@@ -122,4 +126,4 @@ module.exports = {
   deleteReservation,
   deleteAllReservations,
   isCarAvailable,
-};
+}
