@@ -1,4 +1,4 @@
-const { Car } = require('../db/models');
+const { Car } = require("../db/models");
 
 class CarsService {
   constructor() {}
@@ -14,6 +14,7 @@ class CarsService {
   ];
 
   getAllCars = async () => {
+    this.getUserIdByCarId(1);
     return await Car.findAll();
   };
 
@@ -31,7 +32,7 @@ class CarsService {
 
   addCar = async (car) => {
     return await Car.create({
-      profile_piture: car.profile_piture,
+      profile_picture: car.profile_picture,
       brand: car.brand,
       model: car.model,
       year: car.year,
@@ -70,8 +71,10 @@ class CarsService {
     });
   };
 
-
-
+  getUserIdByCarId = async (carId) => {
+    const car = await Car.findByPk(carId);
+    return car;
+  };
 }
 
 module.exports = new CarsService();

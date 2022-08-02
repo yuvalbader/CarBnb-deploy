@@ -25,7 +25,7 @@ const getUserByEmail = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    console.log('here')
+    console.log("here");
     const user = await userService.getUserById(id);
     if (!user) {
       throw new Error("User not found");
@@ -47,7 +47,7 @@ const createUser = async (req, res, next) => {
 };
 
 const updateUser = async (req, res, next) => {
-  const id = req.params.id;
+  const {id} = req.params;
   const updatedUser = req.body;
   try {
     const user = await userService.updateUser(id, updatedUser);

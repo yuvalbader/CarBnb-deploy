@@ -1,5 +1,5 @@
 const reservationService = require("../services/reservation");
-
+const UtilsService = require("../services/utils")
 const getAllReservations = async (req, res, next) => {
   try {
     const reservations = await reservationService.getAllReservations();
@@ -31,6 +31,7 @@ const getReservationsByCustomerId = async (req, res, next) => {
     const reservations = await reservationService.getReservationsByCustomerId(
       id
     );
+    await UtilsService.getMyReservations(1);
     if (!reservations) {
       throw new Error("Reservations not found");
     }
