@@ -40,7 +40,7 @@ const Datee = forwardRef((props, ref) => {
             setValue(newValue)
           }
         }}
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params) => <TextField sx={{minWidth:145}} {...params} />}
       />
     </LocalizationProvider>
   )

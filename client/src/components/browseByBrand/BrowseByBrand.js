@@ -24,9 +24,8 @@ const Testimonials = () => {
 
   const vehicles = useSelector((state) => state.vehiclesSlice)
   const onClick = (id) => {
-    navigate(`/car/${id}`, {
-      state: { vehicle: vehicles.find((v) => v.id === id) },
-    })
+    console.log("id:", id)
+    navigate(`/car/${id}`, { state: { currentVehicle: vehicles[id] } })
   }
   if (loading)
     return (
@@ -49,11 +48,11 @@ const Testimonials = () => {
         {Object.keys(vehicles).map((index) => {
           return (
             <SwiperSlide
-              key={Object.values(vehicles)[index - 1].id}
+              key={Object.values(vehicles)[index - 1]?.id}
               className="testemonials"
             >
               <Card
-                onClick={() => onClick(Object.values(vehicles)[index - 1].id)}
+                onClick={() => onClick(Object.values(vehicles)[index - 1]?.id)}
                 className="card-brand"
                 sx={{ maxWidth: 345 }}
               >
@@ -61,13 +60,13 @@ const Testimonials = () => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={Object.values(vehicles)[index - 1].profile_picture}
-                    alt={Object.values(vehicles)[index - 1].brand}
+                    image={Object.values(vehicles)[index - 1]?.profile_picture}
+                    alt={Object.values(vehicles)[index - 1]?.brand}
                   />
 
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {Object.values(vehicles)[index - 1].brand}
+                      {Object.values(vehicles)[index - 1]?.brand}
                     </Typography>
                   </CardContent>
                 </CardActionArea>

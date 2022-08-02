@@ -1,31 +1,31 @@
-const { Op } = require("sequelize");
-const { User } = require("../db/models");
+const { Op } = require("sequelize")
+const { User } = require("../db/models")
 
 class UserService {
-  getAllUsers = async () => {};
+  getAllUsers = async () => {}
 
   getUserByEmail = async (email) => {
-    console.log("got to get user by email: ", email);
+    console.log("got to get user by email: ", email)
     return await User.findOne({
       where: {
         email: {
           [Op.like]: "%" + email + "%",
         },
       },
-    });
-  };
+    })
+  }
 
   getUserById = async (id) => {
-    return await User.findByPk(id);
-  };
+    return await User.findByPk(id)
+  }
 
-  createUser = async (user) => {};
+  createUser = async (user) => {}
 
-  updateUser = async (updatedUser, id) => {};
+  updateUser = async (updatedUser, id) => {}
 
-  deleteUser = async (userId) => {};
+  deleteUser = async (userId) => {}
 
-  deleteAllUsers = async () => {};
+  deleteAllUsers = async () => {}
 }
 
-module.exports = new UserService();
+module.exports = new UserService()

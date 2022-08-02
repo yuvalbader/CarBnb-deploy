@@ -11,7 +11,6 @@ import "./App.css"
 import MyCars from "./components/MyCars/MyCars"
 import SearchResultsPage from "./pages/SearchResults/SearchResults"
 function App() {
-
   return (
     <>
       <NavBarComponent />

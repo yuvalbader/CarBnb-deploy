@@ -67,7 +67,6 @@ export default function Search() {
     const hoursUntil = timeUntil[0]
     const minutesUntil = timeUntil[1]
 
-    console.log("where", whereRef.current.value)
     const searchDataObject = {
       location: whereRef.current.value,
       start_order: new Date(
