@@ -12,7 +12,8 @@ import Time from "../Search/Time/Index"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import { makeStyles } from "@material-ui/core/styles"
-
+import { useLocation } from "react-router-dom"
+import ListApiService from "../../services/list-api-service"
 import "./style.css"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
@@ -35,7 +36,8 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null }
 
-export default function SideSearch({ state }) {
+export default function SideSearch() {
+  const { state } = useLocation()
   const classes = useStyles()
   const today = new Date()
   const threeDays = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)
@@ -47,7 +49,8 @@ export default function SideSearch({ state }) {
   const untilRef = React.useRef()
   const [dataFrom, setDataFrom] = React.useState(today)
   const [dataUntil, setDataUntil] = React.useState(threeDays)
-  // const selector = useSelector((state) => state)
+  const [datesAvailable, setDatesAvailable] = React.useState(true)
+
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
       loadScript(
@@ -60,7 +63,6 @@ export default function SideSearch({ state }) {
     loaded.current = true
   }
   const getDates = useCallback(() => {
-    // calculate the number of days between the two dates
     const diffTime = Math.abs(dataUntil - dataFrom)
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     const days = []
@@ -117,15 +119,38 @@ export default function SideSearch({ state }) {
     }
   }, [value, inputValue, fetch])
 
+  const getAvailableDate = useCallback(() => {
+    const data = {
+      start_order: dataFrom,
+      end_order: dataUntil,
+      car_id: state.currentVehicle.id,
+    }
+    console.log("data", data)
+    ListApiService.isCarAvailable(data).then((res) => {
+      console.log("res", res)
+      if (res) {
+        setDatesAvailable(false)
+      } else {
+        setDatesAvailable(true)
+      }
+    })
+  }, [dataFrom, dataUntil])
+
+  useMemo(() => {
+    return getAvailableDate()
+  }, [dataFrom, dataUntil])
+
   return (
     <div className="sideSearch_container">
       <div>
         <Typography variant="h6" gutterBottom>
-          <span style={{ fontWeight: "bold" }}>{state.vehicle.price}</span> /
-          Day
+          <span style={{ fontWeight: "bold" }}>
+            {state.currentVehicle.price_per_day}$
+          </span>{" "}
+          / Day
           <hr style={{ width: "18%" }} />
           <div>
-            US ${parseInt(state.vehicle.price.split("$")[1]) * calcDays}{" "}
+            US ${parseInt(state.currentVehicle.price_per_day) * calcDays}{" "}
             est.total
           </div>
         </Typography>
@@ -232,7 +257,11 @@ export default function SideSearch({ state }) {
         />
         <div className="sideSearch_continue">
           <Stack direction="row">
-            <Button sx={{ width: "100%", mt: 2 }} variant="contained">
+            <Button
+              disabled={datesAvailable}
+              sx={{ width: "100%", mt: 2 }}
+              variant="contained"
+            >
               Continue
             </Button>
           </Stack>

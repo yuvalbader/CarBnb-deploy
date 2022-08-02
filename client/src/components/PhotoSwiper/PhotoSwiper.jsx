@@ -1,7 +1,6 @@
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper"
-import { useLocation } from "react-router-dom"
 import { Swiper, SwiperSlide } from "swiper/react"
-
+import { useLocation } from "react-router-dom"
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/navigation"
@@ -10,8 +9,7 @@ import "swiper/css/scrollbar"
 import "./style.css"
 
 export default function PhotoSwiper() {
-  const location = useLocation()
-  const { state } = location
+  const { state } = useLocation()
   return (
     <Swiper
       // install Swiper modules
@@ -19,15 +17,17 @@ export default function PhotoSwiper() {
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={50}
       slidesPerView={1}
-      navigation={{clickable: true}}
+      navigation={{ clickable: true }}
       onSlideChange={() => console.log("slide change")}
     >
-      {state.vehicle.photos.map((photo, index) => (
-        <SwiperSlide key={index}>
-          <img className="image_of_brand" src={photo} alt={photo} />
-        </SwiperSlide>
-      ))}
-      
+      <SwiperSlide>
+        <img
+          className="image_of_brand"
+          src={state.profile_picture}
+          alt={state.profile_picture}
+        />
+      </SwiperSlide>
+      ))
     </Swiper>
   )
 }

@@ -1,8 +1,6 @@
 import axios from "axios"
 import ListApiService from "../../services/list-api-service"
 import actionTypes from "./constants"
-// import { useSelector } from "react-redux"
-import { store } from "../store"
 
 const fetchMyReservationsRequestAction = () => ({
   type: actionTypes.FETCH_MY_RESERVATIONS_REQUEST,
@@ -18,11 +16,10 @@ const fetchMyReservationsFailureAction = () => ({
 })
 
 export const fetchMyReservations = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(fetchMyReservationsRequestAction())
     try {
-      // const myVehicles = useSelector((state) => state.vehiclesSlice);
-      const myVehicles = store.getState().vehiclesSlice
+      const myVehicles = getState().vehiclesSlice
       const myVehiclesId = Object.keys(myVehicles)
       if (myVehiclesId.length === 0)
         return dispatch(fetchMyReservationsSuccessAction({}))

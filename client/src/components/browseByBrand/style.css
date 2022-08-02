@@ -18,11 +18,14 @@ img {
   user-select: none;
   box-sizing: border-box;
 }
-
+#section_loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 .card-brand {
-  border-radius: 2rem;
   box-shadow: 3px 2px 9px 2px rgba(0, 0, 0, 0.1);
-
 }
 h1 {
   font-size: 4.5rem;
