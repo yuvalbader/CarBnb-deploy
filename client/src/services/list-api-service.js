@@ -122,6 +122,14 @@ class ListApiService {
       console.log(err.message)
     }
   }
+  static async getUserById(userId) {
+    try {
+      const response = await axios.get(BASE_URL + USER + `${userId}`)
+      return response.data
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 }
 
 export default ListApiService
