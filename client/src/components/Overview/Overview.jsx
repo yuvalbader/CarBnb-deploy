@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./style.css"
 import StarIcon from "@mui/icons-material/Star"
-import Avatar from "./Avatar/Index"
 import Typography from "@mui/material/Typography"
 import { useLocation } from "react-router-dom"
 import ListApiService from "../../services/list-api-service"

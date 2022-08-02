@@ -123,7 +123,6 @@ class ListApiService {
     }
   }
   static async getUserById(userId) {
-    console.log("userId", userId)
     try {
       const response = await axios.get(BASE_URL + USER + `${userId}`)
       return response.data
