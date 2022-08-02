@@ -103,7 +103,6 @@ const deleteAllReservations = async (req, res, next) => {
 
 const isCarAvailable = async (req, res, next) => {
   const details = req.body
-  console.log("detailts", details)
   try {
     const result = await reservationService.isCarAvailable(details)
     return res.status(200).send(result)

@@ -62,8 +62,6 @@ class ReservationService {
     const car_id = data.car_id
     const start_order = new Date(data.start_order)
     const end_order = new Date(data.end_order)
-    console.log("Dates:", start_order, end_order)
-
     const reserved = await Reservation.findAll({
       where: {
         car_id: car_id,
