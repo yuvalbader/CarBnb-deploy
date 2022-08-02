@@ -5,7 +5,7 @@ import { Pagination } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import "swiper/css/pagination"
-import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions"
+// import { fetchVehicles } from "../../app/actions/fetch-vehicles-actions"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import CardMedia from "@mui/material/CardMedia"
@@ -19,7 +19,7 @@ const Testimonials = () => {
   const navigate = useNavigate()
   const loading = useSelector((state) => state.viewSlice.isLoading)
   useEffect(() => {
-    dispatch(fetchVehicles())
+    // dispatch(fetchVehicles())
   }, [dispatch])
 
   const vehicles = useSelector((state) => state.vehiclesSlice)

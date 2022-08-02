@@ -48,8 +48,8 @@ const createUser = async (req, res, next) => {
 }
 
 const updateUser = async (req, res, next) => {
-  const id = req.params.id
-  const updatedUser = req.body
+  const {id} = req.params;
+  const updatedUser = req.body;
   try {
     const user = await userService.updateUser(id, updatedUser)
     if (!user) {

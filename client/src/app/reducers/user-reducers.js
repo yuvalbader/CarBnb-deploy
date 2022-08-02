@@ -14,6 +14,11 @@ const userReducer = (state = initialState, action) => {
       return { ...state, reservations: reservations };
     }
 
+    case actionTypes.FETCH_MY_ORDERS_SUCCESS: {
+      const { orders } = action;
+      return { ...state, orders: orders };
+    }
+
     case actionTypes.LOGIN_USER_SUCCESS: {
       const { userObject } = action;
       return { ...state, userObject: userObject, isLoggedIn: true };
