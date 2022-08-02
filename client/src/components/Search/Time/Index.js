@@ -35,7 +35,6 @@ const Time = forwardRef((props, ref) => {
         value={time}
         onChange={handleChange}
         inputRef={ref}
-        inputProps={{ border: "sildpink" }}
         required
       >
         {possibleTimes.map((time, index) => (
