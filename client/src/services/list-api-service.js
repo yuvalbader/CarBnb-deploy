@@ -130,6 +130,14 @@ class ListApiService {
       console.log(err.message)
     }
   }
+  static async getCarByID(carId) {
+    try {
+      const response = await axios.get(BASE_URL + CAR + `${carId}`)
+      return response.data
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 }
 
 export default ListApiService

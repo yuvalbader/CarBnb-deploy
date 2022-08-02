@@ -4,7 +4,8 @@ const getAllReservations = async (req, res, next) => {
   try {
     const reservations = await reservationService.getAllReservations()
     if (!reservations) {
-      throw new Error("Reservations not found")
+      // throw new Error("Reservations not found")
+      return []
     }
     return res.status(200).send(reservations)
   } catch (err) {
@@ -14,10 +15,12 @@ const getAllReservations = async (req, res, next) => {
 
 const getReservationsByCarId = async (req, res, next) => {
   const id = req.params.id
+
   try {
     const reservations = await reservationService.getReservationsByCarId(id)
     if (!reservations) {
-      throw new Error("Reservations not found")
+      // throw new Error("Reservations not found")
+      return []
     }
     return res.status(200).send(reservations)
   } catch (err) {
@@ -32,7 +35,8 @@ const getReservationsByCustomerId = async (req, res, next) => {
       id
     )
     if (!reservations) {
-      throw new Error("Reservations not found")
+      // throw new Error("Reservations not found")
+      return []
     }
     return res.status(200).send(reservations)
   } catch (err) {
@@ -72,7 +76,8 @@ const updateReservation = async (req, res, next) => {
       updatedReservation
     )
     if (!reservation) {
-      throw new Error("Reservation not found")
+      // throw new Error("Reservation not found")
+      return {}
     }
     return res.status(200).send("Reservation has been successfully updated")
   } catch (err) {
