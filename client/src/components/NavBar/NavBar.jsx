@@ -38,15 +38,6 @@ const NavBarComponent = () => {
     }
   }, [])
 
-  // const checkIfUserLogIn = () => {
-  //   // checking local storage if user is logged in
-  //   const userObject = JSON.parse(localStorage.getItem("user"))
-  //   if (localStorage.getItem("user")) {
-  //     console.log("user is logged in", userObject)
-  //     dispatch(loginUser(userObject.email))
-  //     setIsUser(true)
-  //   }
-  // }
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }

@@ -1,86 +1,88 @@
-const userService = require("../services/user");
+const userService = require("../services/user")
 
 const getAllUsers = async (req, res, next) => {
   try {
-    const users = await userService.getAllUsers();
-    return res.status(200).send(users);
+    const users = await userService.getAllUsers()
+    return res.status(200).send(users)
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 const getUserByEmail = async (req, res, next) => {
-  const { email } = req.params;
+  const { email } = req.params
   try {
-    const user = await userService.getUserByEmail(email);
+    const user = await userService.getUserByEmail(email)
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("User not found")
     }
-    return res.status(200).send(user);
+    return res.status(200).send(user)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const getUserById = async (req, res, next) => {
-  const { id } = req.params;
+  console.log("getUserById")
+  const { id } = req.params
+  console.log("id", id)
   try {
-    console.log('here')
-    const user = await userService.getUserById(id);
+    console.log("here")
+    const user = await userService.getUserById(id)
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("User not found")
     }
-    return res.status(200).send(user);
+    return res.status(200).send(user)
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).send(err.message)
   }
-};
+}
 
 const createUser = async (req, res, next) => {
   try {
-    newUser = req.body;
-    const user = await userService.createUser(newUser);
-    return res.status(200).send("User has been successfully added");
+    newUser = req.body
+    const user = await userService.createUser(newUser)
+    return res.status(200).send("User has been successfully added")
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 const updateUser = async (req, res, next) => {
-  const id = req.params.id;
-  const updatedUser = req.body;
+  const id = req.params.id
+  const updatedUser = req.body
   try {
-    const user = await userService.updateUser(id, updatedUser);
+    const user = await userService.updateUser(id, updatedUser)
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).send("User not found")
     }
-    return res.status(200).send("User has been successfully updated");
+    return res.status(200).send("User has been successfully updated")
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 const deleteUser = async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params.id
   try {
-    const user = await userService.deleteUser(id);
+    const user = await userService.deleteUser(id)
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).send("User not found")
     }
-    return res.status(200).send("User has been successfully deleted");
+    return res.status(200).send("User has been successfully deleted")
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 const deleteAllUsers = async (req, res, next) => {
   try {
-    await userService.deleteAllUsers();
-    return res.status(200).send("All users have been successfully deleted");
+    await userService.deleteAllUsers()
+    return res.status(200).send("All users have been successfully deleted")
   } catch (err) {
-    next(err);
+    next(err)
   }
-};
+}
 
 module.exports = {
   getAllUsers,
@@ -90,4 +92,4 @@ module.exports = {
   deleteUser,
   deleteAllUsers,
   getUserById,
-};
+}

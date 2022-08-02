@@ -16,6 +16,7 @@ import SearchIcon from "@mui/icons-material/Search"
 import IconButton from "@mui/material/IconButton"
 import "./style.css"
 import { search } from "../../app/actions/search-actions"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
 const GOOGLE_MAPS_API_KEY = "AIzaSyAsJrza-9qgAdE5FUD2f26prJwV9vCt7wA"
 
 function loadScript(src, id) {
@@ -66,7 +67,6 @@ export default function Search() {
     const hoursUntil = timeUntil[0]
     const minutesUntil = timeUntil[1]
 
-    console.log("where", whereRef.current.value)
     const searchDataObject = {
       location: whereRef.current.value,
       start_order: new Date(
@@ -158,15 +158,7 @@ export default function Search() {
   }, [value, inputValue, fetch])
 
   if (loading) {
-    return (
-      <div className="loading_container">
-        <img
-          className="loading_page"
-          src="https://cdn.dribbble.com/users/778626/screenshots/4339853/media/35ef4328e6a9fa16ef277436cab1dc09.gif"
-          alt="loading"
-        />
-      </div>
-    )
+    return <LoadingSpinner />
   }
   return (
     <div className="container__searchBar">

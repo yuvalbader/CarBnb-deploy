@@ -3,10 +3,11 @@ const CarsService = require("../services/car")
 const getAllCars = async (req, res, next) => {
   try {
     const cars = await CarsService.getAllCars()
+    const firstFiveCars = cars.slice(0, 5)
     if (cars.length === 0) {
       throw new Error("Cars not found")
     }
-    return res.status(200).send(cars)
+    return res.status(200).send(firstFiveCars)
   } catch (err) {
     return res.status(404).send(err.message)
   }

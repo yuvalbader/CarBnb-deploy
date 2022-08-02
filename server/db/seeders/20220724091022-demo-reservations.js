@@ -9,7 +9,7 @@ module.exports = {
         total_price: 500,
         start_time: new Date(),
         end_time: new Date(),
-        user_id: 1,
+        user_id: 2,
         car_id: 3,
         createdAt: new Date(),
         updatedAt: new Date(),

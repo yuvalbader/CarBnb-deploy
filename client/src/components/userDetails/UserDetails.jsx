@@ -1,33 +1,31 @@
-import React, { useCallback } from "react"
+import React, { useState } from "react"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
-import HelperTextMisaligned from "../Login/Login"
+import Avatar from "../Overview/Avatar/Index"
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  height: 600,
   bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 }
 
-export default function Model({ pageName }) {
-  const [open, setOpen] = React.useState(false)
+export default function PopModal({ userDetails }) {
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  console.log(userDetails)
   return (
-    <>
-      <Button
-        sx={{ ml: 4, color: "white", display: "block" }}
-        onClick={handleOpen}
-      >
-        {pageName}
+    <div>
+      <Button sx={{ padding: 0 }} onClick={handleOpen}>
+        <Avatar name={userDetails.first_name + " " + userDetails.last_name} />
       </Button>
       <Modal
         open={open}
@@ -36,23 +34,14 @@ export default function Model({ pageName }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography
-            style={{
-              display: "flex",
-              alignText: "center",
-              justifyContent: "center",
-            }}
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-          >
-            <h1>Welcome Back</h1>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {userDetails.first_name + " " + userDetails.last_name}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <HelperTextMisaligned />
+            {userDetails.email}
           </Typography>
         </Box>
       </Modal>
-    </>
+    </div>
   )
 }
