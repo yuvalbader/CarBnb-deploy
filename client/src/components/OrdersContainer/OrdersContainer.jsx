@@ -66,21 +66,50 @@ const OrdersContainer = (props, navBar) => {
           slidesPerView={3}
           spaceBetween={10}
           pagination={{
-          clickable: true,
+            clickable: true,
           }}
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.map((item) => {
-            return (
-              <SwiperSlide className="swiper-slide">
-                <VehicleCard
-                  item={{ ...item, seats: 5, engine: "petrol", gear: "Auto" }}
-                ></VehicleCard>
-                {/* <ReservationCard item={item}></ReservationCard> */}
-              </SwiperSlide>
-            );
-          })}
+          {data.map(
+            ({
+              car_id,
+              id,
+              profile_picture,
+              brand,
+              model,
+              type,
+              location,
+              start_date,
+              end_date,
+              total_price,
+              user_id,
+              owner_first_name,
+              owner_last_name,
+              owner_profile_picture,
+            }) => {
+              return (
+                <SwiperSlide className="swiper-slide">
+                  <ReservationCard
+                    car_id={car_id}
+                    id={id}
+                    profile_picture={profile_picture}
+                    brand={brand}
+                    model={model}
+                    type={type}
+                    location={location}
+                    start_date={start_date}
+                    end_date={end_date}
+                    total_price={total_price}
+                    user_id={user_id}
+                    owner_first_name={owner_first_name}
+                    owner_last_name={owner_last_name}
+                    owner_profile_picture={owner_profile_picture}
+                  ></ReservationCard>
+                </SwiperSlide>
+              );
+            }
+          )}
         </Swiper>
       )}
     </>
