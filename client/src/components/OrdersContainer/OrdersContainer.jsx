@@ -7,13 +7,13 @@ import { Pagination } from "swiper";
 import dummyData from "../../pages/MyProfile/dummyData";
 import { useOutletContext } from "react-router-dom";
 import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "./OrdersContainer.css";
 import {
   fetchMyReservations,
   fetchMyOrders,
+  fetchMyOrdAndRes,
 } from "../../app/actions/user-actions";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
@@ -36,9 +36,10 @@ const OrdersContainer = (props, navBar) => {
   }, []);
 
   const fetchMyData = () => {
-    dispatch(fetchMyVehicles());
-    dispatch(fetchMyReservations());
-    dispatch(fetchMyOrders());
+    // dispatch(fetchMyVehicles());
+    dispatch(fetchMyOrdAndRes());
+    // dispatch(fetchMyReservations());
+    // dispatch(fetchMyOrders());
   };
 
   const defaultOuput = () => {

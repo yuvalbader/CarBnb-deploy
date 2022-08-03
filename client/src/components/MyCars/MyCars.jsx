@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import { useSelector } from "react-redux";
-import VehicleListContainer from "../vehicles-list/VehiclesListContainer";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
@@ -10,6 +9,7 @@ import { Pagination } from "swiper";
 
 import VehicleCard from "../vehicle-card/VehicleCard";
 import "swiper/css/pagination";
+import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 
 const MyCars = () => {
   let data = useSelector((state) => state.vehiclesSlice);
@@ -20,6 +20,11 @@ const MyCars = () => {
   const openFormHandler = () => setIsAddCarPressed(true);
   const closeFormHandler = () => setIsAddCarPressed(false);
   const handleOutletChange = useOutletContext();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMyVehicles());
+  }, []);
 
   handleOutletChange("mycars");
 
