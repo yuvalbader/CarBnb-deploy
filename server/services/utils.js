@@ -98,9 +98,15 @@ class UtilsService {
       },
     });
     if (!myCars) return [];
+    const myCarsObj = myCars.reduce((acc, car) => {
+      acc[car.id] = car;
+      return acc;
+    }, {});
+
     myCars = myCars.map((carObj) => {
       return carObj.id;
     });
+
     let findAllRes = await Reservation.findAll({
       where: {
         car_id: { [Op.in]: myCars },
@@ -129,6 +135,14 @@ class UtilsService {
       newRes["costumer_first_name"] = user.first_name;
       newRes["costumer_last_name"] = user.last_name;
       newRes["costumer_profile_picture"] = user.profile_picture;
+      const { car_id } = newRes;
+      const car = myCarsObj[car_id];
+      newRes["location"] = car.location;
+      newRes["car_type"] = car.type;
+      newRes["car_model"] = car.model;
+      newRes["car_brand"] = car.brand;
+      newRes["car_picture"] = car.profile_picture;
+
       return newRes;
     });
     return findAllRes;

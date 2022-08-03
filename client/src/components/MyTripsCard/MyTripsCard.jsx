@@ -1,30 +1,30 @@
-import Card from "@mui/material/Card"
-import CardMedia from "@mui/material/CardMedia"
-import CardContent from "@mui/material/CardContent"
-import Typography from "@mui/material/Typography"
-import Box from "@mui/material/Box"
-import LocationOnIcon from "@mui/icons-material/LocationOn"
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
-import PaidIcon from "@mui/icons-material/Paid"
-import Avatar from "@mui/material/Avatar"
-import CardActions from "@mui/material/CardActions"
-import Button from "@mui/material/Button"
-import { Link } from "@mui/material"
-import { useEffect } from "react"
-import CarModal from "../carDetails/CarDetails"
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PaidIcon from "@mui/icons-material/Paid";
+import Avatar from "@mui/material/Avatar";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+import { Link } from "@mui/material";
+import { useEffect } from "react";
+import CarModal from "../carDetails/CarDetails";
 
 const styleBox1 = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   my: "10px",
-}
+};
 
 const styleBox2 = {
   display: "flex",
   justifyContent: "flex-end",
   my: "10px",
-}
+};
 
 const MyTripsCard = ({
   car_picture,
@@ -60,19 +60,20 @@ const MyTripsCard = ({
               fontWeight={"bold"}
               component="div"
             >
+              {brand}
               <Typography
                 component="div"
                 marginLeft="10px"
                 variant="h8"
-                // color="text.secondary"
+                color="text.secondary"
               >
-                {brand}
+                {model}
               </Typography>
             </Typography>
+            <Typography variant="h7" color="text.secondary">
+              {type}
+            </Typography>
           </Box>
-          <Typography variant="h7" color="text.secondary">
-            {model}
-          </Typography>
           <Typography
             variant="h8"
             fontWeight={"bold"}
@@ -185,7 +186,7 @@ const MyTripsCard = ({
         <CarModal id={car_id} text={"Open Details"} />
       </CardActions>
     </Card>
-  )
-}
+  );
+};
 
 export default MyTripsCard;

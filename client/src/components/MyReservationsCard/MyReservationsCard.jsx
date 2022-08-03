@@ -8,8 +8,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PaidIcon from "@mui/icons-material/Paid";
 import Avatar from "@mui/material/Avatar";
 import { Link } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const styleBox1 = {
   display: "flex",
@@ -30,28 +28,23 @@ const MyReservationsCard = ({
   costumer_last_name,
   costumer_profile_picture,
   end_date,
+  location,
   id,
   start_date,
   total_price,
   user_id,
+  car_picture,
+  brand,
+  model,
+  type,
 }) => {
-  let myCars = useSelector((state) => state.vehiclesSlice).myVehicles;
-  const [car, setCar] = useState(null);
-
-  useEffect(() => {
-    console.log("myCars", myCars[10]);
-    const car = myCars[car_id];
-    setCar(car);
-    console.log("car", car.profile_picture);
-  }, []);
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="200"
-        image={car.profile_picture}
-        alt={car.brand + car.model}
+        image={car_picture}
+        alt={brand + model}
       />
       <CardContent>
         <Box sx={styleBox1}>
@@ -63,20 +56,21 @@ const MyReservationsCard = ({
               fontWeight={"bold"}
               component="div"
             >
-              {car.brand}
+              {brand}
               <Typography
                 component="div"
                 marginLeft="10px"
                 variant="h8"
                 color="text.secondary"
               >
-                {car.model}
+                {model}
               </Typography>
             </Typography>
+            <Typography variant="h7" color="text.secondary">
+              {type}
+            </Typography>
           </Box>
-          <Typography variant="h7" color="text.secondary">
-            {car.type}
-          </Typography>
+
           <Typography
             variant="h8"
             fontWeight={"bold"}
@@ -107,7 +101,7 @@ const MyReservationsCard = ({
             </Box>
             <Box marginRigth={"40px"} marginTop={"10px"} width={"140px"}>
               <LocationOnIcon color="primary" fontSize={"10px"} />
-              {car.location}
+              {location}
             </Box>
           </Typography>
           <Box display="flex" gap="40px" marginTop="20px">
