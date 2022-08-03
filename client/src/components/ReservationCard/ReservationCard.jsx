@@ -1,27 +1,30 @@
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PaidIcon from "@mui/icons-material/Paid";
-import Avatar from "@mui/material/Avatar";
-import { Link } from "@mui/material";
-import { useEffect } from "react";
+import Card from "@mui/material/Card"
+import CardMedia from "@mui/material/CardMedia"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
+import PaidIcon from "@mui/icons-material/Paid"
+import Avatar from "@mui/material/Avatar"
+import CardActions from "@mui/material/CardActions"
+import Button from "@mui/material/Button"
+import { Link } from "@mui/material"
+import { useEffect } from "react"
+import CarModal from "../carDetails/CarDetails"
 
 const styleBox1 = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   my: "10px",
-};
+}
 
 const styleBox2 = {
   display: "flex",
   justifyContent: "flex-end",
   my: "10px",
-};
+}
 
 const ReservationCard = ({
   car_id,
@@ -39,10 +42,6 @@ const ReservationCard = ({
   owner_last_name,
   owner_profile_picture,
 }) => {
-
-  
-
-  
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -99,7 +98,7 @@ const ReservationCard = ({
                   style={{ textDecoration: "none" }}
                   href={`https://fullstackmondayu.monday.com/boards/2949023880`} // navigate here to user profile page
                 >
-                  {owner_first_name+" "+owner_last_name}
+                  {owner_first_name + " " + owner_last_name}
                 </Link>
               </Box>
             </Box>
@@ -174,8 +173,11 @@ const ReservationCard = ({
           </Typography>
         </Box>
       </CardContent>
+      <CardActions>
+        <CarModal id={car_id} text={"Open Details"} />
+      </CardActions>
     </Card>
-  );
-};
+  )
+}
 
-export default ReservationCard;
+export default ReservationCard
