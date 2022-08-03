@@ -5,6 +5,7 @@ const addVehicleRequestAction = () => ({
   type: actionTypes.ADD_VEHICLE_REQUEST,
 });
 
+
 const addVehicleSuccessAction = (vehicleData) => ({
   type: actionTypes.ADD_VEHICLE_SUCCESS,
   vehicle: vehicleData,
