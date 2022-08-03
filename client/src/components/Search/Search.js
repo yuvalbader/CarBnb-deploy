@@ -67,13 +67,10 @@ export default function Search() {
     const hoursUntil = timeUntil[0];
     const minutesUntil = timeUntil[1];
 
-    const modifyLocation = (location) => {
-      //return the fisrt word which is the city
-      return location.replace(",", "").split(" ")[0];
-    };
+
 
     const searchDataObject = {
-      location: modifyLocation(whereRef.current.value),
+      location: whereRef.current.value,
       start_order: new Date(
         yearFrom,
         monthFrom,
