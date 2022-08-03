@@ -6,13 +6,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import { useOutletContext } from "react-router-dom";
 import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import "./OrdersContainer.css";
 import {
   fetchMyReservations,
   fetchMyOrders,
+  fetchMyOrdAndRes,
 } from "../../app/actions/user-actions";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
@@ -39,20 +39,10 @@ const OrdersContainer = (props, navBar) => {
   }, []);
 
   const fetchMyData = () => {
-    dispatch(fetchMyVehicles());
-    dispatch(fetchMyReservations());
-    dispatch(fetchMyOrders());
-    addCarsDetailsToReservations();
-  };
-
-  const addCarsDetailsToReservations = () => {
-    reservationsList.forEach((reservation) => {
-      const car = myCars[reservation.car_id];
-      reservation.profile_picture = car.profile_picture;
-      reservation.brand = car.brand;
-      reservation.model = car.model;
-      reservation.type = car.type;
-    });
+    // dispatch(fetchMyVehicles());
+    dispatch(fetchMyOrdAndRes());
+    // dispatch(fetchMyReservations());
+    // dispatch(fetchMyOrders());
   };
 
   const defaultOuput = () => {
@@ -125,7 +115,12 @@ const OrdersContainer = (props, navBar) => {
               )
             : reservationsList.map(
                 ({
+                  car_brand,
+                  car_model,
+                  car_picture,
+                  car_type,
                   car_id,
+                  location,
                   costumer_first_name,
                   costumer_last_name,
                   costumer_profile_picture,
@@ -137,7 +132,12 @@ const OrdersContainer = (props, navBar) => {
                 }) => (
                   <SwiperSlide key={id} className="swiper-slide">
                     <MyReservationsCard
+                      location={location}
                       car_id={car_id}
+                      car_picture={car_picture}
+                      brand={car_brand}
+                      model={car_model}
+                      type={car_type}
                       id={id}
                       start_date={start_date}
                       end_date={end_date}

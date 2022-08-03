@@ -64,7 +64,7 @@ const ListNewVehicleForm = (onSubmit) => {
       gear: values.gear,
       gas: values.gas,
     };
-
+    
     dispatch(addVehicle(vehicleData));
     onSubmit();
   }
