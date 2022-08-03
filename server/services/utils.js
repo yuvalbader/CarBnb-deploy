@@ -86,6 +86,7 @@ class UtilsService {
       newRes["car_type"] = car.type;
       newRes["car_model"] = car.model;
       newRes["car_brand"] = car.brand;
+      newRes["car_picture"] = car.profile_picture;
       return newRes;
     });
     return myOreders;

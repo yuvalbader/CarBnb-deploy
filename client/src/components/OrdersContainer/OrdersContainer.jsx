@@ -85,64 +85,71 @@ const OrdersContainer = (props, navBar) => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.map(
-            ({
-              car_id,
-              id,
-              profile_picture,
-              brand,
-              model,
-              type,
-              location,
-              start_date,
-              end_date,
-              total_price,
-              user_id,
-              owner_first_name,
-              owner_last_name,
-              owner_profile_picture,
-            }) => {
-              return (
-                <SwiperSlide className="swiper-slide">
-                  {page === "trips" ? (
+          {page === "trips"
+            ? ordersList.map(
+                ({
+                  car_brand,
+                  car_id,
+                  car_model,
+                  car_type,
+                  end_date,
+                  id,
+                  location,
+                  owner_first_name,
+                  owner_last_name,
+                  owner_profile_picture,
+                  start_date,
+                  total_price,
+                  user_id,
+                  car_picture,
+                }) => (
+                  <SwiperSlide key={id} className="swiper-slide">
                     <MyTripsCard
                       car_id={car_id}
                       id={id}
-                      profile_picture={profile_picture}
-                      brand={brand}
-                      model={model}
-                      type={type}
-                      location={location}
+                      car_picture={car_picture}
+                      brand={car_brand}
+                      model={car_model}
+                      type={car_type}
                       start_date={start_date}
                       end_date={end_date}
-                      total_price={total_price}
-                      user_id={user_id}
+                      location={location}
                       owner_first_name={owner_first_name}
                       owner_last_name={owner_last_name}
+                      total_price={total_price}
+                      user_id={user_id}
                       owner_profile_picture={owner_profile_picture}
-                    ></MyTripsCard>
-                  ) : (
+                    />
+                  </SwiperSlide>
+                )
+              )
+            : reservationsList.map(
+                ({
+                  car_id,
+                  costumer_first_name,
+                  costumer_last_name,
+                  costumer_profile_picture,
+                  end_date,
+                  id,
+                  start_date,
+                  total_price,
+                  user_id,
+                }) => (
+                  <SwiperSlide key={id} className="swiper-slide">
                     <MyReservationsCard
                       car_id={car_id}
                       id={id}
-                      profile_picture={profile_picture}
-                      brand={brand}
-                      model={model}
-                      type={type}
-                      location={location}
                       start_date={start_date}
                       end_date={end_date}
                       total_price={total_price}
                       user_id={user_id}
-                      owner_first_name={owner_first_name}
-                      owner_last_name={owner_last_name}
-                      owner_profile_picture={owner_profile_picture}
-                    ></MyReservationsCard>
-                  )}
-                </SwiperSlide>
-              );
-            }
-          )}
+                      costumer_first_name={costumer_first_name}
+                      costumer_last_name={costumer_last_name}
+                      costumer_profile_picture={costumer_profile_picture}
+                    />
+                  </SwiperSlide>
+                )
+              )}
         </Swiper>
       )}
     </>

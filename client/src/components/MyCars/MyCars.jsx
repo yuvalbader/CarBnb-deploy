@@ -7,7 +7,6 @@ import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-
 import VehicleCard from "../vehicle-card/VehicleCard";
 import "swiper/css/pagination";
 

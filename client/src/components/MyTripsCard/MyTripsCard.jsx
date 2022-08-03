@@ -24,20 +24,20 @@ const styleBox2 = {
 };
 
 const MyTripsCard = ({
-  car_id,
-  id,
-  profile_picture,
+  car_picture,
   brand,
+  car_id,
   model,
   type,
-  location,
-  start_date,
   end_date,
-  total_price,
-  user_id,
+  id,
+  location,
   owner_first_name,
   owner_last_name,
   owner_profile_picture,
+  start_date,
+  total_price,
+  user_id,
 }) => {
   console.log();
   return (
@@ -45,8 +45,8 @@ const MyTripsCard = ({
       <CardMedia
         component="img"
         height="200"
-        // image={car}
-        alt={brand + " " + model}
+        image={car_picture}
+        alt={brand + model}
       />
       <CardContent>
         <Box sx={styleBox1}>
@@ -58,14 +58,13 @@ const MyTripsCard = ({
               fontWeight={"bold"}
               component="div"
             >
-              {brand}
               <Typography
                 component="div"
                 marginLeft="10px"
                 variant="h8"
-                color="text.secondary"
+                // color="text.secondary"
               >
-                {type}
+                {brand}
               </Typography>
             </Typography>
           </Box>
@@ -82,7 +81,10 @@ const MyTripsCard = ({
             gap="8px"
           >
             <Box display="flex" flexDirection="row">
-              <Avatar alt="Remy Sharp" src={owner_profile_picture} />
+              <Avatar
+                alt={owner_first_name + owner_last_name}
+                src={owner_profile_picture}
+              />
               <Box>
                 <Link
                   display="flex"
@@ -124,7 +126,13 @@ const MyTripsCard = ({
                 <CalendarMonthIcon color="primary" fontSize={"10px"} />
                 {"Start Date "}
               </Typography>
-              <Typography> {start_date}</Typography>
+              <Typography>
+                {" "}
+                {
+                  //print only the date, not the time
+                  start_date.split("T")[0]
+                }
+              </Typography>
             </Typography>
             <Typography
               display="flex"
@@ -144,7 +152,7 @@ const MyTripsCard = ({
                 <CalendarMonthIcon color="primary" fontSize={"10px"} />
                 {"End Date "}
               </Typography>
-              <Typography> {end_date}</Typography>
+              <Typography> {end_date.split("T")[0]}</Typography>
             </Typography>
           </Box>
         </Box>

@@ -8,7 +8,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PaidIcon from "@mui/icons-material/Paid";
 import Avatar from "@mui/material/Avatar";
 import { Link } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const styleBox1 = {
   display: "flex",
@@ -25,28 +26,25 @@ const styleBox2 = {
 
 const MyReservationsCard = ({
   car_id,
-  id,
-  profile_picture,
-  brand,
-  model,
-  type,
-  location,
-  start_date,
+  costumer_first_name,
+  costumer_last_name,
+  costumer_profile_picture,
   end_date,
+  id,
+  start_date,
   total_price,
   user_id,
-  owner_first_name,
-  owner_last_name,
-  owner_profile_picture,
 }) => {
-  console.log();
+  let myCars = useSelector((state) => state.vehiclesSlice);
+  const car = myCars[car_id];
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="200"
-        // image={car}
-        alt={brand + " " + model}
+        image={car.profile_picture}
+        alt={car.brand + car.model}
       />
       <CardContent>
         <Box sx={styleBox1}>
@@ -58,19 +56,19 @@ const MyReservationsCard = ({
               fontWeight={"bold"}
               component="div"
             >
-              {brand}
+              {car.brand}
               <Typography
                 component="div"
                 marginLeft="10px"
                 variant="h8"
                 color="text.secondary"
               >
-                {type}
+                {car.model}
               </Typography>
             </Typography>
           </Box>
           <Typography variant="h7" color="text.secondary">
-            {model}
+            {car.type}
           </Typography>
           <Typography
             variant="h8"
@@ -82,7 +80,7 @@ const MyReservationsCard = ({
             gap="8px"
           >
             <Box display="flex" flexDirection="row">
-              <Avatar alt="Remy Sharp" src={owner_profile_picture} />
+              <Avatar alt="Remy Sharp" src={costumer_profile_picture} />
               <Box>
                 <Link
                   display="flex"
@@ -96,13 +94,13 @@ const MyReservationsCard = ({
                   style={{ textDecoration: "none" }}
                   href={`https://fullstackmondayu.monday.com/boards/2949023880`} // navigate here to user profile page
                 >
-                  {owner_first_name + " " + owner_last_name}
+                  {costumer_first_name + " " + costumer_last_name}
                 </Link>
               </Box>
             </Box>
             <Box marginRigth={"40px"} marginTop={"10px"} width={"140px"}>
               <LocationOnIcon color="primary" fontSize={"10px"} />
-              {location}
+              {car.location}
             </Box>
           </Typography>
           <Box display="flex" gap="40px" marginTop="20px">
@@ -124,7 +122,7 @@ const MyReservationsCard = ({
                 <CalendarMonthIcon color="primary" fontSize={"10px"} />
                 {"Start Date "}
               </Typography>
-              <Typography> {start_date}</Typography>
+              <Typography> {start_date.split("T")[0]}</Typography>
             </Typography>
             <Typography
               display="flex"
@@ -144,7 +142,7 @@ const MyReservationsCard = ({
                 <CalendarMonthIcon color="primary" fontSize={"10px"} />
                 {"End Date "}
               </Typography>
-              <Typography> {end_date}</Typography>
+              <Typography> {end_date.split("T")[0]}</Typography>
             </Typography>
           </Box>
         </Box>
