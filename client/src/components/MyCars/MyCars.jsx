@@ -26,9 +26,10 @@ const MyCars = () => {
     dispatch(fetchMyVehicles());
   }, []);
 
-  handleOutletChange("mycars");
 
-  if (loading) return <LoadingSpinner />;
+  handleOutletChange("mycars")
+
+  if (loading) return <LoadingSpinner />
   const userHadNoCars = () => {
     return (
       <div className="trips-view-container-img">
@@ -42,8 +43,8 @@ const MyCars = () => {
         </div>
         <div>This is where you can access information about your cars</div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="details-view-container">
@@ -85,7 +86,7 @@ const MyCars = () => {
                     user_id={user_id}
                   ></VehicleCard>
                 </SwiperSlide>
-              );
+              )
             }
           )}
         </Swiper>
@@ -95,7 +96,7 @@ const MyCars = () => {
       </Button>
       <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />
     </div>
-  );
-};
+  )
+}
 
-export default MyCars;
+export default MyCars
