@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReservationCard from "../ReservationCard/ReservationCard";
-import VehicleCard from "../vehicle-card/VehicleCard";
+import MyTripsCard from "../MyTripsCard/MyTripsCard";
+import MyReservationsCard from "../MyReservationsCard/MyReservationsCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import dummyData from "../../pages/MyProfile/dummyData";
 import { useOutletContext } from "react-router-dom";
 import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 import "swiper/css";
@@ -27,12 +26,16 @@ const OrdersContainer = (props, navBar) => {
   const reservationsList = Object.values(myReservations);
   const { page } = props;
   const data = page === "trips" ? ordersList : reservationsList;
+  let myCars = useSelector((state) => state.vehiclesSlice);
+
   const pageLabel = `No past ${page}`;
   const pageTitle = `My ${page}`;
   handleOutletChange(page);
   console.log("loading", loading);
   useEffect(() => {
     fetchMyData();
+    if (page !== "trips") {
+    }
   }, []);
 
   const fetchMyData = () => {
@@ -72,45 +75,81 @@ const OrdersContainer = (props, navBar) => {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.map(
-            ({
-              car_id,
-              id,
-              profile_picture,
-              brand,
-              model,
-              type,
-              location,
-              start_date,
-              end_date,
-              total_price,
-              user_id,
-              owner_first_name,
-              owner_last_name,
-              owner_profile_picture,
-            }) => {
-              return (
-                <SwiperSlide className="swiper-slide">
-                  <ReservationCard
-                    car_id={car_id}
-                    id={id}
-                    profile_picture={profile_picture}
-                    brand={brand}
-                    model={model}
-                    type={type}
-                    location={location}
-                    start_date={start_date}
-                    end_date={end_date}
-                    total_price={total_price}
-                    user_id={user_id}
-                    owner_first_name={owner_first_name}
-                    owner_last_name={owner_last_name}
-                    owner_profile_picture={owner_profile_picture}
-                  ></ReservationCard>
-                </SwiperSlide>
-              );
-            }
-          )}
+          {page === "trips"
+            ? ordersList.map(
+                ({
+                  car_brand,
+                  car_id,
+                  car_model,
+                  car_type,
+                  end_date,
+                  id,
+                  location,
+                  owner_first_name,
+                  owner_last_name,
+                  owner_profile_picture,
+                  start_date,
+                  total_price,
+                  user_id,
+                  car_picture,
+                }) => (
+                  <SwiperSlide key={id} className="swiper-slide">
+                    <MyTripsCard
+                      car_id={car_id}
+                      id={id}
+                      car_picture={car_picture}
+                      brand={car_brand}
+                      model={car_model}
+                      type={car_type}
+                      start_date={start_date}
+                      end_date={end_date}
+                      location={location}
+                      owner_first_name={owner_first_name}
+                      owner_last_name={owner_last_name}
+                      total_price={total_price}
+                      user_id={user_id}
+                      owner_profile_picture={owner_profile_picture}
+                    />
+                  </SwiperSlide>
+                )
+              )
+            : reservationsList.map(
+                ({
+                  car_brand,
+                  car_model,
+                  car_picture,
+                  car_type,
+                  car_id,
+                  location,
+                  costumer_first_name,
+                  costumer_last_name,
+                  costumer_profile_picture,
+                  end_date,
+                  id,
+                  start_date,
+                  total_price,
+                  user_id,
+                }) => (
+                  <SwiperSlide key={id} className="swiper-slide">
+                    <MyReservationsCard
+                      location={location}
+                      car_id={car_id}
+                      car_picture={car_picture}
+                      brand={car_brand}
+                      model={car_model}
+                      type={car_type}
+                      id={id}
+                      start_date={start_date}
+                      end_date={end_date}
+                      total_price={total_price}
+                      user_id={user_id}
+                      costumer_first_name={costumer_first_name}
+                      costumer_last_name={costumer_last_name}
+                      costumer_profile_picture={costumer_profile_picture}
+                    />
+                  </SwiperSlide>
+                )
+              )}
         </Swiper>
       )}
     </>

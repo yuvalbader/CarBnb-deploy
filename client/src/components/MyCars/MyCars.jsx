@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 
 const MyCars = () => {
-  let data = useSelector((state) => state.vehiclesSlice);
+  let data = useSelector((state) => state.vehiclesSlice.myVehicles);
   const loading = useSelector((state) => state.viewSlice.isLoading);
   data = Object.values(data);
   console.log(data);
@@ -29,7 +29,8 @@ const MyCars = () => {
 
   handleOutletChange("mycars")
 
-  if (loading) return <LoadingSpinner />
+  if (loading) return <LoadingSpinner />;
+  
   const userHadNoCars = () => {
     return (
       <div className="trips-view-container-img">
@@ -52,11 +53,13 @@ const MyCars = () => {
       {data.length === 0 && userHadNoCars()}
       {data.length !== 0 && (
         <Swiper
-          className="containerr testimonials__containerr"
+          slidesPerView={3}
+          spaceBetween={10}
+          pagination={{
+            clickable: true,
+          }}
           modules={[Pagination]}
-          spaceBetween={20}
-          slidesPerView={2}
-          pagination={{ clickable: true }}
+          className="mySwiper"
         >
           {data.map(
             ({
@@ -74,6 +77,7 @@ const MyCars = () => {
               return (
                 <SwiperSlide className="swiper-slide">
                   <VehicleCard
+                    page={"myCars"}
                     profile_picture={profile_picture}
                     brand={brand}
                     type={type}
@@ -86,7 +90,7 @@ const MyCars = () => {
                     user_id={user_id}
                   ></VehicleCard>
                 </SwiperSlide>
-              )
+              );
             }
           )}
         </Swiper>
@@ -96,7 +100,7 @@ const MyCars = () => {
       </Button>
       <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />
     </div>
-  )
+  );
 }
 
 export default MyCars
