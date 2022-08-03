@@ -6,7 +6,8 @@ class UtilsService {
   constructor() {}
 
   getAvailableCars = async (search) => {
-    const { start_order, end_order, location: searchLocation } = search;
+    let { start_order, end_order, location: searchLocation } = search;
+    searchLocation = searchLocation.split(",")[0];
     const booking = await Reservation.findAll({
       where: {
         [Op.or]: [
@@ -61,7 +62,6 @@ class UtilsService {
       acc[car.id] = car;
       return acc;
     }, {});
-    console.log("carsObj:", carsObj);
 
     carsOwners = carsOwners.reduce((acc, user) => {
       acc[user.id] = user;
@@ -72,7 +72,6 @@ class UtilsService {
       acc[car.id] = carsOwners[car.user_id];
       return acc;
     }, {});
-    console.log("car_user:", car_user);
 
     myOreders = myOreders.map((res) => {
       const newRes = { ...res.dataValues };

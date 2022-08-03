@@ -28,6 +28,19 @@ const fetchMyOrdersFailureAction = () => ({
   type: actionTypes.FETCH_MY_ORDERS_FAILURE,
 });
 
+const fetchMyOrdAndResRequestAction = () => ({
+  type: actionTypes.FETCH_MY_ORD_AND_RES_REQUEST,
+});
+
+const fetchMyOrdAndResSuccessAction = (results) => ({
+  type: actionTypes.FETCH_MY_ORD_AND_RES_SUCCESS,
+  results,
+});
+
+const fetchMyOrdAndResFailureAction = () => ({
+  type: actionTypes.FETCH_MY_ORD_AND_RES_FAILURE,
+});
+
 export const fetchMyReservations = () => {
   return async (dispatch, getState) => {
     dispatch(fetchMyReservationsRequestAction());
@@ -60,6 +73,32 @@ export const fetchMyOrders = () => {
       dispatch(fetchMyOrdersSuccessAction(myOrdersById));
     } catch (error) {
       dispatch(fetchMyOrdersFailureAction());
+    }
+  };
+};
+
+export const fetchMyOrdAndRes = () => {
+  return async (dispatch, getState) => {
+    dispatch(fetchMyOrdAndResRequestAction());
+    try {
+      const id = getState().userSlice.userObject.id;
+      const myOrders = ListApiService.getMyOrders(id);
+      const myReservations = ListApiService.getMyReservations(id);
+      const result = await Promise.all([myOrders, myReservations]);
+      let myOrdersRes = result[0];
+      let myReservationsRes = result[1];
+      myOrdersRes = myOrdersRes.reduce((acc, order) => {
+        acc[order.id] = order;
+        return acc;
+      }, {});
+      myReservationsRes = myReservationsRes.reduce((acc, order) => {
+        acc[order.id] = order;
+        return acc;
+      }, {});
+      console.log(result);
+      dispatch(fetchMyOrdAndResSuccessAction([myOrdersRes, myReservationsRes]));
+    } catch (error) {
+      dispatch(fetchMyOrdAndResFailureAction());
     }
   };
 };

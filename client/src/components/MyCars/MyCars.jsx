@@ -1,25 +1,31 @@
-import { useState } from "react"
-import { useOutletContext } from "react-router-dom"
-import { useSelector } from "react-redux"
-import VehicleListContainer from "../vehicles-list/VehiclesListContainer"
-import Button from "@mui/material/Button"
-import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog"
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination } from "swiper"
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 
-import VehicleCard from "../vehicle-card/VehicleCard"
-import "swiper/css/pagination"
+import VehicleCard from "../vehicle-card/VehicleCard";
+import "swiper/css/pagination";
+import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 
 const MyCars = () => {
-  let data = useSelector((state) => state.vehiclesSlice.myVehicles)
-  const loading = useSelector((state) => state.viewSlice.isLoading)
-  data = Object.values(data)
-  console.log(data)
-  const [isAddCarPressed, setIsAddCarPressed] = useState(false)
-  const openFormHandler = () => setIsAddCarPressed(true)
-  const closeFormHandler = () => setIsAddCarPressed(false)
-  const handleOutletChange = useOutletContext()
+  let data = useSelector((state) => state.vehiclesSlice);
+  const loading = useSelector((state) => state.viewSlice.isLoading);
+  data = Object.values(data);
+  console.log(data);
+  const [isAddCarPressed, setIsAddCarPressed] = useState(false);
+  const openFormHandler = () => setIsAddCarPressed(true);
+  const closeFormHandler = () => setIsAddCarPressed(false);
+  const handleOutletChange = useOutletContext();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMyVehicles());
+  }, []);
+
 
   handleOutletChange("mycars")
 
