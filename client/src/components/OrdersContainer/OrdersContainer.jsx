@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ReservationCard from "../ReservationCard/ReservationCard";
-import VehicleCard from "../vehicle-card/VehicleCard";
+import MyTripsCard from "../MyTripsCard/MyTripsCard";
+import MyReservationsCard from "../MyReservationsCard/MyReservationsCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import dummyData from "../../pages/MyProfile/dummyData";
 import { useOutletContext } from "react-router-dom";
 import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 
@@ -27,18 +26,33 @@ const OrdersContainer = (props, navBar) => {
   const reservationsList = Object.values(myReservations);
   const { page } = props;
   const data = page === "trips" ? ordersList : reservationsList;
+  let myCars = useSelector((state) => state.vehiclesSlice);
+
   const pageLabel = `No past ${page}`;
   const pageTitle = `My ${page}`;
   handleOutletChange(page);
   console.log("loading", loading);
   useEffect(() => {
     fetchMyData();
+    if (page !== "trips") {
+    }
   }, []);
 
   const fetchMyData = () => {
     dispatch(fetchMyVehicles());
     dispatch(fetchMyReservations());
     dispatch(fetchMyOrders());
+    addCarsDetailsToReservations();
+  };
+
+  const addCarsDetailsToReservations = () => {
+    reservationsList.forEach((reservation) => {
+      const car = myCars[reservation.car_id];
+      reservation.profile_picture = car.profile_picture;
+      reservation.brand = car.brand;
+      reservation.model = car.model;
+      reservation.type = car.type;
+    });
   };
 
   const defaultOuput = () => {
@@ -90,22 +104,41 @@ const OrdersContainer = (props, navBar) => {
             }) => {
               return (
                 <SwiperSlide className="swiper-slide">
-                  <ReservationCard
-                    car_id={car_id}
-                    id={id}
-                    profile_picture={profile_picture}
-                    brand={brand}
-                    model={model}
-                    type={type}
-                    location={location}
-                    start_date={start_date}
-                    end_date={end_date}
-                    total_price={total_price}
-                    user_id={user_id}
-                    owner_first_name={owner_first_name}
-                    owner_last_name={owner_last_name}
-                    owner_profile_picture={owner_profile_picture}
-                  ></ReservationCard>
+                  {page === "trips" ? (
+                    <MyTripsCard
+                      car_id={car_id}
+                      id={id}
+                      profile_picture={profile_picture}
+                      brand={brand}
+                      model={model}
+                      type={type}
+                      location={location}
+                      start_date={start_date}
+                      end_date={end_date}
+                      total_price={total_price}
+                      user_id={user_id}
+                      owner_first_name={owner_first_name}
+                      owner_last_name={owner_last_name}
+                      owner_profile_picture={owner_profile_picture}
+                    ></MyTripsCard>
+                  ) : (
+                    <MyReservationsCard
+                      car_id={car_id}
+                      id={id}
+                      profile_picture={profile_picture}
+                      brand={brand}
+                      model={model}
+                      type={type}
+                      location={location}
+                      start_date={start_date}
+                      end_date={end_date}
+                      total_price={total_price}
+                      user_id={user_id}
+                      owner_first_name={owner_first_name}
+                      owner_last_name={owner_last_name}
+                      owner_profile_picture={owner_profile_picture}
+                    ></MyReservationsCard>
+                  )}
                 </SwiperSlide>
               );
             }

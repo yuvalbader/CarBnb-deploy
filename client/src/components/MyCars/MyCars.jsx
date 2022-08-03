@@ -24,6 +24,7 @@ const MyCars = () => {
   handleOutletChange("mycars");
 
   if (loading) return <LoadingSpinner />;
+  
   const userHadNoCars = () => {
     return (
       <div className="trips-view-container-img">
@@ -68,6 +69,7 @@ const MyCars = () => {
               return (
                 <SwiperSlide className="swiper-slide">
                   <VehicleCard
+                    page={"myCars"}
                     profile_picture={profile_picture}
                     brand={brand}
                     type={type}

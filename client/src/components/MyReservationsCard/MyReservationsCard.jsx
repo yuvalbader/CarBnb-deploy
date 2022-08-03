@@ -23,7 +23,7 @@ const styleBox2 = {
   my: "10px",
 };
 
-const ReservationCard = ({
+const MyReservationsCard = ({
   car_id,
   id,
   profile_picture,
@@ -39,16 +39,13 @@ const ReservationCard = ({
   owner_last_name,
   owner_profile_picture,
 }) => {
-
-  
-
-  
+  console.log();
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="200"
-        image={profile_picture}
+        // image={car}
         alt={brand + " " + model}
       />
       <CardContent>
@@ -99,7 +96,7 @@ const ReservationCard = ({
                   style={{ textDecoration: "none" }}
                   href={`https://fullstackmondayu.monday.com/boards/2949023880`} // navigate here to user profile page
                 >
-                  {owner_first_name+" "+owner_last_name}
+                  {owner_first_name + " " + owner_last_name}
                 </Link>
               </Box>
             </Box>
@@ -178,4 +175,4 @@ const ReservationCard = ({
   );
 };
 
-export default ReservationCard;
+export default MyReservationsCard;

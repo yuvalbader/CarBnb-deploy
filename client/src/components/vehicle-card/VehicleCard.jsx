@@ -8,6 +8,9 @@ import PaidIcon from "@mui/icons-material/Paid";
 import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import Chip from "@mui/material/Chip";
+import Button from "@mui/material/Button";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import Box from "@mui/material/Box";
 // import { Divider } from "@mui/material"
@@ -33,6 +36,7 @@ const chipStyle = {
 };
 
 const VehicleCard = ({
+  page,
   brand,
   type,
   model,
@@ -108,13 +112,35 @@ const VehicleCard = ({
               sx={chipStyle}
             />
           </Box>
-          {/* <Divider sx={{ my: '10px' }}></Divider> */}
           <Box sx={styleBox2} justifyContent="flex-end">
             <PaidIcon color="primary" fontSize={"10px"} />
             <Typography sx={typographyStyle} variant="h7" fontWeight={"bold"}>
               {`${price_per_day} /day`}
             </Typography>
-            {/* <Typography> {`${totalPrice} /day`}</Typography> */}
+            {page === "myCars" && (
+              <Box display="flex" flexDirection="row">
+                <Button
+                  // onClick={handleEditClick}
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  style={{ marginLeft: "90px", width: "90px" }}
+                  startIcon={<BorderColorIcon />}
+                >
+                  edit
+                </Button>
+                <Button
+                  // onClick={handleDeleteClick}
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  style={{ marginLeft: "20px", width: "90px" }}
+                  startIcon={<DeleteOutlineIcon />}
+                >
+                  delete
+                </Button>
+              </Box>
+            )}
           </Box>
         </Box>
       </CardContent>
