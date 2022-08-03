@@ -20,7 +20,7 @@ const style = {
   p: 4,
 }
 
-export default function CarModal({ id }) {
+export default function CarModal({ id, text }) {
   const [open, setOpen] = useState(false)
   const [car, setCar] = useState(null)
   const handleOpen = () => setOpen(true)
@@ -31,9 +31,10 @@ export default function CarModal({ id }) {
       setCar(car)
     })
   }, [id])
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>{text}</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -48,25 +49,25 @@ export default function CarModal({ id }) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              {car.brand} {car.model} {car.year}
+              {car?.brand} {car?.model} {car?.year}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {car.description}
+              {car?.description}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {car.location}
+              {car?.location}
             </Typography>
             <h6>Features</h6>
             <Grid container spacing={2}>
-              <Grid item xs={6} sm={6} md={6} key={car.id}>
-                <Typography variant="h6">{car.engine}Engine</Typography>
+              <Grid item xs={6} sm={6} md={6} key={car?.id}>
+                <Typography variant="h6">{car?.engine}Engine</Typography>
               </Grid>
-              <Grid item xs={6} sm={6} md={6} key={car.id}>
-                <Typography variant="h6">{car.gear}Gear</Typography>
+              <Grid item xs={6} sm={6} md={6} key={car?.id}>
+                <Typography variant="h6">{car?.gear}Gear</Typography>
               </Grid>
-              <Grid item xs={6} sm={6} md={6} key={car.id}>
+              <Grid item xs={6} sm={6} md={6} key={car?.id}>
                 <Typography variant="h6">
-                  {car.number_of_seats}Number Of Seats
+                  {car?.number_of_seats}Number Of Seats
                 </Typography>
               </Grid>
             </Grid>
