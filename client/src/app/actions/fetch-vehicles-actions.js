@@ -57,5 +57,22 @@ export const mainPageVehicles = () => {
     } catch (error) {
       dispatch(fetchVehiclesHomePAgeFailureAction())
     }
-  }
-}
+  };
+};
+
+export const fetchVehiclesToMainPage = () => {
+  return async (dispatch, getState) => {
+    dispatch(fetchVehiclesRequestAction());
+    try {
+      const id = getState().userSlice.userObject.id;
+      const vehicles = await ListApiService.getMyCars(id);
+      const vehiclesById = vehicles.reduce((acc, vehicle) => {
+        acc[vehicle.id] = vehicle;
+        return acc;
+      }, {});
+      dispatch(fetchVehiclesSuccessAction(vehiclesById));
+    } catch (error) {
+      dispatch(fetchVehiclesFailureAction());
+    }
+  };
+};
