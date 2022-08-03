@@ -6,7 +6,7 @@ class UtilsService {
   constructor() {}
 
   getAvailableCars = async (search) => {
-    const { start_order, end_order, location } = search;
+    const { start_order, end_order, location: searchLocation } = search;
     const booking = await Reservation.findAll({
       where: {
         [Op.or]: [
@@ -25,7 +25,7 @@ class UtilsService {
     const findall = await Car.findAll({
       where: {
         id: { [Op.notIn]: unAvailableCars },
-        location: { [Op.like]: "%" + location + "%" },
+        location: { [Op.like]: "%" + searchLocation + "%" },
       },
     });
     return findall;
@@ -41,28 +41,34 @@ class UtilsService {
     const carsId = myOreders.map((res) => {
       return res.car_id;
     });
-    const carsObj = await Car.findAll({
+    const getCars = await Car.findAll({
       where: {
         id: { [Op.in]: carsId },
       },
     });
-    let carsOwners = carsObj.map((car) => {
+
+    let carsOwners = getCars.map((car) => {
       return car.user_id;
     });
+
     carsOwners = await User.findAll({
       where: {
         id: { [Op.in]: carsOwners },
       },
     });
 
+    const carsObj = getCars.reduce((acc, car) => {
+      acc[car.id] = car;
+      return acc;
+    }, {});
+    console.log("carsObj:", carsObj);
+
     carsOwners = carsOwners.reduce((acc, user) => {
       acc[user.id] = user;
       return acc;
     }, {});
-    console.log("carsObj:", carsObj);
-    console.log("carsOwners:", carsOwners);
 
-    let car_user = carsObj.reduce((acc, car) => {
+    let car_user = getCars.reduce((acc, car) => {
       acc[car.id] = carsOwners[car.user_id];
       return acc;
     }, {});
@@ -71,10 +77,15 @@ class UtilsService {
     myOreders = myOreders.map((res) => {
       const newRes = { ...res.dataValues };
       const { car_id } = newRes;
+      const car = carsObj[car_id];
       const user = car_user[car_id];
       newRes["owner_first_name"] = user.first_name;
       newRes["owner_last_name"] = user.last_name;
       newRes["owner_profile_picture"] = user.profile_picture;
+      newRes["location"] = car.location;
+      newRes["car_type"] = car.type;
+      newRes["car_model"] = car.model;
+      newRes["car_brand"] = car.brand;
       return newRes;
     });
     return myOreders;

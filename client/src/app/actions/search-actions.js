@@ -1,5 +1,5 @@
-import actionTypes from './constants';
-import ListApiService from '../../services/list-api-service';
+import actionTypes from "./constants";
+import ListApiService from "../../services/list-api-service";
 
 const searchRequestAction = () => ({
   type: actionTypes.SEARCH_VEHICLES_REQUEST,
