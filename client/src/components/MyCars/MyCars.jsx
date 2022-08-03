@@ -11,16 +11,16 @@ import VehicleCard from "../vehicle-card/VehicleCard";
 import "swiper/css/pagination";
 
 const MyCars = () => {
-  let data = useSelector((state) => state.vehiclesSlice);
-  const loading = useSelector((state) => state.viewSlice.isLoading);
-  data = Object.values(data);
-  console.log(data);
-  const [isAddCarPressed, setIsAddCarPressed] = useState(false);
-  const openFormHandler = () => setIsAddCarPressed(true);
-  const closeFormHandler = () => setIsAddCarPressed(false);
-  const handleOutletChange = useOutletContext();
+  let data = useSelector((state) => state.vehiclesSlice.myVehicles)
+  const loading = useSelector((state) => state.viewSlice.isLoading)
+  data = Object.values(data)
+  console.log(data)
+  const [isAddCarPressed, setIsAddCarPressed] = useState(false)
+  const openFormHandler = () => setIsAddCarPressed(true)
+  const closeFormHandler = () => setIsAddCarPressed(false)
+  const handleOutletChange = useOutletContext()
 
-  handleOutletChange("mycars");
+  handleOutletChange("mycars")
 
   if (loading) return <LoadingSpinner />;
   
@@ -37,8 +37,8 @@ const MyCars = () => {
         </div>
         <div>This is where you can access information about your cars</div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="details-view-container">
@@ -81,7 +81,7 @@ const MyCars = () => {
                     user_id={user_id}
                   ></VehicleCard>
                 </SwiperSlide>
-              );
+              )
             }
           )}
         </Swiper>
@@ -91,7 +91,7 @@ const MyCars = () => {
       </Button>
       <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />
     </div>
-  );
-};
+  )
+}
 
-export default MyCars;
+export default MyCars

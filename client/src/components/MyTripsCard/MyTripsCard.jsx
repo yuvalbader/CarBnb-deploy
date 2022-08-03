@@ -1,27 +1,30 @@
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PaidIcon from "@mui/icons-material/Paid";
-import Avatar from "@mui/material/Avatar";
-import { Link } from "@mui/material";
-import { useEffect } from "react";
+import Card from "@mui/material/Card"
+import CardMedia from "@mui/material/CardMedia"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"
+import PaidIcon from "@mui/icons-material/Paid"
+import Avatar from "@mui/material/Avatar"
+import CardActions from "@mui/material/CardActions"
+import Button from "@mui/material/Button"
+import { Link } from "@mui/material"
+import { useEffect } from "react"
+import CarModal from "../carDetails/CarDetails"
 
 const styleBox1 = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   my: "10px",
-};
+}
 
 const styleBox2 = {
   display: "flex",
   justifyContent: "flex-end",
   my: "10px",
-};
+}
 
 const MyTripsCard = ({
   car_picture,
@@ -39,7 +42,6 @@ const MyTripsCard = ({
   total_price,
   user_id,
 }) => {
-  console.log();
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -179,8 +181,11 @@ const MyTripsCard = ({
           </Typography>
         </Box>
       </CardContent>
+      <CardActions>
+        <CarModal id={car_id} text={"Open Details"} />
+      </CardActions>
     </Card>
-  );
-};
+  )
+}
 
 export default MyTripsCard;

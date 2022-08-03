@@ -35,8 +35,15 @@ const MyReservationsCard = ({
   total_price,
   user_id,
 }) => {
-  let myCars = useSelector((state) => state.vehiclesSlice);
-  const car = myCars[car_id];
+  let myCars = useSelector((state) => state.vehiclesSlice).myVehicles;
+  const [car, setCar] = useState(null);
+
+  useEffect(() => {
+    console.log("myCars", myCars[10]);
+    const car = myCars[car_id];
+    setCar(car);
+    console.log("car", car.profile_picture);
+  }, []);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
