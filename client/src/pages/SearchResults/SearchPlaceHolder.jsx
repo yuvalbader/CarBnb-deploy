@@ -4,6 +4,9 @@ const SearchPlaceHolder = () => {
     // Render a countdown
     return <span>{seconds}</span>
   }
+  setTimeout(() => {
+    window.location.href = "/"
+  }, 3000)
   return (
     <div
       style={{

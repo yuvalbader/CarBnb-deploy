@@ -4,9 +4,10 @@ import { useSelector } from "react-redux"
 import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner"
 import SearchPlaceHolder from "./SearchPlaceHolder"
 import ErrorPlaceHolder from "./ErrorPlaceHolder"
-import { useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const SearchResultsPage = () => {
+  const location = useLocation()
   const filteredVehicles = useSelector(
     (state) => state.searchSlice.searchedVehicles
   )
@@ -19,27 +20,24 @@ const SearchResultsPage = () => {
   const minPrice = Math.min(...prices)
   const maxPrice = Math.max(...prices)
 
-  if (filteredVehicles.length === 0) {
-    setTimeout(() => {
-      window.location.href = "/"
-    }, 3000)
-    return (
-      <section>
-        <SearchPlaceHolder />
-      </section>
-    )
-  }
-
   return (
     <section>
       {isLoading && <LoadingSpinner />}
       {!isLoading && !isError && (
         <div>
           <FilterResultsBar minPrice={minPrice} maxPrice={maxPrice} />
-          <VehiclesListContainer vehicles={filteredVehicles} />
+          <VehiclesListContainer
+            state={location.state}
+            vehicles={filteredVehicles}
+          />
         </div>
       )}
       {isError && !isLoading && <ErrorPlaceHolder />}
+      {!isError && !isLoading && filteredVehicles.length === 0 && (
+        <section>
+          <SearchPlaceHolder />
+        </section>
+      )}
     </section>
   )
 }

@@ -1,39 +1,38 @@
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
-import PaidIcon from "@mui/icons-material/Paid";
-import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra";
-import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
-import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-
-import Box from "@mui/material/Box";
-// import { Divider } from "@mui/material"
+import Card from "@mui/material/Card"
+import CardMedia from "@mui/material/CardMedia"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import LocalGasStationIcon from "@mui/icons-material/LocalGasStation"
+import PaidIcon from "@mui/icons-material/Paid"
+import AirlineSeatReclineExtraIcon from "@mui/icons-material/AirlineSeatReclineExtra"
+import ManageHistoryIcon from "@mui/icons-material/ManageHistory"
+import Chip from "@mui/material/Chip"
+import Button from "@mui/material/Button"
+import BorderColorIcon from "@mui/icons-material/BorderColor"
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
+import CardActions from "@mui/material/CardActions"
+import Box from "@mui/material/Box"
+import ReserveCar from "../reserveCar/ReserveCar"
 
 const styleBox1 = {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   my: "10px",
-};
+}
 
 const styleBox2 = {
   display: "flex",
   alignItems: "center",
-  width: "100%",
-};
+}
 
 const typographyStyle = {
   padding: "5px",
-};
+}
 const chipStyle = {
   border: "none",
-};
+}
 
 const VehicleCard = ({
   page,
@@ -46,13 +45,17 @@ const VehicleCard = ({
   engine,
   profile_picture,
   number_of_seats,
-  user_id,
+  id,
+  state,
 }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
-        height="200"
+        sx={{
+          objectFit: "cover",
+          height: "140px",
+        }}
         image={profile_picture}
         alt={""}
       />
@@ -144,8 +147,11 @@ const VehicleCard = ({
           </Box>
         </Box>
       </CardContent>
+      <CardActions>
+        <ReserveCar state={state} id={id} text={"Reserve"} />
+      </CardActions>
     </Card>
-  );
-};
+  )
+}
 
-export default VehicleCard;
+export default VehicleCard
