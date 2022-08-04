@@ -23,8 +23,8 @@ export default function PhotoSwiper() {
       <SwiperSlide>
         <img
           className="image_of_brand"
-          src={state.profile_picture}
-          alt={state.profile_picture}
+          src={state.currentVehicle.profile_picture}
+          alt={state.currentVehicle.profile_picture}
         />
       </SwiperSlide>
       ))

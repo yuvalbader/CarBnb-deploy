@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { Outlet, useNavigate, useRouter } from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
@@ -16,12 +16,8 @@ const ProfileNavBar = () => {
     setValue(value);
   };
 
-  const handleOutletChange = (value) => {
-    setValue(value);
-  };
-
   return (
-    <div>
+    <>
       <Tabs value={value} onChange={handleChange}>
         <Tab
           icon={<CardTravelIcon />}
@@ -42,15 +38,8 @@ const ProfileNavBar = () => {
           value="mycars"
         />
       </Tabs>
-      {/* {value === "trips" && (
-        <OrdersContainer page="trips">My trips</OrdersContainer>
-      )}
-      {value === 'reservations' && (
-        <OrdersContainer page="reservations">My reservations</OrdersContainer>
-      )}
-      {value === "cars" && <MyCars title="cars">My cars</MyCars>} */}
-      <Outlet context={handleOutletChange}/>
-    </div>
+      <Outlet />
+    </>
   );
 };
 

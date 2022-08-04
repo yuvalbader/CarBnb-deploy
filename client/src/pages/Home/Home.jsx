@@ -1,10 +1,10 @@
 import Search from "../../components/Search/Search"
-import BrowseByBrand from "../../components/browseByBrand/BrowseByBrand"
+import BrandsToShow from "../../components/brandsToShow/BrandsToShow"
 const Home = () => {
   return (
     <>
       <Search />
-      <BrowseByBrand />
+      <BrandsToShow />
     </>
   )
 }
