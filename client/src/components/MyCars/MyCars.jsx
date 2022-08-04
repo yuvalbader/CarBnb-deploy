@@ -1,36 +1,30 @@
-import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Button from "@mui/material/Button";
-import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog";
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
-
-import VehicleCard from "../vehicle-card/VehicleCard";
-import "swiper/css/pagination";
-import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import Button from "@mui/material/Button"
+import ListVahicleDialog from "../list-new-vehicle-form/ListVehicleDialog"
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Pagination } from "swiper"
+import VehicleCard from "../vehicle-card/VehicleCard"
+import "swiper/css/pagination"
+import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions"
 
 const MyCars = () => {
-  let data = useSelector((state) => state.vehiclesSlice.myVehicles);
-  const loading = useSelector((state) => state.viewSlice.isLoading);
-  data = Object.values(data);
-  console.log(data);
-  const [isAddCarPressed, setIsAddCarPressed] = useState(false);
-  const openFormHandler = () => setIsAddCarPressed(true);
-  const closeFormHandler = () => setIsAddCarPressed(false);
-  const handleOutletChange = useOutletContext();
-  const dispatch = useDispatch();
+  let data = useSelector((state) => state.vehiclesSlice.myVehicles)
+  const loading = useSelector((state) => state.viewSlice.isLoading)
+  data = Object.values(data)
+  console.log(data)
+  const [isAddCarPressed, setIsAddCarPressed] = useState(false)
+  const openFormHandler = () => setIsAddCarPressed(true)
+  const closeFormHandler = () => setIsAddCarPressed(false)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchMyVehicles());
-  }, []);
+    dispatch(fetchMyVehicles())
+  }, [])
 
+  if (loading) return <LoadingSpinner />
 
-  // handleOutletChange("mycars")
-
-  if (loading) return <LoadingSpinner />;
-  
   const userHadNoCars = () => {
     return (
       <div className="trips-view-container-img">
@@ -62,18 +56,21 @@ const MyCars = () => {
           className="mySwiper"
         >
           {data.map(
-            ({
-              brand,
-              type,
-              model,
-              price_per_day,
-              gear,
-              location,
-              engine,
-              profile_picture,
-              number_of_seats,
-              user_id,
-            },index) => {
+            (
+              {
+                brand,
+                type,
+                model,
+                price_per_day,
+                gear,
+                location,
+                engine,
+                profile_picture,
+                number_of_seats,
+                user_id,
+              },
+              index
+            ) => {
               return (
                 <SwiperSlide key={index} className="swiper-slide">
                   <VehicleCard
@@ -90,7 +87,7 @@ const MyCars = () => {
                     user_id={user_id}
                   ></VehicleCard>
                 </SwiperSlide>
-              );
+              )
             }
           )}
         </Swiper>
@@ -100,7 +97,7 @@ const MyCars = () => {
       </Button>
       <ListVahicleDialog open={isAddCarPressed} onClose={closeFormHandler} />
     </div>
-  );
+  )
 }
 
 export default MyCars

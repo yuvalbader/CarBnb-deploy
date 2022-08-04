@@ -14,7 +14,7 @@ import { CardActionArea } from "@mui/material"
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
-const Testimonials = () => {
+const BrandsToShow = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loading = useSelector((state) => state.viewSlice.isLoading)
@@ -77,4 +77,4 @@ const Testimonials = () => {
     </section>
   )
 }
-export default Testimonials
+export default BrandsToShow
