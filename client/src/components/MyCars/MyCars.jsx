@@ -21,7 +21,7 @@ const MyCars = () => {
   const closeFormHandler = () => setIsAddCarPressed(false)
   const handleOutletChange = useOutletContext()
 
-  handleOutletChange("mycars")
+  // handleOutletChange("mycars")
 
   if (loading) return <LoadingSpinner />
   const userHadNoCars = () => {
@@ -64,9 +64,9 @@ const MyCars = () => {
               profile_picture,
               number_of_seats,
               user_id,
-            }) => {
+            },index) => {
               return (
-                <SwiperSlide className="swiper-slide">
+                <SwiperSlide key={index} className="swiper-slide">
                   <VehicleCard
                     profile_picture={profile_picture}
                     brand={brand}

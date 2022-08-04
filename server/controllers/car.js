@@ -46,7 +46,6 @@ const getCarsByUserId = async (req, res, next) => {
   const { id } = req.params
   try {
     const cars = await CarsService.getCarByUserId(id)
-    console.log("typeof cars", typeof cars)
     if (cars.length === 0) {
       // throw new Error("Cars not found")
       return []

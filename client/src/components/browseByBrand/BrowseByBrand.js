@@ -18,11 +18,13 @@ const Testimonials = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loading = useSelector((state) => state.viewSlice.isLoading)
+
   useEffect(() => {
     dispatch(mainPageVehicles())
   }, [dispatch])
 
   const vehicles = useSelector((state) => state.vehiclesSlice.mainPageVehicles)
+
   const onClick = (id) => {
     console.log("id:", id)
     navigate(`/car/${id}`, { state: { currentVehicle: vehicles[id] } })
@@ -47,12 +49,9 @@ const Testimonials = () => {
       >
         {Object.keys(vehicles).map((index) => {
           return (
-            <SwiperSlide
-              key={Object.values(vehicles)[index - 1]?.id}
-              className="testemonials"
-            >
+            <SwiperSlide key={vehicles[index]?.id} className="testemonials">
               <Card
-                onClick={() => onClick(Object.values(vehicles)[index - 1]?.id)}
+                onClick={() => onClick(vehicles[index]?.id)}
                 className="card-brand"
                 sx={{ maxWidth: 345 }}
               >
@@ -60,13 +59,13 @@ const Testimonials = () => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={Object.values(vehicles)[index - 1]?.profile_picture}
-                    alt={Object.values(vehicles)[index - 1]?.brand}
+                    image={vehicles[index]?.profile_picture}
+                    alt={vehicles[index]?.brand}
                   />
 
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                      {Object.values(vehicles)[index - 1]?.brand}
+                      {vehicles[index]?.brand}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
