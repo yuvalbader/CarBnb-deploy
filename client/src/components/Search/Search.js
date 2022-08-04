@@ -98,7 +98,12 @@ export default function Search() {
     } else {
       dispatch(search(searchDataObject))
       navigate("/searchResult", {
-        state: { dateFrom: searchDataObject.start_order, dateUntil: searchDataObject.end_order },
+        state: {
+          dateFrom: searchDataObject.start_order,
+          dateUntil: searchDataObject.end_order,
+          timeToPickRef: timeToPickRef.current.value,
+          timeToDropRef: timeToDropRef.current.value,
+        },
       })
     }
   }
