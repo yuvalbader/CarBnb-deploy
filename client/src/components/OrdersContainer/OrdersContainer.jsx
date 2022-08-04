@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import ReservationCard from "../ReservationCard/ReservationCard"
+import ReservationCard from "../MyReservationsCard/MyReservationsCard"
 import VehicleCard from "../vehicle-card/VehicleCard"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper"
