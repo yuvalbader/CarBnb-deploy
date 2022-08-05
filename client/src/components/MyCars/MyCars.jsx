@@ -85,6 +85,7 @@ const MyCars = () => {
                     engine={engine}
                     number_of_seats={number_of_seats}
                     user_id={user_id}
+                    state={data}
                   ></VehicleCard>
                 </SwiperSlide>
               )

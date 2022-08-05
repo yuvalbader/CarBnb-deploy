@@ -30,52 +30,15 @@ const useStyles = makeStyles(() => ({
   },
 }))
 export default function ReserveCar({ id, text, state }) {
-  // #############################################################################
-  const [loading, setLoading] = React.useState(false)
-  const [success, setSuccess] = React.useState(false)
-  const timer = React.useRef()
-
-  const buttonSx = {
-    ...(success && {
-      bgcolor: green[500],
-      "&:hover": {
-        bgcolor: green[700],
-      },
-    }),
-  }
-
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timer.current)
-    }
-  }, [])
-
-  const handleButtonClick = () => {
-    if (!loading) {
-      setSuccess(false)
-      setLoading(true)
-      timer.current = window.setTimeout(() => {
-        ListApiService.createReservation(dataToSend).then((res) => {
-          console.log("res", res)
-        })
-        setSuccess(true)
-        setLoading(false)
-      }, 2000)
-    }
-  }
-  // #############################################################################
   const userId = useSelector((state) => state.userSlice.userObject.id)
   const [open, setOpen] = useState(false)
   const [car, setCar] = useState(null)
   const handleOpen = () => {
     setOpen(true)
-    // getAvailableDate()
   }
   const handleClose = () => setOpen(false)
   const [carId, setCarId] = useState(id)
   const classes = useStyles()
-  const today = new Date()
-  const threeDays = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000)
   const [datesAvailable, setDatesAvailable] = React.useState(true)
   const monthFrom = state.dateFrom.toLocaleDateString().split("/")[0] - 2
   const yearFrom = state.dateFrom.toLocaleDateString().split("/")[2]
@@ -92,8 +55,7 @@ export default function ReserveCar({ id, text, state }) {
   const [newDateUntil, setNewDateUntil] = React.useState(
     new Date(yearUntil, monthUntil, dayUntil)
   )
-  console.log("time from", timeFrom)
-  console.log("time until", timeUntil)
+  const [res, setRes] = React.useState(false)
   const fromRef = React.useRef()
   const untilRef = React.useRef()
   useEffect(() => {
@@ -120,7 +82,6 @@ export default function ReserveCar({ id, text, state }) {
   const getAvailableDate = useCallback(() => {
     setNewDateFrom(newDateFrom)
     setNewDateUntil(newDateUntil)
-    console.log(newDateFrom, newDateUntil)
     const data = {
       start_order: newDateFrom,
       end_order: newDateUntil,
@@ -130,22 +91,73 @@ export default function ReserveCar({ id, text, state }) {
       end_time: timeUntil,
       total_price: car?.price_per_day * calcDays,
     }
-    console.log("data", data)
     setDataToSend(data)
     ListApiService.isCarAvailable(data).then((res) => {
-      console.log("res", res)
       if (res) {
+        setRes(true)
         setDatesAvailable(false)
       } else {
+        setRes(false)
         setDatesAvailable(true)
       }
     })
-  }, [newDateFrom, newDateUntil,timeFrom,timeUntil])
+  }, [newDateFrom, newDateUntil, timeFrom, timeUntil])
 
   useMemo(() => {
     return getAvailableDate()
-  }, [newDateFrom, newDateUntil,timeFrom,timeUntil])
+  }, [newDateFrom, newDateUntil, timeFrom, timeUntil])
+  // #############################################################################
+  const [loading, setLoading] = React.useState(false)
+  const [success, setSuccess] = React.useState(false)
+  const [result, setResult] = React.useState("Complete Reservation")
+  const timer = React.useRef()
 
+  const buttonSx = {
+    ...(success && {
+      bgcolor: green[500],
+      "&:hover": {
+        bgcolor: green[700],
+      },
+    }),
+  }
+
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timer.current)
+    }
+  }, [])
+
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false)
+      setLoading(true)
+      timer.current = window.setTimeout(() => {
+        ListApiService.createReservation(dataToSend).then((res) => {
+          if (res) {
+            setSuccess(true)
+            setLoading(false)
+            setResult("Reservation Confiremd")
+            setTimeout(() => {
+              handleClose()
+            }, 2000)
+            window.location.href("/")
+          } else if (loading) {
+            setResult("Preform Reservation")
+          } else {
+            setSuccess(false)
+            setLoading(true)
+            setResult("Reservetion Denied, Please try again")
+            setTimeout(() => {
+              setResult("Complete Reservation")
+            }, 2000)
+          }
+        })
+      }, 2000)
+      setSuccess(false)
+      setResult("Complete Reservation")
+    }
+  }
+  // #############################################################################
   if (car) {
     return (
       <div>
@@ -221,14 +233,6 @@ export default function ReserveCar({ id, text, state }) {
                   </Typography>
                   <div className="sideSearch_continue">
                     <Stack direction="row">
-                      {/* <Button
-                        onClick={handleReserveClick}
-                        disabled={datesAvailable}
-                        sx={{ width: "100%", mt: 2 }}
-                        variant="contained"
-                      >
-                        Continue
-                      </Button> */}
                       <Box sx={{ display: "flex", alignItems: "center" }}>
                         <Box sx={{ m: 1, position: "relative" }}>
                           <Button
@@ -237,9 +241,9 @@ export default function ReserveCar({ id, text, state }) {
                             disabled={datesAvailable}
                             onClick={handleButtonClick}
                           >
-                            Complete Reservation
+                            {result}
                           </Button>
-                          {datesAvailable && (
+                          {loading && (
                             <CircularProgress
                               size={24}
                               sx={{

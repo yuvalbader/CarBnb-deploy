@@ -4,7 +4,6 @@ import ListItem from "@mui/material/ListItem"
 const styleList = { display: "grid", gridTemplateColumns: "repeat(3,1fr)" }
 
 const VehicleListContainer = ({ vehicles, state }) => {
-  console.log(vehicles)
   return (
     <List sx={styleList}>
       {vehicles.map(

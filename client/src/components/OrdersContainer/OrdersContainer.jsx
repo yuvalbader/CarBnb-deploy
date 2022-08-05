@@ -55,6 +55,7 @@ const OrdersContainer = (props, navBar) => {
       </div>
       {data.length !== 0 && (
         <Swiper
+          style={{ paddingBottom: "2rem" }}
           slidesPerView={3}
           spaceBetween={10}
           pagination={{

@@ -48,6 +48,8 @@ const VehicleCard = ({
   id,
   state,
 }) => {
+  console.log("page:", page)
+  console.log("state:", state)
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -148,7 +150,9 @@ const VehicleCard = ({
         </Box>
       </CardContent>
       <CardActions>
-        <ReserveCar state={state} id={id} text={"Reserve"} />
+        {page !== "myCars" && (
+          <ReserveCar id={id} state={state} text="Reserved" />
+        )}
       </CardActions>
     </Card>
   )
