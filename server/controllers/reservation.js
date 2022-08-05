@@ -1,4 +1,4 @@
-const reservationService = require("../services/reservation");
+const reservationService = require("../services/reservation")
 const UtilsService = require("../services/utils")
 const getAllReservations = async (req, res, next) => {
   try {
@@ -58,6 +58,7 @@ const getReservationById = async (req, res, next) => {
 }
 
 const createReservation = async (req, res, next) => {
+  console.log("req in create", req.body)
   const newReservation = req.body
   try {
     await reservationService.createReservation(newReservation)

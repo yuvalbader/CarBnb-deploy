@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import { Outlet, useNavigate, useRouter } from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
@@ -21,7 +21,7 @@ const ProfileNavBar = () => {
   };
 
   return (
-    <div>
+    <>
       <Tabs value={value} onChange={handleChange}>
         <Tab
           icon={<CardTravelIcon />}
@@ -44,7 +44,7 @@ const ProfileNavBar = () => {
       </Tabs>
 
       <Outlet context={handleOutletChange}/>
-    </div>
+    </>
   );
 };
 

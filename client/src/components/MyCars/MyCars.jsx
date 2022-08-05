@@ -56,6 +56,10 @@ const MyCars = memo(() => {
       {data.length === 0 && userHadNoCars()}
       {data.length !== 0 && (
         <Swiper
+          style={{
+            width: "100%",
+            paddingBottom: "3rem",
+          }}
           slidesPerView={3}
           spaceBetween={10}
           pagination={{
@@ -65,20 +69,23 @@ const MyCars = memo(() => {
           className="mySwiper"
         >
           {data.map(
-            ({
-              brand,
-              type,
-              model,
-              price_per_day,
-              gear,
-              location,
-              engine,
-              profile_picture,
-              number_of_seats,
-              user_id,
-            }) => {
+            (
+              {
+                brand,
+                type,
+                model,
+                price_per_day,
+                gear,
+                location,
+                engine,
+                profile_picture,
+                number_of_seats,
+                user_id,
+              },
+              index
+            ) => {
               return (
-                <SwiperSlide className="swiper-slide">
+                <SwiperSlide key={index} className="swiper-slide">
                   <VehicleCard
                     page={"myCars"}
                     profile_picture={profile_picture}
@@ -93,7 +100,7 @@ const MyCars = memo(() => {
                     user_id={user_id}
                   ></VehicleCard>
                 </SwiperSlide>
-              );
+              )
             }
           )}
         </Swiper>

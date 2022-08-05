@@ -46,10 +46,10 @@ const OrdersContainer = memo((props) => {
         <p className="no-past title">{pageLabel}</p>
         <div>This is where you can access information about your {page}</div>
       </div>
-    );
-  };
+    )
+  }
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <LoadingSpinner />
   return (
     <>
       <div className="details-view-container">
@@ -58,6 +58,7 @@ const OrdersContainer = memo((props) => {
       </div>
       {data.length !== 0 && (
         <Swiper
+          style={{ paddingBottom: "2rem" }}
           slidesPerView={3}
           spaceBetween={10}
           pagination={{
@@ -147,4 +148,4 @@ const OrdersContainer = memo((props) => {
   );
 });
 
-export default OrdersContainer;
+export default OrdersContainer
