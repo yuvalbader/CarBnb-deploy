@@ -47,6 +47,10 @@ const MyCars = () => {
       {data.length === 0 && userHadNoCars()}
       {data.length !== 0 && (
         <Swiper
+          style={{
+            width: "100%",
+            paddingBottom: "3rem",
+          }}
           slidesPerView={3}
           spaceBetween={10}
           pagination={{
@@ -85,7 +89,6 @@ const MyCars = () => {
                     engine={engine}
                     number_of_seats={number_of_seats}
                     user_id={user_id}
-                    state={data}
                   ></VehicleCard>
                 </SwiperSlide>
               )

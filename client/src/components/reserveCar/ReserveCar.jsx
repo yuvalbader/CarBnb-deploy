@@ -243,7 +243,7 @@ export default function ReserveCar({ id, text, state }) {
                           >
                             {result}
                           </Button>
-                          {loading && (
+                          {/* {loading && (
                             <CircularProgress
                               size={24}
                               sx={{
@@ -255,7 +255,7 @@ export default function ReserveCar({ id, text, state }) {
                                 marginLeft: "-12px",
                               }}
                             />
-                          )}
+                          )} */}
                         </Box>
                       </Box>
                     </Stack>
