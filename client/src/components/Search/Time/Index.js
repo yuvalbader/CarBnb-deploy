@@ -24,6 +24,14 @@ const Time = forwardRef((props, ref) => {
   const classes = useStyles()
   const [time, setTime] = React.useState("")
   const handleChange = (event) => {
+    if (window.location.href !== "http://localhost:3000/") {
+      if (props.label === "from") {
+        props.setTimeFrom(event.target.value)
+      } else {
+        props.setTimeUntil(event.target.value)
+      }
+    }
+
     setTime(event.target.value)
   }
 

@@ -27,12 +27,33 @@ class ReservationService {
   }
 
   createReservation = async (reservation) => {
+    const startTime = new Date(
+      parseInt(reservation.start_order.split("T")[0].split("-")[0]),
+      parseInt(reservation.start_order.split("T")[0].split("-")[1]) - 1,
+      parseInt(reservation.start_order.split("T")[0].split("-")[2]),
+      parseInt(reservation.start_time.split(":")[0]) + 3,
+      parseInt(reservation.start_time.split(":")[1])
+    )
+    const endTime = new Date(
+      parseInt(reservation.end_order.split("T")[0].split("-")[0]),
+      parseInt(reservation.end_order.split("T")[0].split("-")[1]) - 1,
+      parseInt(reservation.end_order.split("T")[0].split("-")[2]),
+      parseInt(reservation.end_time.split(":")[0]) + 3,
+      parseInt(reservation.end_time.split(":")[1])
+    )
+    const startOrder = new Date(reservation.start_order)
+    const endOrder = new Date(reservation.end_order)
+    const startOrderNew = new Date(startOrder.setDate(startOrder.getDate() + 1))
+    const endOrderNew = new Date(endOrder.setDate(endOrder.getDate() + 1))
+    const start = new Date(startTime.setDate(startTime.getDate() + 1))
+    const end = new Date(endTime.setDate(endTime.getDate() + 1))
+
     return await Reservation.create({
-      start_date: reservation.start_date,
-      end_date: reservation.end_date,
+      start_date: startOrderNew,
+      end_date: endOrderNew,
       total_price: reservation.total_price,
-      start_time: reservation.start_time,
-      end_time: reservation.end_time,
+      start_time: start,
+      end_time: end,
       user_id: reservation.user_id,
       car_id: reservation.car_id,
     })
@@ -58,21 +79,22 @@ class ReservationService {
   }
 
   isCarAvailable = async (data) => {
-    // const { car_id, start_order, end_order } = data
     const car_id = data.car_id
     const start_order = new Date(data.start_order)
     const end_order = new Date(data.end_order)
+    const start = new Date(start_order.setDate(start_order.getDate() + 1))
+    const end = new Date(end_order.setDate(end_order.getDate() + 1))
     const reserved = await Reservation.findAll({
       where: {
         car_id: car_id,
 
         [Op.or]: [
-          { end_date: { [Op.between]: [start_order, end_order] } },
-          { start_date: { [Op.between]: [start_order, end_order] } },
+          { end_date: { [Op.between]: [start, end] } },
+          { start_date: { [Op.between]: [start, end] } },
           {
             [Op.and]: [
-              { start_date: { [Op.lt]: start_order } },
-              { end_date: { [Op.gt]: end_order } },
+              { start_date: { [Op.lt]: start } },
+              { end_date: { [Op.gt]: end } },
             ],
           },
         ],

@@ -5,7 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { makeStyles } from "@material-ui/core/styles"
 
-const Datee = forwardRef((props, ref) => {
+const DateForRes = forwardRef((props, ref) => {
   const useStyles = makeStyles(() => ({
     noBorder: {
       border: "none",
@@ -20,8 +20,8 @@ const Datee = forwardRef((props, ref) => {
         value={
           value === null
             ? props.label === "From"
-              ? new Date()
-              : new Date().setDate(new Date().getDate() + 3)
+              ? props.dateFrom
+              : props.dateUntil
             : value
         }
         inputRef={ref}
@@ -48,4 +48,4 @@ const Datee = forwardRef((props, ref) => {
   )
 })
 
-export default Datee
+export default DateForRes
