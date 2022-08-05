@@ -1,49 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MyTripsCard from "../MyTripsCard/MyTripsCard";
 import MyReservationsCard from "../MyReservationsCard/MyReservationsCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import { useOutletContext } from "react-router-dom";
-import { fetchMyVehicles } from "../../app/actions/fetch-vehicles-actions";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./OrdersContainer.css";
-import {
-  fetchMyReservations,
-  fetchMyOrders,
-  fetchMyOrdAndRes,
-} from "../../app/actions/user-actions";
+import { fetchMyOrdAndRes } from "../../app/actions/user-actions";
 import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import SelectInput from "@mui/material/Select/SelectInput";
 
-const OrdersContainer = (props, navBar) => {
+const OrdersContainer = memo((props) => {
   const handleOutletChange = useOutletContext();
   const loading = useSelector((state) => state.viewSlice.isLoading);
   const dispatch = useDispatch();
+  const myId = useSelector((state) => state.userSlice.userObject.id);
+  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
   const myOrders = useSelector((state) => state.userSlice.orders);
   const myReservations = useSelector((state) => state.userSlice.reservations);
   const ordersList = Object.values(myOrders);
   const reservationsList = Object.values(myReservations);
   const { page } = props;
   const data = page === "trips" ? ordersList : reservationsList;
-  let myCars = useSelector((state) => state.vehiclesSlice);
-
   const pageLabel = `No past ${page}`;
   const pageTitle = `My ${page}`;
   handleOutletChange(page);
-  console.log("loading", loading);
-  useEffect(() => {
-    fetchMyData();
-    if (page !== "trips") {
-    }
+
+  const fetchMyData = useCallback((id) => {
+    if(id) dispatch(fetchMyOrdAndRes(id));
   }, []);
 
-  const fetchMyData = () => {
-    // dispatch(fetchMyVehicles());
-    dispatch(fetchMyOrdAndRes());
-    // dispatch(fetchMyReservations());
-    // dispatch(fetchMyOrders());
-  };
+  useEffect(() => {
+    fetchMyData(myId);
+  }, [myId]);
 
   const defaultOuput = () => {
     return (
@@ -154,6 +145,6 @@ const OrdersContainer = (props, navBar) => {
       )}
     </>
   );
-};
+});
 
 export default OrdersContainer;

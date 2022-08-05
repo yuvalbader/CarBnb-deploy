@@ -26,6 +26,7 @@ const styleBox2 = {
   display: "flex",
   alignItems: "center",
   width: "100%",
+
 };
 
 const typographyStyle = {

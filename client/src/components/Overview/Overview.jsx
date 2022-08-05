@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react"
-import "./style.css"
-import StarIcon from "@mui/icons-material/Star"
-import Typography from "@mui/material/Typography"
-import { useLocation } from "react-router-dom"
-import ListApiService from "../../services/list-api-service"
-import PopModal from "../userDetails/UserDetails"
+import React, { useEffect, useState } from "react";
+import "./style.css";
+import StarIcon from "@mui/icons-material/Star";
+import Typography from "@mui/material/Typography";
+import { useLocation } from "react-router-dom";
+import ListApiService from "../../services/list-api-service";
+import PopModal from "../userDetails/UserDetails";
+
 export const Overview = () => {
-  const [userDetails, setUserDetails] = useState({})
-  const { state } = useLocation()
+  const [userDetails, setUserDetails] = useState({});
+  const { state } = useLocation();
   // fetching user data by the state.userId
   useEffect(() => {
     ListApiService.getUserById(state.currentVehicle.user_id).then((user) => {
-      setUserDetails(user)
-    })
-  }, [])
+      setUserDetails(user);
+    });
+  }, []);
 
   return (
     <div className="brand_container">
@@ -47,5 +48,5 @@ export const Overview = () => {
         </Typography>
       </div>
     </div>
-  )
-}
+  );
+};

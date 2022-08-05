@@ -1,110 +1,108 @@
-const CarsService = require("../services/car")
+const CarsService = require("../services/car");
 
 const getAllCars = async (req, res, next) => {
   try {
-    const cars = await CarsService.getAllCars()
-    const firstFiveCars = cars.slice(0, 5)
+    const cars = await CarsService.getAllCars();
+    let firstFiveCars = cars.slice(0, 5);
     if (cars.length === 0) {
       // throw new Error("Cars not found")
-      return {}
+      firstFiveCars = [];
     }
-    return res.status(200).send(firstFiveCars)
+    return res.status(200).send(firstFiveCars);
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 const getBrands = async (req, res, next) => {
-  try {
-    let brands = await CarsService.getBrands()
-    if (brands.length === 0) {
-      // throw new Error("Brands not found")
-      return {}
-    }
-    brands = brands.map((a) => a.brand)
-    return res.status(200).send(brands)
-  } catch (err) {
-    return res.status(404).send(err.message)
-  }
-}
+  // try {
+  //   let brands = await CarsService.getBrands()
+  //   if (brands.length === 0) {
+  //     throw new Error("Brands not found")
+  //     return {}
+  //   }
+  //   brands = brands.map((a) => a.brand)
+  //   return res.status(200).send(brands)
+  // } catch (err) {
+  //   return res.status(404).send(err.message)
+  // }
+};
 
 const getCarById = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const car = await CarsService.getCarById(id)
+    const car = await CarsService.getCarById(id);
     if (!car) {
       // throw new Error("Car not found")
-      return {}
+      return {};
     }
-    return res.status(200).send(car)
+    return res.status(200).send(car);
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 const getCarsByUserId = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    const cars = await CarsService.getCarByUserId(id)
-    console.log("typeof cars", typeof cars)
+    let cars = await CarsService.getCarByUserId(id);
     if (cars.length === 0) {
-      // throw new Error("Cars not found")
-      return []
+      cars = [];
     }
-    return res.status(200).send(cars)
+    return res.status(200).send(cars);
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 const addCar = async (req, res, next) => {
-  const newCar = req.body
+  const newCar = req.body;
   try {
-    const car = await CarsService.addCar(newCar)
+    console.log("newCar:",newCar);
+    const car = await CarsService.addCar(newCar);
     if (!car) {
-      // throw new Error("Car not added")
-      return {}
+      throw new Error("Failed to add car");
     }
-    return res.status(200).send("Car has been successfully added")
+    return res.status(200).send("Car has been successfully added");
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(400).send(err.message);
   }
-}
+};
 
 const updateCar = async (req, res, next) => {
-  const { id } = req.params
-  const updateCar = req.body
+  const { id } = req.params;
+  const updateCar = req.body;
   try {
-    const car = await CarsService.updateCar(id, updateCar)
-    console.log(car)
+    const car = await CarsService.updateCar(id, updateCar);
+    console.log(car);
     if (car[0] === 0) {
       // throw new Error("Unable to update car")
-      return {}
+      return {};
     }
-    return res.status(200).send("Car has been successfully updated")
+    return res.status(200).send("Car has been successfully updated");
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 const deleteCar = async (req, res, next) => {
-  const { id } = req.params
+  const { id } = req.params;
   try {
-    await CarsService.deleteCar(id)
-    return res.status(200).send("Car has been successfully deleted")
+    await CarsService.deleteCar(id);
+    return res.status(200).send("Car has been successfully deleted");
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 const deleteAllCars = async (req, res, next) => {
   try {
-    await CarsService.deleteAllCars()
-    return res.status(200).send("Cars has been successfully deleted")
+    await CarsService.deleteAllCars();
+    return res.status(200).send("Cars has been successfully deleted");
   } catch (err) {
-    return res.status(404).send(err.message)
+    return res.status(404).send(err.message);
   }
-}
+};
 
 module.exports = {
   getAllCars,
@@ -115,4 +113,4 @@ module.exports = {
   updateCar,
   deleteCar,
   deleteAllCars,
-}
+};

@@ -42,13 +42,7 @@ const ProfileNavBar = () => {
           value="mycars"
         />
       </Tabs>
-      {/* {value === "trips" && (
-        <OrdersContainer page="trips">My trips</OrdersContainer>
-      )}
-      {value === 'reservations' && (
-        <OrdersContainer page="reservations">My reservations</OrdersContainer>
-      )}
-      {value === "cars" && <MyCars title="cars">My cars</MyCars>} */}
+
       <Outlet context={handleOutletChange}/>
     </div>
   );

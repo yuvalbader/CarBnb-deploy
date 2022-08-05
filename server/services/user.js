@@ -5,7 +5,6 @@ class UserService {
   getAllUsers = async () => {}
 
   getUserByEmail = async (email) => {
-    console.log("got to get user by email: ", email)
     return await User.findOne({
       where: {
         email: {
