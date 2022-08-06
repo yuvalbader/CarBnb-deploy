@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/hhasona/CarBnb/issues"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "homepage": "https://github.com/hhasona/CarBnb#readme",
   "dependencies": {
     "cors": "^2.8.5",
