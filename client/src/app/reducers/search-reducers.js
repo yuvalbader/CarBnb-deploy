@@ -1,11 +1,18 @@
 import actionTypes from '../actions/constants';
+import { SORT_TYPES } from './reducersConstans';
 
 const initialState = {
   searchedVehicles: [],
-  priceLowToHigh: false,
-  priceHighToLow: false,
-  minPrice: 0,
-  maxPrice: 0,
+  activatedFilters: {
+    sort: SORT_TYPES.EMPTY,
+    gears: [],
+    engines: [],
+    brands: [],
+    types: [],
+    number_of_seats: [],
+    minPrice: 0,
+    maxPrice: 0,
+  },
 };
 
 const searchReducers = (state = initialState, action) => {
@@ -19,27 +26,64 @@ const searchReducers = (state = initialState, action) => {
       return {
         ...state,
         searchedVehicles: values,
-        minPrice: minPrice,
-        maxPrice: maxPrice,
-        priceLowToHigh: false,
-        priceHighToLow: false,
+        activatedFilters: {
+          minPrice: minPrice,
+          maxPrice: maxPrice,
+          sort: SORT_TYPES.EMPTY,
+          gears: [],
+          engines: [],
+          brands: [],
+          types: [],
+          number_of_seats: [],
+        },
       };
     }
     case actionTypes.SET_SORT_LTH: {
-      /*       const sortedVehicles = [...state.filteredVehicles];
-      sortedVehicles.sort( (v1,v2) => v1.price_per_day -v2.price_per_day); */
-      return { ...state, priceLowToHigh: true, priceHighToLow: false };
+      const activatedFilters = state.activatedFilters;
+      return {
+        ...state,
+        activatedFilters: {
+          ...activatedFilters,
+          sort: SORT_TYPES.LOWER_TO_HIGHER,
+        },
+      };
     }
     case actionTypes.SET_SORT_HTL: {
-      /*       const clonedVehicles = [...state.filteredVehicles];
-      clonedVehicles.sort( (v1,v2) => v2.price_per_day -v1.price_per_day); */
-      return { ...state, priceLowToHigh: false, priceHighToLow: true };
+      const activatedFilters = state.activatedFilters;
+      return {
+        ...state,
+        activatedFilters: {
+          ...activatedFilters,
+          sort: SORT_TYPES.HIGHER_TO_LOWER,
+        },
+      };
     }
-    case actionTypes.SET_PRICE_RANGE: {
+    case actionTypes.SET_PRICE_RANG: {
       const { range } = action;
-      /*const clonedVehicles = [...state.filteredVehicles];
-      clonedVehicles.filter( vehicle => vehicle.price_per_day >= range[0] && vehicle.price_per_day >= range[1]); */
-      return { ...state, minPrice: range[0], maxPrice: range[1] };
+      const activatedFilters = state.activatedFilters;
+      return {
+        ...state,
+        activatedFilters: {
+          ...activatedFilters,
+          minPrice: range[0],
+          maxPrice: range[1],
+        },
+      };
+    }
+    case actionTypes.SET_FILTERS: {
+      const { gears, brands, types, number_of_seats, engines } = action;
+      const activatedFilters = state.activatedFilters;
+      return {
+        ...state,
+        activatedFilters: {
+          ...activatedFilters,
+          gears,
+          brands,
+          types,
+          number_of_seats,
+          engines,
+        },
+      };
     }
     default:
       return state;
