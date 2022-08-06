@@ -1,31 +1,30 @@
-import VehiclesListContainer from "../../components/vehicles-list/VehiclesListContainer"
-import FilterResultsBar from "../../components/filterSearchResultsBar/FilterResultsBar"
-import { useSelector } from "react-redux"
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner"
-import SearchPlaceHolder from "./SearchPlaceHolder"
-import ErrorPlaceHolder from "./ErrorPlaceHolder"
-import { useLocation } from "react-router-dom"
+import VehiclesListContainer from '../../components/vehicles-list/VehiclesListContainer';
+import FilterResultsBar from '../../components/filterSearchResultsBar/FilterResultsBar';
+import { useSelector } from 'react-redux';
+import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
+import SearchPlaceHolder from './SearchPlaceHolder';
+import ErrorPlaceHolder from './ErrorPlaceHolder';
+import { useLocation } from 'react-router-dom';
+import {
+  getFilteredVehicles,
+  getFiltersData,
+} from '../../app/selectors/search-selectors';
+import { useRef } from 'react';
 
 const SearchResultsPage = () => {
-  const location = useLocation()
-  const filteredVehicles = useSelector(
-    (state) => state.searchSlice.searchedVehicles
-  )
-  const isLoading = useSelector((state) => state.viewSlice.isLoading)
-  const isError = useSelector((state) => state.viewSlice.isError)
+  const location = useLocation();
+  const filteredVehicles = useSelector((state) => getFilteredVehicles(state));
+  const vehiclesDetails = useSelector((state) => getFiltersData(state));
 
-  const prices = filteredVehicles.map((vehicle) =>
-    parseInt(vehicle.price_per_day)
-  )
-  const minPrice = Math.min(...prices)
-  const maxPrice = Math.max(...prices)
+  const isLoading = useSelector((state) => state.viewSlice.isLoading);
+  const isError = useSelector((state) => state.viewSlice.isError);
 
   return (
     <section>
       {isLoading && <LoadingSpinner />}
       {!isLoading && !isError && (
         <div>
-          <FilterResultsBar minPrice={minPrice} maxPrice={maxPrice} />
+          <FilterResultsBar data={vehiclesDetails} />
           <VehiclesListContainer
             state={location.state}
             vehicles={filteredVehicles}
@@ -39,7 +38,7 @@ const SearchResultsPage = () => {
         </section>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default SearchResultsPage
+export default SearchResultsPage;

@@ -1,5 +1,5 @@
-import actionTypes from "./constants";
-import ListApiService from "../../services/list-api-service";
+import actionTypes from './constants';
+import ListApiService from '../../services/list-api-service';
 
 const searchRequestAction = () => ({
   type: actionTypes.SEARCH_VEHICLES_REQUEST,
@@ -25,6 +25,15 @@ const setSortLTHAction = () => ({
 const setPriceRangeAction = (range) => ({
   type: actionTypes.SET_PRICE_RANG,
   range,
+});
+
+const setFiltersAction = (gears, brands, types, number_of_seats, engines) => ({
+  type: actionTypes.SET_FILTERS,
+  gears,
+  brands,
+  types,
+  number_of_seats,
+  engines,
 });
 
 export const search = (searchData) => {
@@ -58,5 +67,11 @@ export const setPriceLTH = () => {
 export const setPriceRange = (range) => {
   return (dispatch) => {
     dispatch(setPriceRangeAction(range));
+  };
+};
+
+export const setFilters = (number_of_seats, types, brands, engines, gears) => {
+  return (dispatch) => {
+    dispatch(setFiltersAction(gears, brands, types, number_of_seats, engines));
   };
 };
