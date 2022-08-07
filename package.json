@@ -10,7 +10,8 @@
     "build": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:migrate": " cd server/db && npx sequelize-cli db:migrate ",
-    "db:seed": " cd server/db && npx sequelize-cli db:seed:all "
+    "db:seed": " cd server/db && npx sequelize-cli db:seed:all ",
+    "build:client":"cd client && npm i && npm run build"
   },
 
   "repository": {
