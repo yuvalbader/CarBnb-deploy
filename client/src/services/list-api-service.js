@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 const BASE_URL = `http://localhost:8000/api/`;
 const CAR = `car/`;
 const RES = `reservation/`;
@@ -7,11 +7,11 @@ const UTILS = `utils/`;
 
 class ListApiService {
   static async baseGet(url) {
-    const userEmail = JSON.parse(localStorage.getItem("user")).email;
+    const userEmail = JSON.parse(localStorage.getItem('user')).email;
     return axios.get(url, { userEmail });
   }
   static async basePost(url, body) {
-    const userEmail = JSON.parse(localStorage.getItem("user")).email;
+    const userEmail = JSON.parse(localStorage.getItem('user')).email;
     return axios.post(url, { ...body, userEmail });
   }
   static async getCarsList() {
@@ -33,9 +33,14 @@ class ListApiService {
     }
   }
 
-  static async addVehicle(vehicle) {
+  static async addVehicle(vehicle, userId) {
     try {
-      const response = await ListApiService.basePost(BASE_URL + CAR, vehicle);
+      const vehicleData = { ...vehicle, user_id: userId };
+      console.log(vehicleData);
+      const response = await ListApiService.basePost(
+        BASE_URL + CAR,
+        vehicleData
+      );
       return response;
     } catch (err) {
       console.log(err.message);
@@ -135,18 +140,18 @@ class ListApiService {
   }
   static async getUserById(userId) {
     try {
-      const response = await axios.get(BASE_URL + USER + `${userId}`)
-      return response.data
+      const response = await axios.get(BASE_URL + USER + `${userId}`);
+      return response.data;
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
   }
   static async getCarByID(carId) {
     try {
-      const response = await axios.get(BASE_URL + CAR + `${carId}`)
-      return response.data
+      const response = await axios.get(BASE_URL + CAR + `${carId}`);
+      return response.data;
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
   }
 }

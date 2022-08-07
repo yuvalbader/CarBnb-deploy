@@ -5,7 +5,6 @@ const addVehicleRequestAction = () => ({
   type: actionTypes.ADD_VEHICLE_REQUEST,
 });
 
-
 const addVehicleSuccessAction = (vehicleData) => ({
   type: actionTypes.ADD_VEHICLE_SUCCESS,
   vehicle: vehicleData,
@@ -16,10 +15,12 @@ const addVehicleFailureAction = () => ({
 });
 
 export const addVehicle = (vehicleData) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(addVehicleRequestAction());
     try {
-      const vehicle = await ListApiService.addVehicle(vehicleData);
+      const id = getState().userSlice.userObject.id;
+      console.log(id);
+      const vehicle = await ListApiService.addVehicle(vehicleData, id);
       dispatch(addVehicleSuccessAction(vehicle));
     } catch (error) {
       dispatch(addVehicleFailureAction());

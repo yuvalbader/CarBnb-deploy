@@ -1,4 +1,4 @@
-const { Car } = require("../db/models");
+const { Car } = require('../db/models');
 
 class CarsService {
   constructor() {}
@@ -6,10 +6,10 @@ class CarsService {
   carsImgs = [
     {
       tesla:
-        "https://resources.turo.com/f/81934/386x308/7dcf9bff19/image_make_tesla-2x.jpg",
+        'https://resources.turo.com/f/81934/386x308/7dcf9bff19/image_make_tesla-2x.jpg',
     },
     {
-      jeep: "https://resources.turo.com/f/81934/386x308/9bf274f19e/image_make_jeep-2x.jpg",
+      jeep: 'https://resources.turo.com/f/81934/386x308/9bf274f19e/image_make_jeep-2x.jpg',
     },
   ];
 
@@ -30,6 +30,7 @@ class CarsService {
   };
 
   addCar = async (car) => {
+    console.log(car);
     return await Car.create({
       profile_picture: car.profile_picture,
       brand: car.brand,
@@ -41,6 +42,9 @@ class CarsService {
       user_id: car.user_id,
       type: car.type,
       location: car.location,
+      engine: car.engine,
+      gear: car.gear,
+      gas: car.gas,
     });
   };
 

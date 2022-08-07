@@ -2,26 +2,23 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 
 import TextFieldWarrper from './form/TextFieldWarrper';
-import Select from './form/Select';
 import SubmitButton from './form/SubmitButton';
 import { addVehicle } from '../../app/actions/add-vehicle-actions';
-/* import InputMap from './InputMap'; */
 
 import { useDispatch } from 'react-redux';
 import InputButton from './form/InputButton';
 import SelectWarrper from './form/Select';
 
-const ListNewVehicleForm = (onSubmit) => {
+//import loc from 'list-of-cars';
+
+const ListNewVehicleForm = ({ onSubmit }) => {
+  //console.log(models.all());
   const dispatch = useDispatch();
-  //let lat = 0;
-  // let lng = 0;
 
   const INITIAL_FORM_STATE = {
     profile_picture: '',
@@ -34,6 +31,7 @@ const ListNewVehicleForm = (onSubmit) => {
     location: '',
     gear: '',
     gas: '',
+    engine: '',
   };
 
   const FORM_VALIDATION = Yup.object().shape({
@@ -48,6 +46,7 @@ const ListNewVehicleForm = (onSubmit) => {
     location: Yup.string().required('required'),
     gear: Yup.string().required('required'),
     gas: Yup.string().required('required'),
+    engine: Yup.string().required('required'),
   });
 
   function addNewVehicleHandler(values) {
@@ -63,8 +62,9 @@ const ListNewVehicleForm = (onSubmit) => {
       location: values.location,
       gear: values.gear,
       gas: values.gas,
+      engine: values.engine,
     };
-    
+
     dispatch(addVehicle(vehicleData));
     onSubmit();
   }
@@ -128,21 +128,42 @@ const ListNewVehicleForm = (onSubmit) => {
               ></SelectWarrper>
             </Grid>
             <Grid item xs={12}>
-              <TextFieldWarrper name="gear" label="Gear" />
+              <SelectWarrper
+                name="gear"
+                label="Gear"
+                options={{
+                  Automatic: 'Automatic',
+                  Robotic: 'Robotic',
+                  Manual: 'Manual',
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <SelectWarrper
+                name="engine"
+                label="Engine type"
+                options={{
+                  Diesel: 'Diesel',
+                  Electric: 'Electric',
+                  Gas: 'Gas',
+                  Hybrid: 'Hybrid',
+                  Gasoline: 'Gasoline',
+                  V8: 'V8',
+                }}
+              />
             </Grid>
             <Grid item xs={12}>
               <SelectWarrper
                 name="gas"
                 label="Gas"
                 options={{
+                  '14MPG': '14 MPG',
+                  '20MPG': '20 MPG',
+                  '21MPG': '21 MPG',
+                  '22MPG': '22 MPG',
                   Electric: 'Electric',
-                  Hybrid: 'Hybrid',
-                  Gas: 'Gas',
                 }}
               ></SelectWarrper>
-            </Grid>
-            <Grid item xs={12}>
-              <TextFieldWarrper name="price_per_day" label="Price/Day" />
             </Grid>
             <Grid item xs={12}>
               <TextFieldWarrper name="location" label="Location" />

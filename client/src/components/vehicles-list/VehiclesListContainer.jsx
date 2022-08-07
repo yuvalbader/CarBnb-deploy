@@ -1,10 +1,9 @@
-import VehicleCard from "../vehicle-card/VehicleCard"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-const styleList = { display: "grid", gridTemplateColumns: "repeat(3,1fr)" }
+import VehicleCard from '../vehicle-card/VehicleCard';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+const styleList = { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' };
 
-const VehicleListContainer = ({ vehicles, state}) => {
-
+const VehicleListContainer = ({ vehicles, state }) => {
   return (
     <List sx={styleList}>
       {vehicles.map(
@@ -22,6 +21,7 @@ const VehicleListContainer = ({ vehicles, state}) => {
             number_of_seats,
             user_id,
             id,
+            gas,
           },
           index
         ) => (
@@ -40,12 +40,13 @@ const VehicleListContainer = ({ vehicles, state}) => {
               number_of_seats={number_of_seats}
               user_id={user_id}
               state={state}
+              gas={gas}
             />
           </ListItem>
         )
       )}
     </List>
-  )
-}
+  );
+};
 
-export default VehicleListContainer
+export default VehicleListContainer;
