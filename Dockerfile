@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:10
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 RUN npm install -g sequelize-cli
 RUN npm run build:client 
 RUN npm run db:migrate
-RUN npm run db:seed
+# RUN npm run db:seed
 
 ENV NODE_ENV=production
 CMD npm start
