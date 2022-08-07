@@ -5,19 +5,19 @@ on:
     branches: [master]
   workflow_dispatch:
 jobs:
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repo
-  #       uses: actions/checkout@v2
-  #     - name: Install Nodejs (puts node and npm in the PATH)
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '14'
-  #     - name: Install & Tests
-  #       run: |
-  #         npm install
-  #         npm test
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Install Nodejs (puts node and npm in the PATH)
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      - name: Install & Tests
+        run: |
+          npm install
+          npm test
   build-deploy:
     runs-on: ubuntu-latest
     steps:
