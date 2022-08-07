@@ -2,10 +2,7 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-COPY server server
-COPY server/db .
-COPY package.json .
-COPY server.js .
+COPY . .
 
 RUN npm install
 RUN npm install -g sequelize-cli
