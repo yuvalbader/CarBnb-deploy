@@ -6,8 +6,8 @@ COPY . .
 
 RUN npm install
 RUN npm install -g sequelize-cli
-RUN npm db:migrate
-RUN db:seed
+RUN npm run db:migrate
+RUN npm run db:seed
 
 ENV NODE_ENV=production
 CMD npm start
