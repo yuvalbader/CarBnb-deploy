@@ -15,8 +15,8 @@ app.use([logger, compression()]);
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(router);
-app.use(express.static(path.join(__dirname + "/server/public")));
+console.log(path.join(__dirname + "..\client/build/"));
+app.use(express.static(path.join(__dirname + "../client/build/")));
 
 app.use("/", api);
 app.use(errorHandler);
