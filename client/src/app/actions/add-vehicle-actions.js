@@ -1,5 +1,5 @@
-import ListApiService from "../../services/list-api-service";
-import actionTypes from "./constants";
+import ListApiService from '../../services/list-api-service';
+import actionTypes from './constants';
 
 const addVehicleRequestAction = () => ({
   type: actionTypes.ADD_VEHICLE_REQUEST,
@@ -19,14 +19,7 @@ export const addVehicle = (vehicleData) => {
     dispatch(addVehicleRequestAction());
     try {
       const id = getState().userSlice.userObject.id;
-<<<<<<< HEAD
-      console.log(id);
       const vehicle = await ListApiService.addVehicle(vehicleData, id);
-=======
-      let data = vehicleData;
-      data = { ...data, user_id: id };
-      const vehicle = await ListApiService.addVehicle(data);
->>>>>>> main
       dispatch(addVehicleSuccessAction(vehicle));
     } catch (error) {
       console.error(error.message);

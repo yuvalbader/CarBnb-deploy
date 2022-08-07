@@ -16,7 +16,6 @@
     "@mui/x-date-pickers": "^5.0.0-beta.2",
     "@mui/x-date-pickers-pro": "^5.0.0-beta.2",
     "@reduxjs/toolkit": "^1.8.3",
-    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.21.7",
@@ -70,5 +69,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "jest": "^28.1.3"
   }
 }
