@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
-const compression = require('compression');
-const logger = require('./middleware/logger');
+const compression = require("compression");
+const logger = require("./middleware/logger");
 const bodyParser = require("body-parser");
 const api = require("./routes/api");
-const errorHandler = require('./middleware/error_handler');
+const errorHandler = require("./middleware/error_handler");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -14,10 +15,8 @@ app.use([logger, compression()]);
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(router);
-// app.use(express.static(path.resolve(__dirname, "../client/build")));
-console.log(__dirname);
-
+app.use(router);
+app.use(express.static(path.join(__dirname + "/server/public")));
 
 app.use("/", api);
 app.use(errorHandler);
