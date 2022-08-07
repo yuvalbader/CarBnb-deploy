@@ -4,7 +4,7 @@
   "description": "hello",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "run": "node server/server.js",
     "run:dev": "nodemon server/server.js",
     "build": "cd client && npm install && npm run build",
@@ -19,6 +19,9 @@
   "bugs": {
     "url": "https://github.com/hhasona/CarBnb/issues"
   },
+  "engines": {
+    "node": "10.x"
+  },
   "homepage": "https://github.com/hhasona/CarBnb#readme",
   "dependencies": {
     "compression": "^1.7.4",
@@ -29,6 +32,7 @@
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.19",
     "npm": "^8.15.0",
+    "pg": "^8.7.3",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {

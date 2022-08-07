@@ -1,24 +1,24 @@
-import Countdown from "react-countdown"
+import Countdown from 'react-countdown';
 const SearchPlaceHolder = () => {
   const renderer = ({ seconds }) => {
     // Render a countdown
-    return <span>{seconds}</span>
-  }
-  setTimeout(() => {
+    return <span>{seconds}</span>;
+  };
+  /*   setTimeout(() => {
     window.location.href = "/"
-  }, 3000)
+  }, 3000) */
   return (
     <div
       style={{
-        display: "flex",
-        margin: "auto",
-        justifyContent: "center",
-        alignItems: "center",
+        display: 'flex',
+        margin: 'auto',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
       className="trips-view-container-img"
     >
       <img
-        style={{ width: "50%", marginTop: "2%" }}
+        style={{ width: '50%', marginTop: '2%' }}
         src="https://resources.turo.com/client/v2/builds/assets/il_car_on_the_desert_@2xc6729191106bba04b948.png"
         alt=""
       />
@@ -27,11 +27,11 @@ const SearchPlaceHolder = () => {
         <label className="no-past-label"></label>
       </div>
       <div>
-        You will be back to search in{" "}
-        {<Countdown renderer={renderer} date={Date.now() + 3000} />}
+        You will be back to search in{' '}
+        {/* {<Countdown renderer={renderer} date={Date.now() + 3000} />} */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SearchPlaceHolder
+export default SearchPlaceHolder;
