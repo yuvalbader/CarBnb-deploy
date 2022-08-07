@@ -17,7 +17,8 @@ const ProfileNavBar = () => {
   };
 
   const handleOutletChange = (value) => {
-    setValue(value);
+    // setValue(value);
+    setTimeout(() => setValue(value), 0);
   };
 
   return (

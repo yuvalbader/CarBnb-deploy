@@ -108,10 +108,10 @@ const MyReservationsCard = ({
             <Typography
               display="flex"
               flexDirection="column"
-              variant="h6"
+              // variant="h6"
               gap="5px"
               fontWeight={"bold"}
-              component="box"
+              variant="box"
             >
               <Typography
                 display="flex"
@@ -128,10 +128,10 @@ const MyReservationsCard = ({
             <Typography
               display="flex"
               flexDirection="column"
-              variant="h6"
+              // variant="h6"
               gap="5px"
               fontWeight={"bold"}
-              component="box"
+              variant="box"
             >
               <Typography
                 display="flex"
@@ -151,10 +151,10 @@ const MyReservationsCard = ({
           <Typography
             display="flex"
             flexDirection="column"
-            variant="h6"
+            // variant="h6"
             gap="5px"
             fontWeight={"bold"}
-            component="box"
+            variant="box"
           >
             <Typography
               display="flex"

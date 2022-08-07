@@ -141,7 +141,7 @@ const ListNewVehicleForm = ({ onSubmit }) => {
             <Grid item xs={12}>
               <TextFieldWarrper
                 name="profile_picture"
-                label="profile_picture"
+                label="profile picture"
               />
             </Grid>
             <Grid item xs={12}>

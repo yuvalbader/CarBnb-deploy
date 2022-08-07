@@ -114,10 +114,10 @@ const MyTripsCard = ({
             <Typography
               display="flex"
               flexDirection="column"
-              variant="h6"
+              // variant="h6"
               gap="5px"
               fontWeight={"bold"}
-              component="box"
+              variant="box"
             >
               <Typography
                 display="flex"
@@ -140,10 +140,10 @@ const MyTripsCard = ({
             <Typography
               display="flex"
               flexDirection="column"
-              variant="h6"
+              // variant="h6"
               gap="5px"
               fontWeight={"bold"}
-              component="box"
+              variant="box"
             >
               <Typography
                 display="flex"
@@ -163,10 +163,10 @@ const MyTripsCard = ({
           <Typography
             display="flex"
             flexDirection="column"
-            variant="h6"
+            // variant="h6"
             gap="5px"
             fontWeight={"bold"}
-            component="box"
+            variant="box"
           >
             <Typography
               display="flex"
