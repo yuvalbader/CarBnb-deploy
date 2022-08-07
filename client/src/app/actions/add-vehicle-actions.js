@@ -19,9 +19,14 @@ export const addVehicle = (vehicleData) => {
     dispatch(addVehicleRequestAction());
     try {
       const id = getState().userSlice.userObject.id;
+<<<<<<< HEAD
+      console.log(id);
+      const vehicle = await ListApiService.addVehicle(vehicleData, id);
+=======
       let data = vehicleData;
       data = { ...data, user_id: id };
       const vehicle = await ListApiService.addVehicle(data);
+>>>>>>> main
       dispatch(addVehicleSuccessAction(vehicle));
     } catch (error) {
       console.error(error.message);

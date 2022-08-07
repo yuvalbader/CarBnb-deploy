@@ -9,7 +9,6 @@ import {
   getFilteredVehicles,
   getFiltersData,
 } from '../../app/selectors/search-selectors';
-import { useRef } from 'react';
 
 const SearchResultsPage = () => {
   const location = useLocation();
