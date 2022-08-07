@@ -17,14 +17,14 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/add-vehicle" exact element={<AddVehicle />} />
-        <Route path="MyProfile" element={<MyProfile />}>
+        <Route path="/MyProfile" element={<MyProfile />}>
           <Route index element={<OrdersContainer page="trips" />} />
-          <Route path="trips" element={<OrdersContainer page="trips" />} />
+          <Route path="/MyProfile/trips" element={<OrdersContainer page="trips" />} />
           <Route
-            path="reservations"
+            path="/MyProfile/reservations"
             element={<OrdersContainer page="reservations" />}
           />
-          <Route path="mycars" element={<MyCars />} />
+          <Route path="/MyProfile/mycars" element={<MyCars />} />
         </Route>
         <Route path="/searchResult" exact element={<SearchResultsPage />} />
         <Route path="/car/:id" element={<Car />} />

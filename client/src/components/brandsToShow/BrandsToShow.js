@@ -1,40 +1,40 @@
-import React, { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import "./style.css"
-import { Pagination } from "swiper"
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import "swiper/css/pagination"
-import { mainPageVehicles } from "../../app/actions/fetch-vehicles-actions"
-import Card from "@mui/material/Card"
-import CardContent from "@mui/material/CardContent"
-import CardMedia from "@mui/material/CardMedia"
-import Typography from "@mui/material/Typography"
-import { CardActionArea } from "@mui/material"
-import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import "./style.css";
+import { Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { mainPageVehicles } from "../../app/actions/fetch-vehicles-actions";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 const BrandsToShow = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const loading = useSelector((state) => state.viewSlice.isLoading)
-  const user = useSelector((state) => state.userSlice.user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const loading = useSelector((state) => state.viewSlice.isLoading);
+  const user = useSelector((state) => state.userSlice.user);
   useEffect(() => {
-    dispatch(mainPageVehicles())
-  }, [dispatch])
+    dispatch(mainPageVehicles());
+  }, [dispatch]);
 
-  const vehicles = useSelector((state) => state.vehiclesSlice.mainPageVehicles)
+  const vehicles = useSelector((state) => state.vehiclesSlice.mainPageVehicles);
 
   const onClick = (id) => {
-    navigate(`/car/${id}`, { state: { currentVehicle: vehicles[id] } })
-  }
+    navigate(`/car/${id}`, { state: { currentVehicle: vehicles[id] } });
+  };
   if (loading)
     return (
       <section id="section_loader">
         <LoadingSpinner />
       </section>
-    )
+    );
   return (
     <section id="section">
       <h1>Find your drive</h1>
@@ -71,10 +71,10 @@ const BrandsToShow = () => {
                 </CardActionArea>
               </Card>
             </SwiperSlide>
-          )
+          );
         })}
       </Swiper>
     </section>
-  )
-}
-export default BrandsToShow
+  );
+};
+export default BrandsToShow;

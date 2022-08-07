@@ -16,6 +16,11 @@ const ProfileNavBar = () => {
     setValue(value);
   };
 
+  const handleOutletChange = (value) => {
+    // setValue(value);
+    setTimeout(() => setValue(value), 0);
+  };
+
   return (
     <>
       <Tabs value={value} onChange={handleChange}>
@@ -38,7 +43,8 @@ const ProfileNavBar = () => {
           value="mycars"
         />
       </Tabs>
-      <Outlet />
+
+      <Outlet context={handleOutletChange}/>
     </>
   );
 };

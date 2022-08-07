@@ -1,37 +1,40 @@
-import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import MyTripsCard from "../MyTripsCard/MyTripsCard"
-import MyReservationsCard from "../MyReservationsCard/MyReservationsCard"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination } from "swiper"
-import "swiper/css"
-import "swiper/css/pagination"
-import "./OrdersContainer.css"
-import { fetchMyOrdAndRes } from "../../app/actions/user-actions"
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner"
+import { useState, useEffect, useCallback, memo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import MyTripsCard from "../MyTripsCard/MyTripsCard";
+import MyReservationsCard from "../MyReservationsCard/MyReservationsCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
+import { useOutletContext } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/pagination";
+import "./OrdersContainer.css";
+import { fetchMyOrdAndRes } from "../../app/actions/user-actions";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import SelectInput from "@mui/material/Select/SelectInput";
 
-const OrdersContainer = (props, navBar) => {
-  const loading = useSelector((state) => state.viewSlice.isLoading)
-  const dispatch = useDispatch()
-  const myOrders = useSelector((state) => state.userSlice.orders)
-  const myReservations = useSelector((state) => state.userSlice.reservations)
-  const ordersList = Object.values(myOrders)
-  const reservationsList = Object.values(myReservations)
-  const { page } = props
-  const data = page === "trips" ? ordersList : reservationsList
+const OrdersContainer = memo((props) => {
+  const handleOutletChange = useOutletContext();
+  const loading = useSelector((state) => state.viewSlice.isLoading);
+  const dispatch = useDispatch();
+  const myId = useSelector((state) => state.userSlice.userObject.id);
+  const isLoggedIn = useSelector((state) => state.userSlice.isLoggedIn);
+  const myOrders = useSelector((state) => state.userSlice.orders);
+  const myReservations = useSelector((state) => state.userSlice.reservations);
+  const ordersList = Object.values(myOrders);
+  const reservationsList = Object.values(myReservations);
+  const { page } = props;
+  const data = page === "trips" ? ordersList : reservationsList;
+  const pageLabel = `No past ${page}`;
+  const pageTitle = `My ${page}`;
+  handleOutletChange(page);
 
-  const pageLabel = `No past ${page}`
-  const pageTitle = `My ${page}`
-  console.log("loading", loading)
+  const fetchMyData = useCallback((id) => {
+    if(id) dispatch(fetchMyOrdAndRes(id));
+  }, []);
+
   useEffect(() => {
-    fetchMyData()
-    if (page !== "trips") {
-    }
-  }, [])
-
-  const fetchMyData = () => {
-    dispatch(fetchMyOrdAndRes())
-  }
+    fetchMyData(myId);
+  }, [myId]);
 
   const defaultOuput = () => {
     return (
@@ -142,7 +145,7 @@ const OrdersContainer = (props, navBar) => {
         </Swiper>
       )}
     </>
-  )
-}
+  );
+});
 
 export default OrdersContainer

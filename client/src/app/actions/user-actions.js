@@ -77,11 +77,12 @@ export const fetchMyOrders = () => {
   };
 };
 
-export const fetchMyOrdAndRes = () => {
+export const fetchMyOrdAndRes = (id) => {
   return async (dispatch, getState) => {
     dispatch(fetchMyOrdAndResRequestAction());
     try {
-      const id = getState().userSlice.userObject.id;
+      // const id = getState().userSlice.userObject.id;
+      // console.log("fetchMyOrdAndRes:",id);
       const myOrders = ListApiService.getMyOrders(id);
       const myReservations = ListApiService.getMyReservations(id);
       const result = await Promise.all([myOrders, myReservations]);
@@ -95,7 +96,6 @@ export const fetchMyOrdAndRes = () => {
         acc[order.id] = order;
         return acc;
       }, {});
-      console.log(result);
       dispatch(fetchMyOrdAndResSuccessAction([myOrdersRes, myReservationsRes]));
     } catch (error) {
       dispatch(fetchMyOrdAndResFailureAction());

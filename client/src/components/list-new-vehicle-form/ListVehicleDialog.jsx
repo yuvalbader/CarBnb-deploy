@@ -18,6 +18,7 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const ListVahicleDialog = ({ open, onClose }) => {
   const CloseDialogHandler = () => {
+    console.log("CloseDialogHandler:", onClose);
     onClose();
   };
 

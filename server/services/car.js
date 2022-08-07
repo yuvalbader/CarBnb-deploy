@@ -66,13 +66,6 @@ class CarsService {
       truncate: true,
     });
   };
-
-  // getBrands = async () => {
-  //   return await Car.findAll({
-  //     attributes: ["brand"],
-  //     group: ["brand"],
-  //   });
-  // };
 }
 
 module.exports = new CarsService();

@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       location: DataTypes.STRING, //city, country
       engine: DataTypes.STRING,
       gear: DataTypes.STRING, //[auto/manual]
+      gas: DataTypes.STRING,
     },
     {
       sequelize,
