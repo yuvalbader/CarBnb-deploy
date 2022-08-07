@@ -29,18 +29,35 @@ class CarsService {
     });
   };
 
-  addCar = async (car) => {
+  addCar = async ({
+    profile_picture,
+    brand,
+    model,
+    year,
+    number_of_seats,
+    price_per_day,
+    description,
+    user_id,
+    type,
+    location,
+    engine,
+    gear,
+    gas,
+  }) => {
     return await Car.create({
-      profile_picture: car.profile_picture,
-      brand: car.brand,
-      model: car.model,
-      year: car.year,
-      number_of_seats: car.number_of_seats,
-      price_per_day: car.price_per_day,
-      description: car.description,
-      user_id: car.user_id,
-      type: car.type,
-      location: car.location,
+      profile_picture,
+      brand,
+      model,
+      year,
+      number_of_seats,
+      price_per_day,
+      description,
+      user_id,
+      type,
+      location,
+      engine,
+      gear,
+      gas,
     });
   };
 
@@ -62,13 +79,6 @@ class CarsService {
       truncate: true,
     });
   };
-
-  // getBrands = async () => {
-  //   return await Car.findAll({
-  //     attributes: ["brand"],
-  //     group: ["brand"],
-  //   });
-  // };
 }
 
 module.exports = new CarsService();

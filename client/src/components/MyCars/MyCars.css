@@ -1,5 +1,5 @@
 .details-view-container {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   align-items: center;
